@@ -1,0 +1,11 @@
+---
+title: "R Notebook"
+bibliography: Litteraturliste.bibtex
+csl: university-college-lillebaelt-harvard.csl
+output: 
+  pdf_document:
+    toc: true
+toc-title: Indholdsfortegnelse
+---
+
+# Litteraturliste
