@@ -1,0 +1,396 @@
+---
+title: "Hovedopgave"
+bibliography: citations/referenceliste.bib
+csl: citations/university-college-lillebaelt-harvard.csl
+output: 
+  pdf_document:
+    toc: true
+toc-title: Indholdsfortegnelse
+---
+
+\pagebreak
+
+# Internet, World Wide Web og HTTP
+Internettet er et computernetværk bestående af computernetværk.
+
+For at dele HTML dokumenter på internettet, blev World Wide Web (WWW) opfundet i 1989 af Tim Bernes Lee. Populariteten af Internettet og WWW steg eksplosivt i perioden fra 1995-2005[^wdi]:
+
+```{r echo=FALSE}
+library('WDI')
+raw <- WDIsearch("individuals using the internet")
+individuals_using_internet <- as.data.frame(raw)
+indicator <- toString(individuals_using_internet["indicator", 1])
+individuals_using_internet_denmark <- WDI(country = "DK", indicator = indicator, start = 1995, end = 2020)
+to_plot <- individuals_using_internet_denmark[c("year", indicator)]
+plot(to_plot, type="l", main="Brugere af Internettet i Danmark", xlab = "Årstal", ylab="% af population")
+```
+
+[^wdi]: @WB, IT.NET.USER.ZS, DK
+
+# JavaScript
+
+JavaScript er det programmeringssprog, som flest udviklere bruger, og har været det siden 2013[^so]. Det blev opfundet i...
+
+## Datatyper
+JavaScript er *loosely typed*[^lt]. JavaScript har overordnet to forskellige datatyper: primitive (simple værdier) og non-primitive (objekter). Forskellen er, at simple typer består af én immutable værdi. Objekter kan derimod indkapsle flere simple værdier (properties) samt metoder (funktioner). De syv[^syv] simple værdier som `number`, `string`, `boolean` etc. er altså byggestenene for objekter[^dt]. 
+
+Objekter kan nedarves. Alle komplekse typer som `Function` eller `Array` er objekter, som alle nedarver fra objektet `Object`. 
+
+### Prototype
+Nedarvning i JavaScript er i modsætning til f.eks. C# ikke med klasser, men med prototype systemet. Alle objekter har en readonly `__proto__` property indeholdende `Object` objektet, og har dermed adgang til dens data og funktionalitet. Objekter som datatyper (klasser) er defineret med en constructor funktion, f.eks: [^katalog]
+
+```{js}
+Animal = function(name) {
+  this.name = name
+}
+Animal.prototype.walk = function() { }
+```
+
+Hvis man vil specialisere et objekt, kalder man constructor funktionen med nøgleordet `new`. Så får objektet bl.a. sat sin `__proto__` property til constructor funktionens objekt, og vil kunne tilgå dens properties og funktioner:
+
+```{js}
+var animal = new Animal("lion")
+animal.name // => "lion"
+```
+
+Specialisering foregår med `constructor` objektet.
+
+
+[^lt]: Datatypen for variabler og argumenter til funktioner kan ændre sig under kodeafviklingen. 
+[^syv]: Oprindeligt var der fem, men Symbol og BigInt kom ind i sproget i hhv. EcmaScript6 og EcmaScript7.
+[^dt]: @projs, Chapter 3, Language Basics & @cleanjs, Section 2, Chapter 6
+[^so]: @SO, Most Popular Technologies, Programming Scripting and Markup Languages
+[^katalog]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
+
+# React
+
+## Hvorfor React?
+
+Når man dykker ned i de seneste års udvikling indenfor JavaScript frontend
+frameworks, biblioteker og værktøjer, opstår der et mønster. De tre Javascript 
+frontend frameworks, som flest udviklere har prøvet at bruge er React, Vue og 
+Angular. [billede1]
+
+Det er umuligt at forudse hvilke af disse teknologier der overlever længst, eller 
+hvornår de bliver erstattet af noget nyt. Men der tegner sig et billede af, at flere 
+udviklere benytter og udtrykker tilfredshed med Vue og React end Angular. React 
+ligger i 2019 placeret #2 på Stack Overflows undersøgelse2 af mest anvendte web 
+frameworks (med jQuery fortsat på førstepladsen) og i kategorien ”Most Loved Web 
+Frameworks” er React nummer ét med Vue lige i hælene mens Angular halter 
+bagefter på en niendeplads. Når man ser på deres indbyrdes popularitet, har Vue 
+flest stjerner på dets GitHub repository og er nu det mest populære af de tre: [billede3]
+
+Hvis man måler på hvor meget de respektive web frameworks downloades af 
+udviklere, ligger React i toppen med op imod seks millioner downloads om ugen, 
+sammenlignet med to millioner for Angular og en million for Vue4. 
+
+Fælles for alle de nævnte web frameworks er, at de er open source. Store 
+virksomheder som Google, Facebook og Microsoft har taget open source 
+forretningsmodellen til sig og er med til puste til ilden af konstant innovation. React er 
+udviklet og drevet af Facebooks senior softwareingeniøre. Google står bag Angular, 
+mens Microsoft står bag dets anvendte open source programmeringssprog 
+TypeScript. Vues styrke ligger bl.a. i, at det ikke har en stor virksomhed i ryggen som 
+driver udviklingen, men er finansieret af crowdfunding og kombinerer det bedste fra 
+Angular og React. Men garantien for stabilitet og langtidsholdbarhed pga. 
+virksomhedsopbakningen fra Facebook, som internt bruger over 50.000 React 
+komponenter, samt udviklerentusiasmen i udviklerkulturen omkring React, er pt de 
+andre web frameworks overlegen, og derfor er React det bedste valg til 
+webapplikationen. 
+
+## Hvad er React?
+ React er et JavaScript kodebibliotek til at bygge brugergrænseflader baseret på 
+komposition af komponenter. Alting i React er en komponent, og selv hele 
+applikationen er en komponent, som er sammensat af de øvrige komponenter. 
+Komponent strukturen gør det muligt at genbruge og indkapsle alt lige fra en simpel 
+checkbox til en hel applikation. Det gør det også nemt at ændre komponenterne og 
+f.eks. tilføje yderligere state, uden at det skabe en dominoeffekt af side effekter i 
+resten af applikationen. Komponent modellen passer ikke så godt med objekt 
+modellen, og principper vi kender som søjler i objekt orienteret programmering, er 
+ikke anvendelige eller har bedre løsninger i React. Facebook promoverer stærkt 
+”Composition over Inheritance”, og udtaler at de aldrig har brugt nedarvning i deres 
+tusindevis af komponenter. [komponenter-billede]
+
+React koncentrerer sig kun om brugergrænsefladen, og det er både en fordel og en 
+ulempe. Langt de fleste React projekter vil have behov for at hente yderligere 
+tredjeparts pakker ned for at håndtere problemer, som f.eks. Angular har indbyggede 
+løsninger på. React omtales ofte heller ikke som et framework men et kodebibliotek, 
+og man sammenligner det ofte med View-laget i MVC. Det gode ved Reacts 
+minimalistiske tilgang er, at der er stor fleksibilitet i hvordan man løser et givent 
+problem, og der er mange højt specialiserede værktøjer til at håndtere nicher som 
+f.eks. routing eller global state. 
+
+ React har dét man kalder en deklarativ API. I stedet for at beskrive hvert trin og i 
+hvilken rækkefølge man opdaterer de enkelte elementer på brugergrænsefladen 
+(imperativt), så beskrives hvordan man ønsker (deklarerer) at brugegrænsefladen 
+skal se ud og hvordan den skal transformeres. Man beskriver UI med en HTML + 
+JavaScript lignende syntaks, og React sørger for resten. 
+
+ 
+## Komponenter og props
+En React komponent er ikke andet end en funktion, som returnerer noget, der i bund 
+og grund bare er HTML. Strukturen og indholdet kan evt. afhænge af nogle 
+funktionsparametre – eller hvad man i React termer ville kalde props. Disse props 
+følger et princip om unidirectional data flow, eller en-vejs databinding. Props kan kun 
+sendes fra forældre-komponent til barn-komponent.   
+
+Det hænger sammen med en anden egenskab ved props, som er, at de skal være 
+immutable. En komponent kan læse sine props, men ikke overskrive dem. Eftersom 
+en komponent modtager sine props som input, betyder det at man undgår side 
+effekter i sine komponenter. Med andre ord, vil de samme props som input altid 
+generere det samme HTML som output. Man siger, at komponenten er en pure 
+function med hensyn til sine props. Reacts eneste regel er, at alle komponenter skal 
+være pure functions mht. sine props. For at en funktion kan være en pure function, 
+må den: a) ikke have sideeffekter b) ikke kalde non-pure functions (som Date.now) og 
+c) behandle sine argumenter som immutable (readonly). Der findes JavaScript 
+kodebiblioteker som ImmutableJS til at håndhæve dette, eller code linting værktøjer 
+som ESLint. 
+
+Props kan indeholde callbacks, så en forældre-komponent kan sende en funktion ned 
+til barn-komponenten, som barn-komponenten kan kalde med en eller flere parametre 
+for at sende data til forældre-komponenten. Det er den eneste umiddelbare måde 
+komponenter kan sende data på, til andre end sine børn. Selvom det er med til at 
+gøre programmet nemt at debugge og forstå, virker det umiddelbart som en 
+begrænsning. For eksempel når når to komponenter A og B langt fra hinanden i 
+træhiearkiet skal bruge data fra hinandens props. Det kræver at en fælles forældre-
+komponent til komponent A og komponent B sender dataen ned i sine props gennem 
+flere mellemled. [propsmellemledbillede]
+
+Når man har en stor applikation med mange komponenter som deler mange props, 
+kan det blive uoverskueligt at vedligeholde, når man bruger dette ”Lifting State Up” 
+mønster. Det overholder ikke DRY princippet, da den manuelle proces med at sende 
+dataen igennem komponenten via props gentages for hvert mellemled mellem A og B.  
+
+
+## Global state
+### Context
+ En måde at omgå denne ”Prop-drilling” proces er ved at benytte Reacts indbyggede 
+Context API. Den tillader komponenter at dele props indenfor en kontekst uden at 
+mappe props mellem komponenter. [contextbillede]
+
+
+### Redux
+ En anden mere avanceret måde, er at gøre som Facebook og bruge software design 
+mønstret Flux. Flux applikationer har tre hovedbestanddele: dispatcher, stores og 
+views. Ideen med Flux er, at den delte state ligger i en single source of truth dvs. i 
+stores. State i stores kan kun opdateres ved at trigge en action. Actions fortæller sine stateændringer (payload) til dispatcher. Stores lytter på ændringer fra dispatcher, og 
+opdaterer deres egen state i overeensstemmelse hermed. 
+
+Redux har også mulighed for middleware, som kan manipulere actions på vej ind og 
+ud af reduceren. Dette giver mulighed for f. eks. asynkrone actions til API kald med 
+redux-thunk middlewaren. Redux API’en giver også mulighed for at kombinere 
+reducers med en higher order reducer funktion kaldet combineReducers. Det er altså 
+en funktion, der tager flere reducers som parameter, og returnerer en ny kombineret 
+reducer. Typisk har man en reducer slice for hver feature / domæne i projektet, som 
+kombineres til en enkelt root reducer med combineReducers. Root reduceren bruges 
+af Redux til at lave store objektet.  [reduxbillede]
+
+For at forbinde sine React komponenter til sin Redux store anbefales det at bruge 
+Redux API’ens connect funktion. Connect tager to funktioner som input og returnerer 
+en funktion, som er en higher order component, der tager en React komponent som 
+input og returnerer en ”forbedret” udgave af komponenten med adgang til store og 
+action creators via props.  [providerbillede]
+
+## Funktionel programmering
+Disse software design mønstre, som optræder i React, kan virke eksotiske fra et objekt orienteret 
+programmerings perspektiv, men de opstår som en naturlig konsekvens af, at React 
+fremhæver det funktionelle programmerings paradigme frem for objekt orienteret 
+programmering. Funktionel programmering er ikke nogen moderne opfindelse, da det 
+har sine rødder i det matematiske felt lambda calculus som blev opfundet i 1936. Det 
+består af nogle mønstre som f.eks. at skrive pure functions og sammensættte dem i 
+higher order funktions samt at undgå mutation af værdier (immutability). Når man 
+forstår de funktionelle koncepter, ser man dem gentage sig overalt i React. 
+
+### Mere om React
+Alt React kode som har med browseren at gøre, er splittet op i sit eget ReactDOM 
+kodebibliotek. Man kan også udvikle med React mod en anden målplatform end 
+browseren, ved at erstatte ReactDOM med et kodebibliotek til f.eks. cross-platform 
+mobilapps (React Native) og konfiguration. Inde i maskineriet fungerer ReactDOM 
+ved, at der fra webapplikationens index side kører en JavaScript fil i browseren, som 
+holder browserens Document Object Model (DOM) synkroniseret med applikationens 
+komposition af React komponenter og state. Alt logikken til at generere HTML 
+dynamisk er således flyttet over i klienten/browseren. Denne client-side-rendering gør 
+det muligt at have en interaktiv hjemmeside uden brug af en webserver. 
+
+Selvom man har en SPA uden en webserver, kan man stadig have pseudorouting 
+med JavaScripts History API eller React udgaven, React Router. Men det er altid 
+index siden, der indlæser hele webapplikationen, som præsenterer indholdet ud fra
+URL routen. Det medfører en bedre brugeroplevelse, da klienten aldrig indlæser en
+ny side efter index siden, og dermed slipper for nogensinde at genindlæse siden. [routebillede]
+
+React opdaterer kun de DOM elementer i browserens hukommelse, som det er
+nødvendigt for at matche det tilsvarende React elements state. Denne optimisering
+fremkommer af Reacts VDOM. Det er en virtuel kopi af DOM’en, som eksisterer med
+den nyeste opdaterede state i hukommelsen. Før React opdaterer DOM, hvilket er en
+meget dyr operation, sammenligner meget hurtige algoritmer VDOM med DOM og
+finder de steder, hvor der er forskel i browserens DOM state fra Reacts interne VDOM
+state, så kun de absolut nødvendige DOM elementer behøver at blive opdateret.  [reactdombllede]
+
+React understøtter også server-side-rendering, hvor serveren foretager den første
+indlæsning af webapplikationen og sender et snapshot af det fuldt formede HTML
+dokument til klienten. På denne måde understøtter man bedre søgemaskine
+crawlerne og opnår en bedre rank i søgemaskinen, og man mindsker markant tiden
+før first meaningful paint (når man kan se sidens primære indhold). Med server-side-
+rendering er man dog stadig nødt til at vente på, at browseren kører React scriptet,
+før siden bliver interaktiv.  
+
+# Node
+
+Node er et open source runtime environment for JavaScript, som kan læse og
+eksekvere JavaScript filer. Udover at være et runtime environment, indeholder Node
+også moduler som gør det muligt at afvikle JavaScript på server-side, og derved at
+implementere en webserver bygget på Node som f.eks. Express.
+
+Selvom det ikke kræver Node eller en webserver at køre en React app, er Node en
+del af alle React projekter. Det skyldes at Node også er den mest populære platform
+for værktøjer til at gøre livet lettere når man arbejder med f.eks. React.
+
+## NPM
+
+Node installeres sammen med Node Package Manager (NPM) som samarbejder med
+et register af JavaScript-pakker. Ved brug af dets Command Line Interface (CLI) kan
+man nemt installere JavaScript-pakker til sit projekt og styre dependencies med
+semantisk versionsstyring. Når man opretter et nyt React projekt, er første trin NPM 
+(med dens script-runner, NPX):
+
+ `npx install create-react-app appnavn` 
+
+ Dette installerer en færdigkonfigureret starterpakke til React udvikling. Den 
+indeholder bl.a. pakker, som udvider JavaScripts syntaks med JSX, og moderne 
+ES6+ sprogfunktioner. Det giver også en samling af scripts (react-scripts) til bl.a. at 
+starte en lokal live udviklingswebserver baseret på Node, med hot-reloading af CSS-
+filer og JavaScript-moduler, eller til at builde en produktionsklar statisk hjemmeside. 
+
+`const element = <div className=”hello”>Hello, UCL!</div>` 
+
+Overstående HTML-lignende syntaks er den syntaksudvidelse, som kaldes JSX. Det 
+transpileres (af Webpack) med en preprocessor (Babel) til ECMAScript JavaScript 
+inden browseren kører scriptet. Webpack er en modul bundler, som samler projektets 
+ES 6 moduler (ved import/export statements) til en samlet kildekode, og med Babel 
+oversætter speciel syntaks som f.eks. JSX til standard JavaScript. Overstående kode 
+bliver oversat af Babel til noget lignende: 
+
+```
+const element = React.createElement( 
+  “div”, 
+  { className: “hello” }, 
+  “Hello, Unik!” 
+); // => Hello, Unik!
+ ```
+
+Det er også muligt at indlejre JavaScript i et JSX udtryk: 
+```
+const element = <div className=”hello”> Hello, { getSchool() }!</div> // => Hello, UCL! 
+```
+ 
+
+Babel understøtter også moderne syntaks som optional chaining `?` operatoren, som 
+tillader at afbryde afviklingen af et udtryk uden fejl, hvis man prøvet at tilgå en 
+property på et objekt med værdien null eller undefined, eller nullish coalescing `??` 
+operatoren, som i tilfælde af ’null’ eller ’undefined’ falder tilbage på en anden værdi: 
+
+```
+let x = foo?.bar.baz(); // => 'undefined’ hvis ’foo’ er ’null’ eller ’undefined’ 
+
+let y = foo ?? ”default”; // => “default” hvis foo er  null eller undefined 
+```
+
+En meget anvendt syntaks inden for React er arrow functions og logical && operator: 
+const app = () => loggedIn && <Content /> 
+
+ ```
+Hvilket oversættes til følgende mindre kompakte syntaks i almindelig Javascript: 
+function app() { 
+  if (loggedIn) { 
+    return React.createElement(Content, null); 
+  } else { 
+   return false; 
+} 
+```
+ 
+
+Det er endda muligt at hente plugins til Babel for at understøtte ny eksperimentel 
+syntaks, som måske kunne være på vej i en fremtidig ES standard. En syntaks som 
+sandsynligvis vil komme i fremtiden, men lige nu er i et meget tidligt stadie, er de 
+såkaldte algebraic effects, som kort sagt vil introducere komponerbare effect 
+handlers til at behandle metodekald anderledes indenfor et scope med en try-catch 
+agtig syntaks. Denne syntaks kan man allerede afprøve nu med et Babel plugin5. 
+
+Babel kan også konfigureres til at understøtte TypeScript. Når man opretter et nyt 
+projekt med create-react-app, kan man vælge at understøtte TypeScript med en 
+template parameter: 
+
+```
+npx create-react-app --template typescript
+```
+
+Dette template indeholder en færdigkonfigureret Babel preset (babel-preset-react-app), som tillader at bruge ny syntaks som f.eks. type annotation (typestærkhed) og
+at anvende TypeScripts compiler, som tillader statiske type checks af almindelig
+JavaScript samt den udvidede TypeScript syntaks.
+
+# TypeScript
+
+TypeScript er en udvidelelse af JavaScript, som introducerer ny syntaks vi kender fra 
+typestærke sprog ligesom C#, som f.eks. interfaces, enums og type annotation. Det 
+introducerer også ny syntaks pga. dets anderledes typesystem, f. eks. muligheden for 
+mapped types, der kan transformere en type fra en definition til en anden. 
+
+Fordelene ved TypeScript er mange, men vigtigst er naturligvis den typesikkerhed, 
+som man kan opnå med TypeScript på compile-time. Typesikkerhed er uvurderligt når 
+man skal refaktorere gammel kode, da det giver mulighed for at ændre koden med en 
+vis grad af tillid til, at der hvert fald ikke er introduceret nye fejl pga. inkompatible 
+typer. Endnu bedre er automatiske tests, men UI kode er notorisk svær at dække med 
+automatiserede tests.  
+
+En anden fordel TypeScript har er, at det typestærkheden forbedrer dokumentation 
+for koden. Hvis man importerer JavaScript moduler som har en korrekt type definition, 
+kan man med sin IDE f.eks. udforske modulets eksporterede objekter, metoder, 
+interfaces, etc. uden at man behøver nærlæse eller afvikle kildekoden. Med 
+DefinitelyTyped registret, er det muligt at finde korrekte type definitioner til de fleste 
+JavaScript kodebiblioteker, som endnu ikke har en officiel type definition (.d.ts fil). 
+
+En af fordelene ved TypeScript er også, at det ligesom Babel er en transpiler, der 
+oversætter syntaks, og man ser ofte nye syntaks funktioner i de nyeste versioner af 
+TypeScript, før de kommer til ECMAScript. 
+
+TypeScripts type system kaldes duck typing eller structural typing, hvilket 
+differentierer sig fra f.eks. C#’s nominal typing ved at være mindre streng, når den 
+skal bestemme hvorvidt et objekt overholder en type definition. Det bestemmes 
+nemlig ved, om et objekt har properties, som er tilsvarende alle de properties et 
+interface indeholder. Det er altså ligemeget, om den har yderligere properties, en 
+anden type annotation eller måske slet ingen type annotation. Det er kun de 
+properties, som udgør måltypens interface, der bliver taget i betragtning. 
+
+```
+interface IItem 
+{ 
+  id: number; 
+} 
+function doSomething(item: IItem) { } 
+doSomething({ id: 1, name: “Rune” }); // OK! 
+```
+
+Et TypeScript interface som overstående genererer ikke noget kode når det 
+oversættes til JavaScript, men TypeScript compileren bruger det interface til at 
+verificere typekorrektheden i compile-time.TypeScript laver ikke nogle runtime type 
+checks, da al TypeScript syntaksen kompileres til standard JavaScript inden kørsel. 
+
+TypeScript compileren kan tit aflede datatypen for en variabel ud fra konteksten den 
+bliver brugt. Det kaldes Type Inference, og det medfører, at man tit får mange af 
+gevinsterne af statiske type checks før man overhovedet er begyndt at annotere sine 
+data typer (hvilket faktisk er valgfrit at gøre). Hvis for eksempel en funktion 
+’assertIsString(val)’ kaster en exception, når parameteren ’val’ har en anden type end 
+’string’, kan TypeScript benytte sig af det til at give fejlbeskeder og code completion. 
+
+```
+function yell(str) { 
+  assertIsString(str); // Nu ved TypeScript at ‘str’ har 
+                       // typen ‘string’ 
+  return str.toUppercase(); 
+  // error: Property 'toUppercase' does not exist on 
+  // type 'string'. Did you mean 'toUpperCase'? 
+} 
+```
+TypeScript er endda i stand til at udlede data typer ud fra kommentarer ovenover 
+koden, hvis kommentarerne er skrevet efter JSDoc specifikationen. 
+
+# Referenceliste
