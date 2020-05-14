@@ -1,21 +1,32 @@
 ---
-title: "Hovedopgave"
 bibliography: citations/referenceliste.bib
 csl: citations/university-college-lillebaelt-harvard.csl
 output: 
   pdf_document:
-    toc: true
+    includes:
+      in_header: import.sty
+      before_body: title.sty
 toc-title: Indholdsfortegnelse
 ---
 
-\pagebreak
+# Basale teknologier
+## Internet, World Wide Web og HTTP
+Internettet er et computernetværk bestående af computernetværk som kommunikerer over en fælles protokolstak. Protokolstakken er en gruppe af protokoller til netværkskommunikation, som kan inddeles i lag efter OSI-modellen:
 
-# Internet, World Wide Web og HTTP
-Internettet er et computernetværk bestående af computernetværk.
+```{r echo = FALSE}
+library("knitr")
+library("kableExtra")
+tableData <- c("Applikationslag","HTTP, SMTP, DNS","Netværkslag", "Test");
+protocols_by_layer <- matrix(tableData,ncol=2,byrow=TRUE)
+colnames(protocols_by_layer) <- c("Lag", "Protokol")
+kable(protocols_by_layer, caption = "title") %>% kable_styling(latex_options = c("hold_position"), font_size = 14) %>% row_spec(0, font_size = 10)
+```
+
+
 
 For at dele HTML dokumenter på internettet, blev World Wide Web (WWW) opfundet i 1989 af Tim Bernes Lee. Populariteten af Internettet og WWW steg eksplosivt i perioden fra 1995-2005[^wdi]:
 
-```{r echo=FALSE}
+```{r echo = FALSE}
 library('WDI')
 raw <- WDIsearch("individuals using the internet")
 individuals_using_internet <- as.data.frame(raw)
@@ -25,13 +36,39 @@ to_plot <- individuals_using_internet_denmark[c("year", indicator)]
 plot(to_plot, type="l", main="Brugere af Internettet i Danmark", xlab = "Årstal", ylab="% af population")
 ```
 
+Internettet er 
+
 [^wdi]: @WB, IT.NET.USER.ZS, DK
 
-# JavaScript
+## CSS
+CSS (Cascading Style Sheets) deklarerer regler som udgør *stylingen* af HTML dokumentet. Reglerne kan ramme en eller flere HTML elementer afhængigt af den valgte *selector*. Der er selectorer for HTML element typer, HTML element ID og HTMl element klasser. 
 
-JavaScript er det programmeringssprog, som flest udviklere bruger, og har været det siden 2013[^so]. Det blev opfundet i...
+Ordet *cascade* i CSS peger på den måde CSS regel konflikter håndteres på en forudsigelig måde.
+For det første ser browseren på *stylesheet origin*. Den lavest prioriterede stylesheet origin er *user agent styles*, som er det stylesheet, browseren som standard applikerer. Det er standard styling som farve til hyperlinks og skriftstørrelse. User agent styles kan variere fra fra browser til browser. For at sikre en ens brugeroplevelse på tværs af user agent/browser, kan man bruge et *CSS Reset* stylesheet som **normalize.css* [^normalize].
+Stylesheets skrevet af udvikleren, eller som er linket til i HTML dokumentet, kaldes *author styles*, og de overskriver user agent styles.
+Det næste browseren vurderer er *specificity*. Reglen med den højeste specificity overskriver andre modstridende regler (med undtagelse af regler deklareret med `!important` annotationen). Den højeste specificity opnås hvis stylingen er deklareret *inline* i HTML elementets `style` attribut. Derefter vurderes specificity fra reglens selector. Hvis selectoren består af HTMl element ID, giver det højere specificity, end hvis den består af HTML element klasser, som igen giver højere specificity, end hvis den består af HTML element typer. En selector med flere ID har højere specificity end én med færre[^cascade].
+Endelig vurderer browseren *source order*. Hvis specificity for modstridende regler er den samme, vil den sidste regel overskrive den første.
 
-## Datatyper
+Udover user agent styles og author styles, kan HTML elementer også nedarve styling ved *inheritance*, hvis den ikke har en værdi fra cascaden beskrevet overfor. Det tillader f.eks. at deklarere en skrifttype for rodelementet, som alle lavere HTML elementer vil arve. Kun nogle properties understøtter inheritance, f.eks. de for text, lister og tabeller.
+
+### Flexbox
+
+### CSS Grid
+
+[^normalize]: https://github.com/necolas/normalize.css
+[^cascade]: @farrel
+
+## JavaScript
+
+JavaScript er det programmeringssprog, som flest udviklere bruger, og har været det siden 2013[^so].
+```{R echo = FALSE}
+language_by_popularity <- c(JavaScript = 67.8, SQL = 54.5, Java = 41.1, "C#"=31)
+barplot(language_by_popularity, main = "Popularitet af programmeringssprog", ylab = "% af adspurgte udviklere", ylim = range(pretty(c(0, language_by_popularity))))
+
+```
+
+
+### Datatyper
 JavaScript er *loosely typed*[^lt]. JavaScript har overordnet to forskellige datatyper: primitive (simple værdier) og non-primitive (objekter). Forskellen er, at simple typer består af én immutable værdi. Objekter kan derimod indkapsle flere simple værdier (properties) samt metoder (funktioner). De syv[^syv] simple værdier som `number`, `string`, `boolean` etc. er altså byggestenene for objekter[^dt]. 
 
 Objekter kan nedarves. Alle komplekse typer som `Function` eller `Array` er objekter, som alle nedarver fra objektet `Object`. 
@@ -62,9 +99,9 @@ Specialisering foregår med `constructor` objektet.
 [^so]: @SO, Most Popular Technologies, Programming Scripting and Markup Languages
 [^katalog]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 
-# React
+# JavaScript Frameworks
 
-## Hvorfor React?
+## Sammenligning
 
 Når man dykker ned i de seneste års udvikling indenfor JavaScript frontend
 frameworks, biblioteker og værktøjer, opstår der et mønster. De tre Javascript 
@@ -97,8 +134,8 @@ komponenter, samt udviklerentusiasmen i udviklerkulturen omkring React, er pt de
 andre web frameworks overlegen, og derfor er React det bedste valg til 
 webapplikationen. 
 
-## Hvad er React?
- React er et JavaScript kodebibliotek til at bygge brugergrænseflader baseret på 
+## React
+React er et JavaScript kodebibliotek til at bygge brugergrænseflader baseret på 
 komposition af komponenter. Alting i React er en komponent, og selv hele 
 applikationen er en komponent, som er sammensat af de øvrige komponenter. 
 Komponent strukturen gør det muligt at genbruge og indkapsle alt lige fra en simpel 
@@ -126,7 +163,7 @@ skal se ud og hvordan den skal transformeres. Man beskriver UI med en HTML +
 JavaScript lignende syntaks, og React sørger for resten. 
 
  
-## Komponenter og props
+### Komponenter og props
 En React komponent er ikke andet end en funktion, som returnerer noget, der i bund 
 og grund bare er HTML. Strukturen og indholdet kan evt. afhænge af nogle 
 funktionsparametre – eller hvad man i React termer ville kalde props. Disse props 
@@ -160,15 +197,11 @@ kan det blive uoverskueligt at vedligeholde, når man bruger dette ”Lifting St
 mønster. Det overholder ikke DRY princippet, da den manuelle proces med at sende 
 dataen igennem komponenten via props gentages for hvert mellemled mellem A og B.  
 
-
-## Global state
-### Context
- En måde at omgå denne ”Prop-drilling” proces er ved at benytte Reacts indbyggede 
+### Redux
+En måde at omgå denne ”Prop-drilling” proces er ved at benytte Reacts indbyggede 
 Context API. Den tillader komponenter at dele props indenfor en kontekst uden at 
 mappe props mellem komponenter. [contextbillede]
 
-
-### Redux
  En anden mere avanceret måde, er at gøre som Facebook og bruge software design 
 mønstret Flux. Flux applikationer har tre hovedbestanddele: dispatcher, stores og 
 views. Ideen med Flux er, at den delte state ligger i en single source of truth dvs. i 
@@ -190,7 +223,7 @@ en funktion, som er en higher order component, der tager en React komponent som
 input og returnerer en ”forbedret” udgave af komponenten med adgang til store og 
 action creators via props.  [providerbillede]
 
-## Funktionel programmering
+### Funktionel programmering
 Disse software design mønstre, som optræder i React, kan virke eksotiske fra et objekt orienteret 
 programmerings perspektiv, men de opstår som en naturlig konsekvens af, at React 
 fremhæver det funktionelle programmerings paradigme frem for objekt orienteret 
@@ -200,7 +233,7 @@ består af nogle mønstre som f.eks. at skrive pure functions og sammensættte d
 higher order funktions samt at undgå mutation af værdier (immutability). Når man 
 forstår de funktionelle koncepter, ser man dem gentage sig overalt i React. 
 
-### Mere om React
+### React-DOM
 Alt React kode som har med browseren at gøre, er splittet op i sit eget ReactDOM 
 kodebibliotek. Man kan også udvikle med React mod en anden målplatform end 
 browseren, ved at erstatte ReactDOM med et kodebibliotek til f.eks. cross-platform 
@@ -233,7 +266,10 @@ før first meaningful paint (når man kan se sidens primære indhold). Med serve
 rendering er man dog stadig nødt til at vente på, at browseren kører React scriptet,
 før siden bliver interaktiv.  
 
-# Node
+### Hooks
+https://itnext.io/under-the-hood-of-react-hooks-805dc68581c3
+
+## Node
 
 Node er et open source runtime environment for JavaScript, som kan læse og
 eksekvere JavaScript filer. Udover at være et runtime environment, indeholder Node
@@ -244,7 +280,7 @@ Selvom det ikke kræver Node eller en webserver at køre en React app, er Node e
 del af alle React projekter. Det skyldes at Node også er den mest populære platform
 for værktøjer til at gøre livet lettere når man arbejder med f.eks. React.
 
-## NPM
+### NPM
 
 Node installeres sammen med Node Package Manager (NPM) som samarbejder med
 et register af JavaScript-pakker. Ved brug af dets Command Line Interface (CLI) kan
@@ -327,7 +363,8 @@ Dette template indeholder en færdigkonfigureret Babel preset (babel-preset-reac
 at anvende TypeScripts compiler, som tillader statiske type checks af almindelig
 JavaScript samt den udvidede TypeScript syntaks.
 
-# TypeScript
+
+## TypeScript
 
 TypeScript er en udvidelelse af JavaScript, som introducerer ny syntaks vi kender fra 
 typestærke sprog ligesom C#, som f.eks. interfaces, enums og type annotation. Det 
@@ -392,5 +429,13 @@ function yell(str) {
 ```
 TypeScript er endda i stand til at udlede data typer ud fra kommentarer ovenover 
 koden, hvis kommentarerne er skrevet efter JSDoc specifikationen. 
+
+## Vue
+
+# Micro Frontends
+
+## Module Federaton
+
+## Single-SPA
 
 # Referenceliste
