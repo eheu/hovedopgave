@@ -26,7 +26,7 @@ kable(protocols_by_layer, caption = "title") %>% kable_styling(latex_options = c
 
 For at dele HTML dokumenter på internettet, blev World Wide Web (WWW) opfundet i 1989 af Tim Bernes Lee. Populariteten af Internettet og WWW steg eksplosivt i perioden fra 1995-2005[^wdi]:
 
-```{r echo = FALSE}
+```{r echo = FALSE, fig.cap = "test"}
 library('WDI')
 raw <- WDIsearch("individuals using the internet")
 individuals_using_internet <- as.data.frame(raw)
@@ -39,6 +39,11 @@ plot(to_plot, type="l", main="Brugere af Internettet i Danmark", xlab = "Årstal
 Internettet er 
 
 [^wdi]: @WB, IT.NET.USER.ZS, DK
+
+# HTTP
+HTTP/1.1
+HTTP/2
+https://stackoverflow.com/questions/37556283/what-is-the-value-of-using-webpack-with-http-2
 
 ## CSS
 CSS (Cascading Style Sheets) deklarerer regler som udgør *stylingen* af HTML dokumentet. Reglerne kan ramme en eller flere HTML elementer afhængigt af den valgte *selector*. Der er selectorer for HTML element typer, HTML element ID og HTMl element klasser. 
@@ -280,21 +285,57 @@ Selvom det ikke kræver Node eller en webserver at køre en React app, er Node e
 del af alle React projekter. Det skyldes at Node også er den mest populære platform
 for værktøjer til at gøre livet lettere når man arbejder med f.eks. React.
 
-### NPM
+### CRA (Create-React-App)
 
 Node installeres sammen med Node Package Manager (NPM) som samarbejder med
 et register af JavaScript-pakker. Ved brug af dets Command Line Interface (CLI) kan
-man nemt installere JavaScript-pakker til sit projekt og styre dependencies med
-semantisk versionsstyring. Når man opretter et nyt React projekt, er første trin NPM 
-(med dens script-runner, NPX):
+man nemt installere JavaScript-pakker fra NPM Registry til sit projekt og styre dependencies med
+semantisk versionsstyring. Når man opretter et nyt React projekt, er første trin at bruge NPM 
+(med dens script-runner, NPX) til at køre et scriptet CRA[^cra], som er udviklet af Facebook.
 
  `npx install create-react-app appnavn` 
 
- Dette installerer en færdigkonfigureret starterpakke til React udvikling. Den 
-indeholder bl.a. pakker, som udvider JavaScripts syntaks med JSX, og moderne 
-ES6+ sprogfunktioner. Det giver også en samling af scripts (react-scripts) til bl.a. at 
+Dette installerer en færdigkonfigureret starterpakke til React udvikling. Den 
+indeholder bl.a. compilere, som udvider JavaScripts syntaks med JSX, og tillader at moderne sprogfunktioner/syntaks. Det giver også en samling af scripts (react-scripts[^rs]) til bl.a. at 
 starte en lokal live udviklingswebserver baseret på Node, med hot-reloading af CSS-
 filer og JavaScript-moduler, eller til at builde en produktionsklar statisk hjemmeside. 
+
+[^cra]: https://www.npmjs.com/package/create-react-app
+[^rs]: https://www.npmjs.com/package/react-scripts
+# Webpack
+create-react-app bruger en automatisk opsat Webpack konfiguration til at kompilere applikationens moduler og afhængigheder til static assets, som er klar til at blive præsenteret for slutbrugeren. Webpack er det, man kalder en *module bundler*[^module-bundler]. Den håndterer altså primært at samle koden ved *import statements* til en samlet JavaScript fil af alle moduler og deres afhængigheder.
+
+Dette giver i sig selv en gevinst, for brugeren kan få hele webapplikationen i et request, og det kan gøre indlæsningen af alle modulerne betydeligt hurtigere på en HTTP/1.1 forbindelse med høj latency.
+
+https://youtu.be/WQue1AN93YU?t=173
+```{r echo = FALSE, fig.cap="Hastighed uden bundling"}
+  library(DiagrammeR)
+graph <- mermaid("
+    gantt
+    dateFormat  HH:mm:ss.SSS
+    title Sample Test Gantt
+
+    section HTML
+    thing1          :   .0,   .300
+
+    section CSS
+    thing2          :   .300, .600   
+
+    section JS
+    thing3          :   .600,   .800
+    thing4          :   .800,   .1000
+    ")
+graph
+```
+
+
+og oversætte moderne syntaks til bagudkompatibel
+
+https://www.youtube.com/watch?v=WQue1AN93YU
+
+[^module-bundler]: https://www.npmjs.com/package/react-scripts
+
+# Babel
 
 `const element = <div className=”hello”>Hello, UCL!</div>` 
 
@@ -362,7 +403,6 @@ npx create-react-app --template typescript
 Dette template indeholder en færdigkonfigureret Babel preset (babel-preset-react-app), som tillader at bruge ny syntaks som f.eks. type annotation (typestærkhed) og
 at anvende TypeScripts compiler, som tillader statiske type checks af almindelig
 JavaScript samt den udvidede TypeScript syntaks.
-
 
 ## TypeScript
 
@@ -438,4 +478,4 @@ koden, hvis kommentarerne er skrevet efter JSDoc specifikationen.
 
 ## Single-SPA
 
-# Referenceliste
+# Litteratur
