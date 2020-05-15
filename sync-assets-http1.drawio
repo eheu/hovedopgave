@@ -1,10 +1,10 @@
-<mxfile host="app.diagrams.net" modified="2020-05-14T20:41:46.727Z" agent="5.0 (Windows)" etag="3uaCaCQdbz2e989RImZ5" version="13.1.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-05-15T07:14:36.934Z" agent="5.0 (Windows)" etag="i-bB0BIyErwjpBTy4hAp" version="13.1.1" type="github">
   <diagram id="9tmcB_nWFTzBjbHdpLqI" name="Page-1">
     <mxGraphModel dx="1254" dy="801" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="Fuwoyqr6tHTowHfoofCM-4" value="Tidslinje" style="swimlane;html=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=20;horizontalStack=0;fillColor=none;strokeColor=none;" parent="1" vertex="1">
+        <mxCell id="Fuwoyqr6tHTowHfoofCM-4" value="Tidslinje" style="swimlane;html=1;childLayout=stackLayout;resizeParent=1;resizeParentMax=0;horizontal=1;startSize=20;horizontalStack=0;fillColor=none;strokeColor=#000000;" parent="1" vertex="1">
           <mxGeometry x="240" y="220" width="540" height="370" as="geometry" />
         </mxCell>
         <mxCell id="Fuwoyqr6tHTowHfoofCM-120" value="" style="endArrow=none;dashed=1;html=1;entryX=1;entryY=1;entryDx=0;entryDy=0;exitX=0;exitY=0;exitDx=0;exitDy=0;" parent="Fuwoyqr6tHTowHfoofCM-4" source="Fuwoyqr6tHTowHfoofCM-103" target="Fuwoyqr6tHTowHfoofCM-96" edge="1">
@@ -94,6 +94,12 @@
         <mxCell id="Fuwoyqr6tHTowHfoofCM-113" value="Udfør" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="Fuwoyqr6tHTowHfoofCM-109" vertex="1">
           <mxGeometry x="222.2202614379086" y="18.333333333333336" width="70.58823529411767" height="18.333333333333336" as="geometry" />
         </mxCell>
+        <mxCell id="Fuwoyqr6tHTowHfoofCM-119" value="" style="endArrow=none;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.25;entryY=0;entryDx=0;entryDy=0;" parent="Fuwoyqr6tHTowHfoofCM-109" edge="1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="73" y="55" as="sourcePoint" />
+            <mxPoint x="73" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
         <mxCell id="Fuwoyqr6tHTowHfoofCM-7" value="&lt;div&gt;Imports&lt;/div&gt;" style="swimlane;html=1;startSize=20;horizontal=0;" parent="Fuwoyqr6tHTowHfoofCM-4" vertex="1">
           <mxGeometry y="280" width="540" height="90" as="geometry" />
         </mxCell>
@@ -121,12 +127,6 @@
         </mxCell>
         <mxCell id="Fuwoyqr6tHTowHfoofCM-106" value="Udfør" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="Fuwoyqr6tHTowHfoofCM-102" vertex="1">
           <mxGeometry x="77.64705882352942" y="18.333333333333336" width="25.882352941176467" height="18.333333333333336" as="geometry" />
-        </mxCell>
-        <mxCell id="Fuwoyqr6tHTowHfoofCM-119" value="" style="endArrow=none;html=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="Fuwoyqr6tHTowHfoofCM-110" edge="1">
-          <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="280" y="430" as="sourcePoint" />
-            <mxPoint x="465" y="420" as="targetPoint" />
-          </mxGeometry>
         </mxCell>
       </root>
     </mxGraphModel>
