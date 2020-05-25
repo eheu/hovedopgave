@@ -9,41 +9,70 @@ output:
 toc-title: Indholdsfortegnelse
 ---
 
-# Basale teknologier
-## Internet, World Wide Web og HTTP
-Internettet er et computernetværk bestående af computernetværk som kommunikerer over en fælles protokolstak. Protokolstakken er en gruppe af protokoller til netværkskommunikation, som kan inddeles i lag efter OSI-modellen:
-
-```{r echo = FALSE}
-library("knitr")
-library("kableExtra")
-tableData <- c("Applikationslag","HTTP, SMTP, DNS","Netværkslag", "Test");
-protocols_by_layer <- matrix(tableData,ncol=2,byrow=TRUE)
-colnames(protocols_by_layer) <- c("Lag", "Protokol")
-kable(protocols_by_layer, caption = "title") %>% kable_styling(latex_options = c("hold_position"), font_size = 14) %>% row_spec(0, font_size = 10)
+```{r echo=FALSE}
+#install.packages("kableExtra")
+#install.packages("WDI")
+#install.packages("cowplot")
+#install.packages("magick")
+#install.packages("png")
 ```
 
 
+# Problemformulering
 
-For at dele HTML dokumenter på internettet, blev World Wide Web (WWW) opfundet i 1989 af Tim Bernes Lee. Populariteten af Internettet og WWW steg eksplosivt i perioden fra 1995-2005[^wdi]:
 
-```{r echo = FALSE, fig.cap = "test"}
+# Indledning
+
+Med denne hovedopgave vil jeg præsentere et bredt overblik over fundementale webteknologier, i form af programmeringssprog, værktøjer og biblioteker, som knytter sig til moderne webudvikling, specielt med hensyn til HTML, CSS og JavaScript. I forhold til spørgsmålet om, hvad der udgør moderne webudvikling, er der delte meninger. Jeg har derfor udvalgt enkelte teknologier at beskrive med begrundelse i offentliggjorte udviklerundersøgelser og efter min personlige præferencer. Tempoet hvormed nye webteknologier introduceres og tages i brug er hastigt stigende. Jeg vil derfor med hovedopgaven også undersøge muligheden for at bygge en microfrontend arkitektur, som kan omkranse adskillelige frameworks og teknologier og dermed tillade brug af den mest passende teknologi til slutbrugeren og udviklerens behov.
+
+\newpage
+
+# Basale webteknologier
+
+## Internettet og World Wide Web
+Internettet er et computernetværk bestående af computernetværk som er forbundet gennem *routere*. En computerenhed, der er forbundet til internettet, kaldes en *host*. For at hosts og routere kan kommunikere, bruger de *TCP/IP protokolstakken*. Det er en gruppe af standarder og software, som tillader enhederne at forstå hinanden efter et fastlagt format. Protokolstakken kan inddeles i lag for protokollernes forskellige ansvarsområder.
+
+
+
+```{r echo = FALSE}
+library("knitr")
+tableData <- c("Applikationslag","HTTP, SMTP, DNS","Netværkslag", "Test");
+protocols_by_layer <- matrix(tableData,ncol=2,byrow=TRUE)
+colnames(protocols_by_layer) <- c("Lag", "Protokol")
+kable(protocols_by_layer, caption = "TCP/IP protokolstakken")
+```
+
+De beskeder, som enheder sender over internettet, bliver opdelt i mange *packets*, som hver især finder vej fra beskedens oprindelse til dens destination. Routerens bestemmer vejen gennem internettet for de mange packets fra oprindelse til destination i en proces der hedder *routing*. Routeren håndterer også *packet switching* ved at betragte hver enkelt packet, som indeholder information om sin egen destination. Routeren slår destinationsadressen op i sin *configuration tabel* for at sende den konkrete packet til den korrekte destination med hensyn til at vælge en ikke overbelastet route. Packet switching er meget effektivt ift. f.eks. *circuit switching*, som holder en kommunikationslinje åben hele tiden, f.eks. traditionel fastnet telefoni. På grund af denne effektivitet steg udbredelsen af internettet eksplosivt i perioden fra 1995-2005[^wdi]:
+
+```{r echo = FALSE, fig.cap = "Brugere af internettet i Danmark", fig.width=4, fig.height=4}
 library('WDI')
 raw <- WDIsearch("individuals using the internet")
 individuals_using_internet <- as.data.frame(raw)
 indicator <- toString(individuals_using_internet["indicator", 1])
 individuals_using_internet_denmark <- WDI(country = "DK", indicator = indicator, start = 1995, end = 2020)
 to_plot <- individuals_using_internet_denmark[c("year", indicator)]
-plot(to_plot, type="l", main="Brugere af Internettet i Danmark", xlab = "Årstal", ylab="% af population")
+plot(to_plot, type="l", main="", xlab = "Årstal", ylab="% af population")
 ```
+
+World Wide Web (WWW) opfundet i 1989 for at forskere kunne *hyperlinke* bl.a. deres forskningsartikler. WWW bruger Hypertext Transfer Protocol (HTTP) for at kommunikere mellem *klienter* og *servere*. 
+
 
 Internettet er 
 
 [^wdi]: @WB, IT.NET.USER.ZS, DK
 
-# HTTP
+## HTTP
 HTTP/1.1
 HTTP/2
 https://stackoverflow.com/questions/37556283/what-is-the-value-of-using-webpack-with-http-2
+
+## W3C
+
+## Heap/Stack (browser?) (flyt?)
+
+## HTML
+
+HTML tags kan have attributter.
 
 ## CSS
 CSS (Cascading Style Sheets) deklarerer regler som udgør *stylingen* af HTML dokumentet. Reglerne kan ramme en eller flere HTML elementer afhængigt af den valgte *selector*. Der er selectorer for HTML element typer, HTML element ID og HTMl element klasser. 
@@ -56,6 +85,8 @@ Endelig vurderer browseren *source order*. Hvis specificity for modstridende reg
 
 Udover user agent styles og author styles, kan HTML elementer også nedarve styling ved *inheritance*, hvis den ikke har en værdi fra cascaden beskrevet overfor. Det tillader f.eks. at deklarere en skrifttype for rodelementet, som alle lavere HTML elementer vil arve. Kun nogle properties understøtter inheritance, f.eks. de for text, lister og tabeller.
 
+### Style creep
+
 ### Flexbox
 
 ### CSS Grid
@@ -63,109 +94,151 @@ Udover user agent styles og author styles, kan HTML elementer også nedarve styl
 [^normalize]: https://github.com/necolas/normalize.css
 [^cascade]: @farrel
 
+## Browser support (flyt?)
+
+https://whatwg.org/faq
+
+https://whatwg.org/faq#living-standard
+
 ## JavaScript
+JavaScript blev skabt i 1995. JavaScript er i dag så allestedsnærværende på internettet, at mange websider ikke engang virker uden JavaScript. JavaScript er det mest populære programmeringssprog, og har været det siden 2013[^so].
 
-JavaScript er det programmeringssprog, som flest udviklere bruger, og har været det siden 2013[^so].
-```{R echo = FALSE}
-language_by_popularity <- c(JavaScript = 67.8, SQL = 54.5, Java = 41.1, "C#"=31)
-barplot(language_by_popularity, main = "Popularitet af programmeringssprog", ylab = "% af adspurgte udviklere", ylim = range(pretty(c(0, language_by_popularity))))
 
+```{R echo = FALSE, fig.cap = "Popularitet af programmeringssprog", fig.width=4, fig.height=4}
+language_by_popularity <- data <- data.frame(
+  name=c("JavaScript","SQL","Java","C#"),  
+  value=c(67.8,54.4,41.1,31)
+)
+
+library(ggplot2)
+# Basic barplot
+# reorder https://stackoverflow.com/a/16968999
+p<-ggplot(data=language_by_popularity, aes(x=reorder(name, -value), y=value)) +
+  geom_bar(stat="identity")
+p + xlab("") + ylab("% af adspurgte udviklere, som bruger sproget")
 ```
 
+### Standardisering
+I 1996 blev JavaScript indsendt til ECMA International som håndterer webstandarder. Dermed kunne konkurrende JavaScript engines kunne en fælles standard, så alle JavaScript *hosting environments* som fx en *browser* kunne afvikle og præsentere JavaScript uden at afvige fra hinanden. Der findes flere forskellige JavaScript *engines*, som alle kører JavaScript kode efter samme standard. Standarden hedder ECMA-262, men kaldes ECMAScript og forkortes ofte *ES*. ES3 udkom i 1999, men der blev ikke udgivet en ny version før 2009, hvor ES5 udkom. Microsoft havde en implementation af standarden, som de kaldte JScript. JScript og JavaScript havde i begyndelsen alligevel væsentlige forskelle. Forskellene blev med tiden udvandet, og i dag er der mange forskellige JavaScript engines, fx. SpiderMonkey (brugt af Firefox), Chakra (brugt af Edge) og V8 (brugt af Chrome). 
+
+
+### Scope (block, function, ?)
+
+### Compiler, runtime
+https://stackoverflow.com/questions/29027845/what-is-the-difference-between-javascript-engine-and-javascript-runtime-environm
+https://medium.com/@andrewrymaruk/v8-a-few-words-about-javascript-engines-882dc2cf6799
 
 ### Datatyper
-JavaScript er *loosely typed*[^lt]. JavaScript har overordnet to forskellige datatyper: primitive (simple værdier) og non-primitive (objekter). Forskellen er, at simple typer består af én immutable værdi. Objekter kan derimod indkapsle flere simple værdier (properties) samt metoder (funktioner). De syv[^syv] simple værdier som `number`, `string`, `boolean` etc. er altså byggestenene for objekter[^dt]. 
 
-Objekter kan nedarves. Alle komplekse typer som `Function` eller `Array` er objekter, som alle nedarver fra objektet `Object`. 
+JavaScript har overordnet to forskellige datatyper af værdier, som kan opbevares i variable. Det er *primitiver* (værdityper), som opbevares på stack, og *objekter* (referencetyper), som opbevares på heap.  Primitiver er simple værdier, som JavaScript har syv forskellige typer af: `Number`, `Boolean`, `String`, `Null`, `Undefined`, `Symbol` (introduceret i ES6) og `BigInt` (introduceret i ES7). Objekter består af *properties*, som er navngivne primitiver eller objekter. Properties kan også indeholde *functions*, som i Javascript er specielle objekter af typen `Function`, og *arrays* af primitiver og/eller objekter, som i JavaScript også er specielle objekter, der har typen `Array`. Functions og arrays er altså som næsten alt andet i JavaScript objeker, selvom syntaksen for at bruge disse specielle objekter er lidt anderledes. Man opretter generelt brugerdefinerede objekter ved at bruge *object literal* syntaksen:
 
-### Prototype
-Nedarvning i JavaScript er i modsætning til f.eks. C# ikke med klasser, men med prototype systemet. Alle objekter har en readonly `__proto__` property indeholdende `Object` objektet, og har dermed adgang til dens data og funktionalitet. Objekter som datatyper (klasser) er defineret med en constructor funktion, f.eks: [^katalog]
 
 ```{js}
-Animal = function(name) {
-  this.name = name
+// objekt
+const animal = {
+  // properties
+  alive: false, // simpel værdi
+  position: { // objekt
+    x: 0,
+    y: 0,
+  },
+  walk: function (x, y) { // metode
+    this.position.x = x;
+    this.position.y = y;
+  },
+};
+```
+
+### Browseren
+https://javascript.info/browser-environment
+JavaScript kører i et *host environment* (hostmiljø) som fx en *browser*. Hostmiljøet er ansvarlig for at gøre specifikke objekter tilgængelige for udvikleren. Alle browsere giver f.eks. adgang til `document` objektet, som kan manipulere det hierarki af *nodes*, som hver især repræsenterer de HTML tags, som udgør det aktuelle HTML dokument.
+
+### DOM
+
+### Nedarvning med prototype pattern
+JavaScript er et objektorienteret sprog, men det har (i modsætning til fx. C#) ikke klasser. For at kunne lave objekter af en bestemt type, bruger man en *constructor funktion*, Denne specielle metode navngives konventionelt med stort begyndelsesbogstav. På constructor funktionen er der en property `prototype`, som indeholder et objekt. Ved at sætte properties på prototype objektet, angiver man hvilke felter, som skal være på objekter skabt med constructor funktionen. Når man laver objekter ved at kalde constructor funktionen med nøgleordet `new`, vil man kunne tilgå de properties og metoder, man har angivet i prototypen.
+
+```{js}
+// constructor funktion
+function Animal() {
 }
-Animal.prototype.walk = function() { }
+
+// prototype pattern
+Animal.prototype.alive = false;
+Animal.prototype.position = { x: 0, y: 0 };
+Animal.prototype.move = function (x, y) {
+  this.position.x = x;
+  this.position.y = y;
+};
 ```
 
-Hvis man vil specialisere et objekt, kalder man constructor funktionen med nøgleordet `new`. Så får objektet bl.a. sat sin `__proto__` property til constructor funktionens objekt, og vil kunne tilgå dens properties og funktioner:
+Når constructor funktionen kaldes med `new`, får Prototype objektet som standard en `constructor` property, som peger tilbage på den constructor funktion, som prototypen tilhører. For eksempel peger `Animal.prototype.constructor` tilbage på `Animal`.  og `__proto__` property, som angiver hhv. typens constructor funktion, og constructor funktionen for den nedarvede type (i sidste ende `Object`).
+
+Hvis man vil specialisere sin constructor function, fx. lave en `Mammal` som specialisering af `Animal`, laver man en ny constructor function, og sætter prototypen til en instans af overtypen.
 
 ```{js}
-var animal = new Animal("lion")
-animal.name // => "lion"
+function Mammal(){
+}
+
+Mammal.prototype = new Animal();
+Mammal.prototype.isPregnant = false;
 ```
 
-Specialisering foregår med `constructor` objektet.
+Når man tilgår en property, fx. (???) vil JavaScripts engine søge efter en property med det navn først blandt objektets properties, dernæst i dens prototypes properties, så prototypens __proto__'s properties, osv. indtil roden af nedarvingshiearkiet, som er constructor funktionen `Object`. 
+
+```{r echo=FALSE, fig.cap="Prototypisk nedarvningskæde", fig.height=4, fig.width=4}
+library(png)
+library(grid)
+img <- readPNG("prototypical-inheritance.png")
+grid.raster(img)
+```
+
+### Nedarvning med klasser
+I ES6 blev en ny syntaks indført for at gøre det lettere at arbejde med prototypiske nedarvningskæder. Man kan nu bruge `class` nøgleordet til at definere sine *klasser*. Klasser i JavaScript minder meget om klasser i andre objectorienterede sprog, fx. C#, men de er blot syntaktisk sukker for prototypisk nedarvning. 
+https://javascript.info/class
+The result of this definition is about the same. So, there are indeed reasons why class can be considered a syntactic sugar to define a constructor together with its prototype methods.
+
+Still, there are important differences.
 
 
-[^lt]: Datatypen for variabler og argumenter til funktioner kan ændre sig under kodeafviklingen. 
-[^syv]: Oprindeligt var der fem, men Symbol og BigInt kom ind i sproget i hhv. EcmaScript6 og EcmaScript7.
-[^dt]: @projs, Chapter 3, Language Basics & @cleanjs, Section 2, Chapter 6
+[^dt]: @projs, Chapter 3, Language Basics
 [^so]: @SO, Most Popular Technologies, Programming Scripting and Markup Languages
 [^katalog]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference
 
-# JavaScript Frameworks
+
+### static class fields
+web components in action appendix
+
+### Moduler
+I JavaScript er det muligt at importere *moduler*. Et modul er en kodefil, som kan importeres af andre kodefiler. Moduler tillader at eksportere *named exports*, så man f.eks. kun eksporterer én funktion fra en fil. Der er også mulighed for **default exports*, som kan importeres nemmere, og generelt bruges, hvis moduler har en primær funktionalitet, som skal fremhæves. Default exports behøver ikke navngives, da de navngives ved importeringen. Endelig  Før i tiden var der ingen understøttelse af moduler, så problemet blev løst med kodebiblioteker som CommonJS og RequireJS
+
+# Moderne webudvikling med JavaScript Frameworks
+
+https://frontendmasters.com/books/front-end-handbook/2019/
+
+## Udfordringen ved nye teknologier
+https://findresearcher.sdu.dk:8443/ws/portalfiles/portal/157293005/SII2020_Agent_based_Simulation_Design_for_Technology_Adoption_Christensen.pdf
 
 ## Sammenligning
 
-Når man dykker ned i de seneste års udvikling indenfor JavaScript frontend
-frameworks, biblioteker og værktøjer, opstår der et mønster. De tre Javascript 
-frontend frameworks, som flest udviklere har prøvet at bruge er React, Vue og 
-Angular. [billede1]
+Når man dykker ned i de seneste års udvikling indenfor JavaScript frameworks, opstår der et mønster. De tre Javascript frontend frameworks, som flest udviklere har prøvet at bruge er React, Vue og Angular. [billede1]
 
 Det er umuligt at forudse hvilke af disse teknologier der overlever længst, eller 
-hvornår de bliver erstattet af noget nyt. Men der tegner sig et billede af, at flere 
-udviklere benytter og udtrykker tilfredshed med Vue og React end Angular. React 
+hvornår de bliver erstattet af noget nyt. Men der tegner sig et billede af, at flere udviklere benytter og udtrykker tilfredshed med Vue og React end Angular. React 
 ligger i 2019 placeret #2 på Stack Overflows undersøgelse2 af mest anvendte web 
 frameworks (med jQuery fortsat på førstepladsen) og i kategorien ”Most Loved Web 
 Frameworks” er React nummer ét med Vue lige i hælene mens Angular halter 
 bagefter på en niendeplads. Når man ser på deres indbyrdes popularitet, har Vue 
 flest stjerner på dets GitHub repository og er nu det mest populære af de tre: [billede3]
 
-Hvis man måler på hvor meget de respektive web frameworks downloades af 
-udviklere, ligger React i toppen med op imod seks millioner downloads om ugen, 
-sammenlignet med to millioner for Angular og en million for Vue4. 
-
-Fælles for alle de nævnte web frameworks er, at de er open source. Store 
-virksomheder som Google, Facebook og Microsoft har taget open source 
-forretningsmodellen til sig og er med til puste til ilden af konstant innovation. React er 
-udviklet og drevet af Facebooks senior softwareingeniøre. Google står bag Angular, 
-mens Microsoft står bag dets anvendte open source programmeringssprog 
-TypeScript. Vues styrke ligger bl.a. i, at det ikke har en stor virksomhed i ryggen som 
-driver udviklingen, men er finansieret af crowdfunding og kombinerer det bedste fra 
-Angular og React. Men garantien for stabilitet og langtidsholdbarhed pga. 
-virksomhedsopbakningen fra Facebook, som internt bruger over 50.000 React 
-komponenter, samt udviklerentusiasmen i udviklerkulturen omkring React, er pt de 
-andre web frameworks overlegen, og derfor er React det bedste valg til 
-webapplikationen. 
+Hvis man måler på hvor meget de respektive web frameworks downloades af udviklere, ligger React i toppen med op imod seks millioner downloads om ugen, sammenlignet med to millioner for Angular og en million for Vue4. Fælles for alle de nævnte web frameworks er, at de er open source. Store virksomheder som Google, Facebook og Microsoft har taget open source forretningsmodellen til sig og er med til puste til ilden af konstant innovation. React er udviklet og drevet af Facebooks senior softwareingeniøre. Google står bag Angular, mens Microsoft står bag dets anvendte open source programmeringssprog TypeScript. Vues styrke ligger bl.a. i, at det ikke har en stor virksomhed i ryggen som driver udviklingen, men er finansieret af crowdfunding og kombinerer det bedste fra Angular og React.
 
 ## React
-React er et JavaScript kodebibliotek til at bygge brugergrænseflader baseret på 
-komposition af komponenter. Alting i React er en komponent, og selv hele 
-applikationen er en komponent, som er sammensat af de øvrige komponenter. 
-Komponent strukturen gør det muligt at genbruge og indkapsle alt lige fra en simpel 
-checkbox til en hel applikation. Det gør det også nemt at ændre komponenterne og 
-f.eks. tilføje yderligere state, uden at det skabe en dominoeffekt af side effekter i 
-resten af applikationen. Komponent modellen passer ikke så godt med objekt 
-modellen, og principper vi kender som søjler i objekt orienteret programmering, er 
-ikke anvendelige eller har bedre løsninger i React. Facebook promoverer stærkt 
-”Composition over Inheritance”, og udtaler at de aldrig har brugt nedarvning i deres 
-tusindevis af komponenter. [komponenter-billede]
+React er et JavaScript kodebibliotek til at bygge brugergrænseflader baseret på komposition af komponenter. Alting i React er en komponent, og selv hele applikationen er en komponent, som er sammensat af de øvrige komponenter. Komponent strukturen gør det muligt at genbruge og indkapsle alt lige fra en simpel checkbox til en hel applikation. Det gør det også nemt at ændre komponenterne og f.eks. tilføje yderligere state, uden at det skaber en dominoeffekt af side effekter i resten af applikationen. Komponent modellen passer ikke så godt med objekt modellen, og principper vi kender som søjler i objekt orienteret programmering, er ikke anvendelige eller har bedre løsninger i React. Facebook promoverer stærkt ”Composition over Inheritance”, og udtaler at de aldrig har brugt nedarvning i deres tusindevis af komponenter. [komponenter-billede]
 
-React koncentrerer sig kun om brugergrænsefladen, og det er både en fordel og en 
-ulempe. Langt de fleste React projekter vil have behov for at hente yderligere 
-tredjeparts pakker ned for at håndtere problemer, som f.eks. Angular har indbyggede 
-løsninger på. React omtales ofte heller ikke som et framework men et kodebibliotek, 
-og man sammenligner det ofte med View-laget i MVC. Det gode ved Reacts 
-minimalistiske tilgang er, at der er stor fleksibilitet i hvordan man løser et givent 
-problem, og der er mange højt specialiserede værktøjer til at håndtere nicher som 
-f.eks. routing eller global state. 
+React koncentrerer sig kun om brugergrænsefladen, og det er både en fordel og en ulempe. Langt de fleste React projekter vil have behov for at hente yderligere tredjeparts pakker ned for at håndtere problemer, som f.eks. Angular har indbyggede løsninger på. React omtales ofte heller ikke som et framework men et kodebibliotek, og man sammenligner det ofte med View-laget i MVC. Det gode ved Reacts minimalistiske tilgang er, at der er stor fleksibilitet i hvordan man løser et givent problem, og der er mange højt specialiserede værktøjer til at håndtere nicher som f.eks. routing eller global state. 
 
- React har dét man kalder en deklarativ API. I stedet for at beskrive hvert trin og i 
-hvilken rækkefølge man opdaterer de enkelte elementer på brugergrænsefladen 
-(imperativt), så beskrives hvordan man ønsker (deklarerer) at brugegrænsefladen 
-skal se ud og hvordan den skal transformeres. Man beskriver UI med en HTML + 
-JavaScript lignende syntaks, og React sørger for resten. 
+React har hvad man kalder en deklarativ API. I stedet for at beskrive hvert trin og i hvilken rækkefølge, man opdaterer de enkelte elementer på brugergrænsefladen (imperativt), så beskrives hvordan man ønsker (deklarerer), at brugegrænsefladen skal se ud afhængigt af dens tilstand. 
 
  
 ### Komponenter og props
@@ -187,30 +260,15 @@ c) behandle sine argumenter som immutable (readonly). Der findes JavaScript
 kodebiblioteker som ImmutableJS til at håndhæve dette, eller code linting værktøjer 
 som ESLint. 
 
-Props kan indeholde callbacks, så en forældre-komponent kan sende en funktion ned 
-til barn-komponenten, som barn-komponenten kan kalde med en eller flere parametre 
-for at sende data til forældre-komponenten. Det er den eneste umiddelbare måde 
-komponenter kan sende data på, til andre end sine børn. Selvom det er med til at 
-gøre programmet nemt at debugge og forstå, virker det umiddelbart som en 
-begrænsning. For eksempel når når to komponenter A og B langt fra hinanden i 
-træhiearkiet skal bruge data fra hinandens props. Det kræver at en fælles forældre-
-komponent til komponent A og komponent B sender dataen ned i sine props gennem 
-flere mellemled. [propsmellemledbillede]
+Props kan indeholde callbacks, så en forældre-komponent kan sende en funktion ned til barn-komponenten, som barn-komponenten kan kalde med en eller flere parametre for at sende data til forældre-komponenten. Det er den eneste umiddelbare måde komponenter kan sende data på, til andre end sine børn. Selvom det er med til at gøre programmet nemt at debugge og forstå, virker det umiddelbart som en begrænsning. For eksempel når når to komponenter A og B langt fra hinanden i træhiearkiet skal bruge data fra hinandens props. Det kræver at en fælles forældre-komponent til komponent A og komponent B sender dataen ned i sine props gennem 
+flere mellemled. Dette pattern kaldes *lifting-state-up*. [propsmellemledbillede]
 
-Når man har en stor applikation med mange komponenter som deler mange props, 
-kan det blive uoverskueligt at vedligeholde, når man bruger dette ”Lifting State Up” 
-mønster. Det overholder ikke DRY princippet, da den manuelle proces med at sende 
-dataen igennem komponenten via props gentages for hvert mellemled mellem A og B.  
+Når man har en stor applikation med mange komponenter, som deler mange props, kan det blive uoverskueligt at vedligeholde med at løfte tilstanden, da det overholder ikke DRY princippet, eftersom den manuelle proces med at sende dataen igennem komponenten via props skal gentages for hvert enkelt mellemled mellem A og B. Dette anti-pattern kaldes *prop-drilling*.
 
 ### Redux
-En måde at omgå denne ”Prop-drilling” proces er ved at benytte Reacts indbyggede 
-Context API. Den tillader komponenter at dele props indenfor en kontekst uden at 
-mappe props mellem komponenter. [contextbillede]
+En måde at omgå denne "prop-drilling”  er ved at benytte Reacts indbyggede Context API. Den tillader komponenter at dele props indenfor en kontekst uden at mappe props mellem komponenter. [contextbillede]
 
- En anden mere avanceret måde, er at gøre som Facebook og bruge software design 
-mønstret Flux. Flux applikationer har tre hovedbestanddele: dispatcher, stores og 
-views. Ideen med Flux er, at den delte state ligger i en single source of truth dvs. i 
-stores. State i stores kan kun opdateres ved at trigge en action. Actions fortæller sine stateændringer (payload) til dispatcher. Stores lytter på ændringer fra dispatcher, og 
+ En anden mere avanceret måde, er at gøre som Facebook og bruge software design mønstret Flux. Flux applikationer har tre hovedbestanddele: dispatcher, stores og views. Ideen med Flux er, at den delte state ligger i en single source of truth dvs. i stores. State i stores kan kun opdateres ved at trigge en action. Actions fortæller sine stateændringer (payload) til dispatcher. Stores lytter på ændringer fra dispatcher, og 
 opdaterer deres egen state i overeensstemmelse hermed. 
 
 Redux har også mulighed for middleware, som kan manipulere actions på vej ind og 
@@ -274,7 +332,7 @@ før siden bliver interaktiv.
 ### Hooks
 https://itnext.io/under-the-hood-of-react-hooks-805dc68581c3
 
-## Node
+## Node (flyt)
 
 Node er et open source runtime environment for JavaScript, som kan læse og
 eksekvere JavaScript filer. Udover at være et runtime environment, indeholder Node
@@ -286,6 +344,9 @@ del af alle React projekter. Det skyldes at Node også er den mest populære pla
 for værktøjer til at gøre livet lettere når man arbejder med f.eks. React.
 
 ### CRA (Create-React-App)
+
+tilføj: https://youtu.be/WQue1AN93YU?t=382
+NPM var mest udbredt til backend, men i 2016 recently også frontend
 
 Node installeres sammen med Node Package Manager (NPM) som samarbejder med
 et register af JavaScript-pakker. Ved brug af dets Command Line Interface (CLI) kan
@@ -300,32 +361,90 @@ indeholder bl.a. compilere, som udvider JavaScripts syntaks med JSX, og tillader
 starte en lokal live udviklingswebserver baseret på Node, med hot-reloading af CSS-
 filer og JavaScript-moduler, eller til at builde en produktionsklar statisk hjemmeside. 
 
+### Indbyggede variabler
+__dirname etc.
+
+### Indbyggede moduler
+path etc.
+
+### module.exports etc 
+
 [^cra]: https://www.npmjs.com/package/create-react-app
 [^rs]: https://www.npmjs.com/package/react-scripts
-# Webpack
-create-react-app bruger en automatisk opsat Webpack konfiguration til at kompilere applikationens moduler og afhængigheder til static assets, som er klar til at blive præsenteret for slutbrugeren. Webpack er det, man kalder en *module bundler*[^module-bundler]. Den håndterer altså primært at samle koden ved *import statements* til en samlet JavaScript fil af alle moduler og deres afhængigheder.
 
-Dette giver i sig selv en gevinst, for brugeren kan få hele webapplikationen i et request, og det kan gøre indlæsningen af alle modulerne betydeligt hurtigere på en HTTP/1.1 forbindelse med høj latency.
+## Node flyttes før webpack
 
-https://youtu.be/WQue1AN93YU?t=173
-```{r echo = FALSE, fig.cap="Hastighed uden bundling"}
-  library(DiagrammeR)
-graph <- mermaid("
-    gantt
-    dateFormat  HH:mm:ss.SSS
-    title Sample Test Gantt
+## Webpack
 
-    section HTML
-    thing1          :   .0,   .300
+### Tree shaking 
+https://insights.untapt.com/webpack-import-require-and-you-3fd7f5ea93c0
 
-    section CSS
-    thing2          :   .300, .600   
+CRA bruger en automatisk opsat Webpack konfiguration til at transpilere applikationens kildekode, hvilket tillader brug af `require` statements. Med `require` kan fra et JavaScript modul importere andre JavaScript moduler. Webpack er det, man kalder en *module bundler*. Det vil sige, at Webpacks primære formål er på buildtime at samle koden til én samlet JavaScript *bundle*, som indeholder alle applikationens moduler og deres indbyrdes afhængigheder. I konfigurationsfilen for Webpack definerer man et *entry point*, som Webpack skal starte i. Ud fra entry point kompilerer Webpack programmet og bygger undervejs en *dependency graph*, som repræsenterer alle webapplikationens moduler og afhængigheder. 
 
-    section JS
-    thing3          :   .600,   .800
-    thing4          :   .800,   .1000
-    ")
-graph
+Med udgangspunkt i denne dependency graph, bundler webpack modulerne og afhængighederne sammen i én samlet JavaScript bundle, som er klar til at blive downloadet og præsenteret af browseren. Dette giver i sig selv en gevinst, for brugeren kan få hele webapplikationen i ét request. Det kan gøre indlæsningen af alle modulerne betydeligt hurtigere på en HTTP/1.1 forbindelse med høj latency, da HTTP/1.1 håndterer hvert request synkront og dermed blokerer renderingen indtil hver static asset er downloaded og eksekveret.
+
+
+```{r echo=FALSE, fig.cap="Synkron asset download og eksekvering", fig.height=4, fig.width=4}
+library(png)
+library(grid)
+img <- readPNG("sync-assets-http1.png")
+grid.raster(img)
+```
+
+
+HTTP/2 protokollen tillader asynkron download af static assets, så her gør antallet af requests ikke den store forskel. Udover bundling af JavaScript moduler, kan man med Webpack også håndtere bl.a. importering af stylesheets, billedfiler og JSON, anvendelse af nonstandard syntaks, og meget mere[^webpack].
+
+### Konfiguraton af Webpack
+Webpack tillader at konfigurere...
+
+For at komme i gang med at bruge webpack, behøver man ikke andet end Node. Man kan lave en ny tom mappe og installere Webpack:
+
+```
+npm init -y
+npm i -D webpack
+```
+
+Som standard er Webpack konfigureret til at søge efter et entry point i `./src/index.js`. Hvis man prøver at køre webpack på sit tomme projekt, vil man få en fejlmeddelse, når man kører webpack med `npx webpack`. Hvis man vil ændre sit entry point, skal man oprette konfiguratonsfilen `webpack.config.js` i projektets rodmappe. En minimal konfigurationsfil, der ændrer entry point til en `main.js` fil i rodmappen, ser sådan ud:
+
+```{js, fig.cap="Test"}
+const config = {
+  entry: './main.js',
+};
+
+module.exports = config;
+```
+
+Hvis overstående konfigurationsfil er til stede i rodmappen, vil Webpack automatisk samle den op, når man kører kommandoen `npx webpack` fra projektets rodmappe som arbejdsmappe. Hvis der findes en `main.js`, vil Webpack køre og resultere i en bundle i `./dist/bundle.js`.
+
+For at ændre output filnavnet til fx. `output.js`, tilføjer man en `output` property til `config` objektet, med en `filename` property. For at placere output placeringen til fx. `./build/`, tilføjer man yderligere en `path` property til `output` objektet. 
+```{js}
+const config = {
+  entry: './src/index.js',
+  output: {
+    path: __dirname + "/build/",
+    filename: 'output.js'
+  }
+};
+
+module.exports = config;
+```
+
+
+Og for at ændre 
+
+
+### Loaders
+
+Webpack giver mulighed for, at man kan indlæse trejdeparts *loaders* til at håndtere andre filtyper end JavaScript. Man konfigurerer webpack til at håndtere forskellige filtyper med forskellige loaders. Hver loader er en preprocessor, som Webpack anvender, når den støder på en angiven filtype. Loaders kan bl.a. sørge for, at CSS filer bliver bundled sammen og indlejret som et tag i HTML dokumentet, eller eller at mindre billedfiler bliver indlejret som en base64 data URL[^b64]. Endvidere vil webpack i *production mode* også optimere de genererede static assets ved at komprimere dem.
+
+[^webpack]: https://github.com/webpack-contrib/awesome-webpack#loaders
+
+
+```{r echo=FALSE, fig.cap="Webpack dependency graph transpilering til bundle", fig.height=4, fig.width=4}
+library(png)
+library(grid)
+img <- readPNG("modules-dependencies-webpack.png")
+grid.raster(img)
 ```
 
 
@@ -333,16 +452,15 @@ og oversætte moderne syntaks til bagudkompatibel
 
 https://www.youtube.com/watch?v=WQue1AN93YU
 
-[^module-bundler]: https://www.npmjs.com/package/react-scripts
+[^b64]: Binær-til-tekst kodningsformat til at indlejre fx. billedfiler direkte i dokumentet i stedet for at importere. 
 
-# Babel
+## Babel
 
 `const element = <div className=”hello”>Hello, UCL!</div>` 
 
 Overstående HTML-lignende syntaks er den syntaksudvidelse, som kaldes JSX. Det 
-transpileres (af Webpack) med en preprocessor (Babel) til ECMAScript JavaScript 
-inden browseren kører scriptet. Webpack er en modul bundler, som samler projektets 
-ES 6 moduler (ved import/export statements) til en samlet kildekode, og med Babel 
+transpileres (af Webpack) med en loader (Babel) til standard JavaScript. Webpack er en modul bundler, som samler projektets 
+ES 6 moduler (ved import/export statements) til én samlet kildekode, og med Babel 
 oversætter speciel syntaks som f.eks. JSX til standard JavaScript. Overstående kode 
 bliver oversat af Babel til noget lignende: 
 
@@ -474,8 +592,60 @@ koden, hvis kommentarerne er skrevet efter JSDoc specifikationen.
 
 # Micro Frontends
 
-## Module Federaton
+## Web Components
+https://medium.com/rangle-io/everything-you-need-to-know-about-web-components-part-1-ced95964fbe6
+https://medium.com/@amitleshed/building-web-components-with-native-custom-elements-8312d6e45fb3
+https://codeburst.io/6-reasons-you-should-use-native-web-components-b45e18e069c2
+https://books.google.dk/books?id=CDzlCwAAQBAJ&pg=PA82&lpg=PA82&dq=%22custom+element+api%22+browser+support&source=bl&ots=rZxaPcxbP4&sig=ACfU3U0VjQVbByK_3xd13N1mAXWqPKYj0w&hl=da&sa=X&ved=2ahUKEwjjgpf12rrpAhXE-6QKHcWKCqQQ6AEwBHoECAoQAQ#v=onepage&q=%22custom%20element%20api%22%20browser%20support&f=false
+https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements
 
+
+
+[^bfarrell]
+### Custom Element API
+Custom Element API er en ny eksperimentel API, som tillader udvikleren at bygge *web components*, som har indbygget understøttelse af alle moderne webbrowsere. Web components tillader udvikleren at lave sine egne brugerdefinerede DOM elementer og bruge dem som komponenter i sin HTML markup. 
+
+
+### Komponenter
+
+Man kan betragte indbyggede DOM elementer, fx. `input` og `form`, som genbrugelige komponenter, der indkapsler et template (HTML), en style (CSS) og en intern logik (JavaScript). Frameworks som React tillader at lave komponenter [...] På samme måde kan man med den nye `customElements` property på `window` objektet lave genbrugelige komponenter af ren HTML, CSS og JavaScript.
+
+```{r echo=FALSE, fig.cap="Et typisk DOM element", fig.height=4, fig.width=4 }
+library(png)
+library(grid)
+img <- readPNG("typical-dom-element.png")
+grid.raster(img)
+```
+
+
+
+
+[^bfarell]: @bfarrell
+
+CustomElementRegistry interfacet / `customElements` tillader at registrere et hvert objekt, som nedarver fra HTMLElement, som et nyt brugerdefineret element. Når objektet er registreret, kan den bruges som markup direkte i HTML dokumentet. 
+
+Man arbejder med interfacet via `define` metoden på `customElements` property'en på `window` objektet. Hvis man laver en ny klasse, der ligesom alle andre DOM elementer nedarver fra klassen `HTMLElement`, kan den defineres i CustomElementRegistry objektet.
+
+```{js, fig.cap="test"}
+class MyWebComponent extends HTMLElement {}
+
+window.customElements.define("custom-element", MyWebComponent);
+```
+
+Dette vil tillade at bruge `custom-element` tagget i sin HTML markup. For at give `CustomElement` noget funktionalitet, er det nødvendigt at kende til dens *component lifecycle*. Component lifecycle er en række metoder, som Custom Element API der kaldes på forskellige tidspunkter, fx. når elementet tilføjes til DOM eller skal opdateres.
+
+Den første af disse component lifecycle metoder er `connectedCallback`, som tilbydes af det Custom Element API og fyres, når komponenten føjes til DOM.
+
+https://developers.google.com/web/fundamentals/web-components/customelements#reactions
+
+
+### Shadow DOM
+
+## Polyfills
+https://www.webcomponents.org/polyfills
+
+## Module Federaton
+https://github.com/webpack/webpack/issues/10352 
 ## Single-SPA
 
 # Litteratur
