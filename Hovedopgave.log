@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2020.3.13)  25 MAY 2020 05:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2020.3.13)  25 MAY 2020 10:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1257,37 +1257,56 @@ LaTeX Info: Redefining \labelcref on input line 2230.
 LaTeX Info: Redefining \labelcpageref on input line 2230.
 )
    defining Unicode char U+2714 (decimal 10004)
-(./Hovedopgave.aux)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2016/02/21 v3.3-144 Customizing captions (AR)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2016/02/04 v1.7-139 caption3 kernel (AR)
+Package caption3 Info: TeX engine: e-TeX on input line 67.
+\captionmargin=\dimen266
+\captionmargin@=\dimen267
+\captionwidth=\dimen268
+\caption@tempdima=\dimen269
+\caption@indent=\dimen270
+\caption@parindent=\dimen271
+\caption@hangindent=\dimen272
+)
+\c@ContinuedFloat=\count162
+Package caption Info: float package is loaded.
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2013/06/09 v1.4-94 longtable captions (AR)
+)) (./Hovedopgave.aux)
 \openout1 = `Hovedopgave.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 165.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 165.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 179.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 179.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 165.
-LaTeX Font Info:    ... okay on input line 165.
-LaTeX Font Info:    Try loading font information for T1+lmr on input line 165.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 179.
+LaTeX Font Info:    ... okay on input line 179.
+LaTeX Font Info:    Try loading font information for T1+lmr on input line 179.
 (/usr/share/texmf/tex/latex/lm/t1lmr.fd
 File: t1lmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-LaTeX Info: Redefining \microtypecontext on input line 165.
+LaTeX Info: Redefining \microtypecontext on input line 179.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
@@ -1302,17 +1321,17 @@ File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman
 (RS)
 )
 \AtBeginShipoutBox=\box52
-Package hyperref Info: Link coloring OFF on input line 165.
+Package hyperref Info: Link coloring OFF on input line 179.
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count162
+\c@section@level=\count163
 )
-LaTeX Info: Redefining \ref on input line 165.
-LaTeX Info: Redefining \pageref on input line 165.
-LaTeX Info: Redefining \nameref on input line 165.
+LaTeX Info: Redefining \ref on input line 179.
+LaTeX Info: Redefining \pageref on input line 179.
+LaTeX Info: Redefining \nameref on input line 179.
 (./Hovedopgave.out) (./Hovedopgave.out)
 \@outlinefile=\write5
 \openout5 = `Hovedopgave.out'.
@@ -1353,16 +1372,16 @@ LaTeX Info: Redefining \nameref on input line 165.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count163
-\scratchdimen=\dimen266
+\scratchcounter=\count164
+\scratchdimen=\dimen273
 \scratchbox=\box53
-\nofMPsegments=\count164
-\nofMParguments=\count165
+\nofMPsegments=\count165
+\nofMParguments=\count166
 \everyMPshowfont=\toks50
-\MPscratchCnt=\count166
-\MPscratchDim=\dimen267
-\MPnumerator=\count167
-\makeMPintoPDFobject=\count168
+\MPscratchCnt=\count167
+\MPscratchDim=\dimen274
+\MPnumerator=\count168
+\makeMPintoPDFobject=\count169
 \everyMPtoPDFconversion=\toks51
 ) (/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -1376,7 +1395,10 @@ G,.JBIG2,.JB2,.eps]
 (/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
-)) ABD: EveryShipout initializing macros [1
+)) ABD: EveryShipout initializing macros
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: End \AtBeginDocument code.
+[1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] (./Hovedopgave.toc
 LaTeX Font Info:    Try loading font information for OT1+lmr on input line 1.
@@ -1426,276 +1448,242 @@ File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 
 [4] [1]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 271.
+(Font)              <8> on input line 286.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 271.
+(Font)              <6> on input line 286.
 
-<Hovedopgave_files/figure-latex/unnamed-chunk-3-1.pdf, id=318, 259.97125pt x 21
+<Hovedopgave_files/figure-latex/unnamed-chunk-3-1.pdf, id=344, 259.97125pt x 21
 9.82124pt>
 File: Hovedopgave_files/figure-latex/unnamed-chunk-3-1.pdf Graphic file (type p
 df)
 <use Hovedopgave_files/figure-latex/unnamed-chunk-3-1.pdf>
 Package pdftex.def Info: Hovedopgave_files/figure-latex/unnamed-chunk-3-1.pdf u
-sed on input line 275.
+sed on input line 290.
 (pdftex.def)             Requested size: 259.97061pt x 219.8207pt.
 [2]
-LaTeX Font Info:    Try loading font information for T1+lmtt on input line 323.
+LaTeX Font Info:    Try loading font information for T1+lmtt on input line 343.
 
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-) [3pdfTeX warning (ext4): destination with the same identifier (name{figure.1}
-) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.333 
-       <./Hovedopgave_files/figure-latex/unnamed-chunk-3-1.pdf>]
-<Hovedopgave_files/figure-latex/unnamed-chunk-4-1.pdf, id=357, 283.0575pt x 265
+) [3 <./Hovedopgave_files/figure-latex/unnamed-chunk-3-1.pdf>]
+<Hovedopgave_files/figure-latex/unnamed-chunk-4-1.pdf, id=381, 283.0575pt x 265
 .99374pt>
 File: Hovedopgave_files/figure-latex/unnamed-chunk-4-1.pdf Graphic file (type p
 df)
 <use Hovedopgave_files/figure-latex/unnamed-chunk-4-1.pdf>
 Package pdftex.def Info: Hovedopgave_files/figure-latex/unnamed-chunk-4-1.pdf u
-sed on input line 368.
+sed on input line 388.
 (pdftex.def)             Requested size: 283.07838pt x 266.01337pt.
 [4]
-Underfull \hbox (badness 10000) in paragraph at lines 392--394
+Underfull \hbox (badness 10000) in paragraph at lines 415--417
 []$\T1/lmr/m/n/10 (+20) https : / / stackover^^]ow . com / questions / 29027845
  / what -[] is -[] the -[] di^^[erence -[] between -[] javascript -[] engine -[
 ] and -[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 392--394
+Underfull \hbox (badness 10000) in paragraph at lines 415--417
 \T1/lmr/m/n/10 (+20) javascript -[] runtime -[] environm$[] []$https : / / medi
 um . com / @andrewrymaruk / v8 -[] a -[] few -[] words -[] about -[] javascript
  -[]
  []
 
-[5pdfTeX warning (ext4): destination with the same identifier (name{figure.2}) 
-has been already used, duplicate ignored
+[5 <./Hovedopgave_files/figure-latex/unnamed-chunk-4-1.pdf>]
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.413 
-       <./Hovedopgave_files/figure-latex/unnamed-chunk-4-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 414.
+Package xcolor Warning: Incompatible color definition on input line 437.
 
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 417.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 440.
 
-Package xcolor Warning: Incompatible color definition on input line 430.
-
-
-Package xcolor Warning: Incompatible color definition on input line 430.
+Package xcolor Warning: Incompatible color definition on input line 453.
 
 
-Package xcolor Warning: Incompatible color definition on input line 447.
-
-
-Package xcolor Warning: Incompatible color definition on input line 461.
-
-
-Package xcolor Warning: Incompatible color definition on input line 461.
-
-
-Package xcolor Warning: Incompatible color definition on input line 461.
+Package xcolor Warning: Incompatible color definition on input line 453.
 
 [6]
 
-Package xcolor Warning: Incompatible color definition on input line 461.
-
-
-Package xcolor Warning: Incompatible color definition on input line 461.
-
-
-Package xcolor Warning: Incompatible color definition on input line 475.
-
-
 Package xcolor Warning: Incompatible color definition on input line 483.
 
 
-Package xcolor Warning: Incompatible color definition on input line 483.
+Package xcolor Warning: Incompatible color definition on input line 497.
 
 
-<Hovedopgave_files/figure-latex/unnamed-chunk-8-1.pdf, id=395, 289.08pt x 170.6
+Package xcolor Warning: Incompatible color definition on input line 497.
+
+
+Package xcolor Warning: Incompatible color definition on input line 511.
+
+
+Package xcolor Warning: Incompatible color definition on input line 519.
+
+
+Package xcolor Warning: Incompatible color definition on input line 519.
+
+[7]
+<Hovedopgave_files/figure-latex/unnamed-chunk-8-1.pdf, id=430, 289.08pt x 170.6
 375pt>
 File: Hovedopgave_files/figure-latex/unnamed-chunk-8-1.pdf Graphic file (type p
 df)
 <use Hovedopgave_files/figure-latex/unnamed-chunk-8-1.pdf>
 Package pdftex.def Info: Hovedopgave_files/figure-latex/unnamed-chunk-8-1.pdf u
-sed on input line 493.
+sed on input line 529.
 (pdftex.def)             Requested size: 289.09251pt x 170.64487pt.
-[7]
-Underfull \hbox (badness 10000) in paragraph at lines 540--541
+[8 <./Hovedopgave_files/figure-latex/unnamed-chunk-8-1.pdf>]
+Underfull \hbox (badness 10000) in paragraph at lines 576--577
 []$\T1/lmr/m/n/10 (+19) https : / / ^^\ndresearcher . sdu . dk : 8443 / ws / po
 rtal^^\les / portal / 157293005 / SII2020 _ Agent _ based _ Simulation _
  []
 
-[8pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
-has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.550 D
-       et er umuligt at forudse hvilke af disse teknologier der overlever <./Ho
-vedopgave_files/figure-latex/unnamed-chunk-8-1.pdf>] [9] [10] [11] [12] [13]
-<Hovedopgave_files/figure-latex/unnamed-chunk-9-1.pdf, id=464, 289.08pt x 222.8
+[9] [10] [11] [12] [13]
+<Hovedopgave_files/figure-latex/unnamed-chunk-9-1.pdf, id=491, 289.08pt x 222.8
 325pt>
 File: Hovedopgave_files/figure-latex/unnamed-chunk-9-1.pdf Graphic file (type p
 df)
 <use Hovedopgave_files/figure-latex/unnamed-chunk-9-1.pdf>
 Package pdftex.def Info: Hovedopgave_files/figure-latex/unnamed-chunk-9-1.pdf u
-sed on input line 830.
+sed on input line 866.
 (pdftex.def)             Requested size: 289.0837pt x 222.83534pt.
 [14]
 
-Package xcolor Warning: Incompatible color definition on input line 861.
+Package xcolor Warning: Incompatible color definition on input line 897.
 
-LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 864
+LaTeX Font Info:    Try loading font information for TS1+lmtt on input line 900
 .
 (/usr/share/texmf/tex/latex/lm/ts1lmtt.fd
 File: ts1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 
-Package xcolor Warning: Incompatible color definition on input line 869.
+Package xcolor Warning: Incompatible color definition on input line 905.
 
 
-Package xcolor Warning: Incompatible color definition on input line 869.
+Package xcolor Warning: Incompatible color definition on input line 905.
 
 
-Package xcolor Warning: Incompatible color definition on input line 883.
+Package xcolor Warning: Incompatible color definition on input line 905.
+
+[15 <./Hovedopgave_files/figure-latex/unnamed-chunk-9-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 905.
 
 
-Package xcolor Warning: Incompatible color definition on input line 895.
+Package xcolor Warning: Incompatible color definition on input line 905.
 
 
-Package xcolor Warning: Incompatible color definition on input line 895.
+Package xcolor Warning: Incompatible color definition on input line 919.
 
 
-Package xcolor Warning: Incompatible color definition on input line 895.
-
-[15pdfTeX warning (ext4): destination with the same identifier (name{figure.4})
- has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.895 \end{Shaded}
-                   <./Hovedopgave_files/figure-latex/unnamed-chunk-9-1.pdf>]
-
-Package xcolor Warning: Incompatible color definition on input line 895.
+Package xcolor Warning: Incompatible color definition on input line 931.
 
 
-Package xcolor Warning: Incompatible color definition on input line 895.
+Package xcolor Warning: Incompatible color definition on input line 931.
 
 
-<Hovedopgave_files/figure-latex/unnamed-chunk-12-1.pdf, id=491, 289.08pt x 136.
+<Hovedopgave_files/figure-latex/unnamed-chunk-12-1.pdf, id=522, 289.08pt x 136.
 51pt>
 File: Hovedopgave_files/figure-latex/unnamed-chunk-12-1.pdf Graphic file (type 
 pdf)
 <use Hovedopgave_files/figure-latex/unnamed-chunk-12-1.pdf>
 Package pdftex.def Info: Hovedopgave_files/figure-latex/unnamed-chunk-12-1.pdf 
-used on input line 916.
+used on input line 952.
 (pdftex.def)             Requested size: 289.09251pt x 136.5159pt.
-[16pdfTeX warning (ext4): destination with the same identifier (name{figure.5})
- has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.935 
-       <./Hovedopgave_files/figure-latex/unnamed-chunk-12-1.pdf>] [17] [18]
-Underfull \hbox (badness 10000) in paragraph at lines 1085--1090
+[16] [17 <./Hovedopgave_files/figure-latex/unnamed-chunk-12-1.pdf>] [18] [19]
+Underfull \hbox (badness 10000) in paragraph at lines 1124--1129
 []$\T1/lmr/m/n/10 (+9) https : / / medium . com / rangle -[] io / everything -[
 ] you -[] need -[] to -[] know -[] about -[] web -[] components -[] part -[] 1 
 -[] ced95964fbe6$[]
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1085--1090
+Underfull \hbox (badness 10000) in paragraph at lines 1124--1129
 []$\T1/lmr/m/n/10 (+20) https : / / medium . com / @amitleshed / building -[] w
 eb -[] components -[] with -[] native -[] custom -[] elements -[] 8312d6e45fb3$
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1085--1090
+Underfull \hbox (badness 10000) in paragraph at lines 1124--1129
 []$\T1/lmr/m/n/10 (+20) https : / / codeburst . io / 6 -[] reasons -[] you -[] 
 should -[] use -[] native -[] web -[] components -[] b45e18e069c2$[] []$https :
  / / books .
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1085--1090
+Underfull \hbox (badness 10000) in paragraph at lines 1124--1129
 \T1/lmr/m/n/10 (+20) google . dk / books ? id = CDzlCwAAQBAJ & pg = PA82 & lpg 
 = PA82 & dq = %22custom + element + api % 22 +
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1085--1090
+Underfull \hbox (badness 10000) in paragraph at lines 1124--1129
 \T1/lmr/m/n/10 (+20) browser + support & source = bl & ots = rZxaPcxbP4 & sig =
  ACfU3U0VjQVbByK _ 3xd13N1mAXWqPKYj0w &
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 1085--1090
+Underfull \hbox (badness 10000) in paragraph at lines 1124--1129
 \T1/lmr/m/n/10 (+20) hl = da & sa = X & ved = 2ahUKEwjjgpf12rrpAhXE -[] 6QKHcWK
 CqQQ6AEwBHoECAoQAQ # v = onepage &
  []
 
 
-Underfull \hbox (badness 5802) in paragraph at lines 1085--1090
+Underfull \hbox (badness 5802) in paragraph at lines 1124--1129
 \T1/lmr/m/n/10 (+20) q = %22custom % 20element % 20api % 22 % 20browser % 20sup
 port & f = false$[] []$https : / / developer . mozilla . org / en -[]
  []
 
-[19]
-<Hovedopgave_files/figure-latex/unnamed-chunk-13-1.pdf, id=527, 289.08pt x 68.2
+
+<Hovedopgave_files/figure-latex/unnamed-chunk-13-1.pdf, id=558, 289.08pt x 68.2
 55pt>
 File: Hovedopgave_files/figure-latex/unnamed-chunk-13-1.pdf Graphic file (type 
 pdf)
 <use Hovedopgave_files/figure-latex/unnamed-chunk-13-1.pdf>
 Package pdftex.def Info: Hovedopgave_files/figure-latex/unnamed-chunk-13-1.pdf 
-used on input line 1110.
+used on input line 1143.
 (pdftex.def)             Requested size: 289.09251pt x 68.25793pt.
-[20pdfTeX warning (ext4): destination with the same identifier (name{figure.6})
- has been already used, duplicate ignored
+[20]
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.1119 M
-        an arbejder med interfacet via \texttt{define} metoden på <./Hovedopga
-ve_files/figure-latex/unnamed-chunk-13-1.pdf>]
+Package xcolor Warning: Incompatible color definition on input line 1195.
 
-Package xcolor Warning: Incompatible color definition on input line 1125.
+[21 <./Hovedopgave_files/figure-latex/unnamed-chunk-13-1.pdf>]
+
+Package xcolor Warning: Incompatible color definition on input line 1201.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1131.
+Package xcolor Warning: Incompatible color definition on input line 1201.
 
 
-Package xcolor Warning: Incompatible color definition on input line 1131.
+Package xcolor Warning: Incompatible color definition on input line 1209.
 
-[21] [22]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1177.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 1177.
+
+Package xcolor Warning: Incompatible color definition on input line 1215.
+
+
+Package xcolor Warning: Incompatible color definition on input line 1215.
+
+[22] [23]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 1276.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 1276.
 (./Hovedopgave.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1177.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1177.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 1276.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 1276.
 
 Package rerunfilecheck Info: File `Hovedopgave.out' has not changed.
-(rerunfilecheck)             Checksum: F9415F2CF1C6E2FA0451A8C239047CA5;6919.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1177.
+(rerunfilecheck)             Checksum: 54E459F8174E7670242652FCE2C9EE9D;7458.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 1276.
  ) 
 Here is how much of TeX's memory you used:
- 26621 strings out of 494944
- 466234 string characters out of 6180677
- 657445 words of memory out of 5000000
- 29170 multiletter control sequences out of 15000+600000
- 69083 words of font info for 118 fonts, out of 8000000 for 9000
+ 27719 strings out of 494944
+ 486166 string characters out of 6180677
+ 677319 words of memory out of 5000000
+ 30237 multiletter control sequences out of 15000+600000
+ 69733 words of font info for 123 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 62i,8n,56p,421b,380s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.8} has been referenced but does not exi
+ 62i,9n,92p,421b,453s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.9} has been referenced but does not exi
 st, replaced by a fixed one
+
+pdfTeX warning (dest): name{Hfootnote.8} has been referenced but does not exist
+, replaced by a fixed one
 
 pdfTeX warning (dest): name{Hfootnote.7} has been referenced but does not exist
 , replaced by a fixed one
@@ -1727,10 +1715,10 @@ onts/type1/public/lm/lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr7.pfb>
 public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/s
 hare/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/publi
 c/lm/lmtti10.pfb>
-Output written on Hovedopgave.pdf (27 pages, 412440 bytes).
+Output written on Hovedopgave.pdf (28 pages, 419587 bytes).
 PDF statistics:
- 644 PDF objects out of 1000 (max. 8388607)
- 572 compressed objects within 6 object streams
- 149 named destinations out of 1000 (max. 500000)
- 12755 words of extra memory for PDF output out of 14400 (max. 10000000)
+ 687 PDF objects out of 1000 (max. 8388607)
+ 613 compressed objects within 7 object streams
+ 161 named destinations out of 1000 (max. 500000)
+ 12795 words of extra memory for PDF output out of 14400 (max. 10000000)
 

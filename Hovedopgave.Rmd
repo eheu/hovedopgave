@@ -6,7 +6,7 @@ output:
     includes:
       in_header: import.sty
       before_body: title.sty
-toc-title: Indholdsfortegnelse
+toc-title: IndholdsfortegnelseK
 ---
 
 ```{r echo=FALSE}
@@ -67,6 +67,7 @@ HTTP/2
 https://stackoverflow.com/questions/37556283/what-is-the-value-of-using-webpack-with-http-2
 
 ## W3C
+“World Wide Web Consortium”
 
 ## Heap/Stack (browser?) (flyt?)
 
@@ -268,7 +269,7 @@ Når man har en stor applikation med mange komponenter, som deler mange props, k
 ### Redux
 En måde at omgå denne "prop-drilling”  er ved at benytte Reacts indbyggede Context API. Den tillader komponenter at dele props indenfor en kontekst uden at mappe props mellem komponenter. [contextbillede]
 
- En anden mere avanceret måde, er at gøre som Facebook og bruge software design mønstret Flux. Flux applikationer har tre hovedbestanddele: dispatcher, stores og views. Ideen med Flux er, at den delte state ligger i en single source of truth dvs. i stores. State i stores kan kun opdateres ved at trigge en action. Actions fortæller sine stateændringer (payload) til dispatcher. Stores lytter på ændringer fra dispatcher, og 
+En anden mere avanceret måde, er at gøre som Facebook og bruge software design mønstret Flux. Flux applikationer har tre hovedbestanddele: dispatcher, stores og views. Ideen med Flux er, at den delte state ligger i en single source of truth dvs. i stores. State i stores kan kun opdateres ved at trigge en action. Actions fortæller sine stateændringer (payload) til dispatcher. Stores lytter på ændringer fra dispatcher, og 
 opdaterer deres egen state i overeensstemmelse hermed. 
 
 Redux har også mulighed for middleware, som kan manipulere actions på vej ind og 
@@ -588,6 +589,8 @@ function yell(str) {
 TypeScript er endda i stand til at udlede data typer ud fra kommentarer ovenover 
 koden, hvis kommentarerne er skrevet efter JSDoc specifikationen. 
 
+## Pipelines
+
 ## Vue
 
 # Micro Frontends
@@ -599,16 +602,10 @@ https://codeburst.io/6-reasons-you-should-use-native-web-components-b45e18e069c2
 https://books.google.dk/books?id=CDzlCwAAQBAJ&pg=PA82&lpg=PA82&dq=%22custom+element+api%22+browser+support&source=bl&ots=rZxaPcxbP4&sig=ACfU3U0VjQVbByK_3xd13N1mAXWqPKYj0w&hl=da&sa=X&ved=2ahUKEwjjgpf12rrpAhXE-6QKHcWKCqQQ6AEwBHoECAoQAQ#v=onepage&q=%22custom%20element%20api%22%20browser%20support&f=false
 https://developer.mozilla.org/en-US/docs/Web/API/Window/customElements
 
+Inspireret af komponenter i frameworks som React, giver de nye *web components* mulighed for at indkapsle template, style og logik i genbrugelige komponenter, som man kan importere og anvende direkte som et custom HTML tag i sin HTML. 
 
+Man kan betragte indbyggede DOM elementer, fx. `input` og `form`, som genbrugelige komponenter, der indkapsler et template (HTML), en style (CSS) og en intern logik (JavaScript). På samme måde kan man med web components lave genbrugelige komponenter af ren HTML, CSS og JavaScript.
 
-[^bfarrell]
-### Custom Element API
-Custom Element API er en ny eksperimentel API, som tillader udvikleren at bygge *web components*, som har indbygget understøttelse af alle moderne webbrowsere. Web components tillader udvikleren at lave sine egne brugerdefinerede DOM elementer og bruge dem som komponenter i sin HTML markup. 
-
-
-### Komponenter
-
-Man kan betragte indbyggede DOM elementer, fx. `input` og `form`, som genbrugelige komponenter, der indkapsler et template (HTML), en style (CSS) og en intern logik (JavaScript). Frameworks som React tillader at lave komponenter [...] På samme måde kan man med den nye `customElements` property på `window` objektet lave genbrugelige komponenter af ren HTML, CSS og JavaScript.
 
 ```{r echo=FALSE, fig.cap="Et typisk DOM element", fig.height=4, fig.width=4 }
 library(png)
@@ -617,26 +614,45 @@ img <- readPNG("typical-dom-element.png")
 grid.raster(img)
 ```
 
+Den store fordel ved web components er, at de er integreret i webplatformen. Man har altså ikke behov for at indlæse et JavaScript framework som React, for at ens komponenter virker. Da web komponents altså er *framework agnostiske*, kan man også nemt integrere dem i andre frameworks, hvorimod man ikke umiddelbart kan integrere fx en React komponent i fx en Vue webapplikation. Dertil kan web components være fuldstændigt indkapslede, så man ikke skal bekymre sig om style creep (**link**). 
+
+I stedet for at være afhængig af et specifikt JavaScript framework, anvender web components i stedet samling af nye specifikationer, som understøttes af alle moderne browsere, herunder især *Custom Elements* og *Shadow DOM*. 
 
 
+### Custom Elements
+Custom Element API tillader udvikleren at skabe nye *custom elements* (brugerdefinerede), som kan bruges ligesom andre HTML elementer. Man tilgår API'en med den nye `customElements` property på det globale `window` objekt. `customElements` er et objekt af typen `CustomElementRegistry`, som tillader at registrere et hvert objekt, som nedarver fra HTMLElement, med et HTML tagnavn, hvormed man knytter dem sammen, så browseren forstår sammenhængen. Når objektet er registreret, kan den bruges som markup direkte i HTML dokumentet. Selvom det i forvejen er tilladt at navngive sine egne HTML tags uden videre, har man altså brug for Custom Element API for at skabe sammenkoblingen mellem tagnavn og det brugerdefinerede DOM element.
 
-[^bfarell]: @bfarrell
+ på *autonomous custom elements* (selvstændige) og *customized built-in elements* (tilpassede). De selvstændige custom elementer er helt uafhængige af standard HTML elementer. Man skaber dem ganske enkelt ved at lave et nedarvet objekt fra den generiske `HTMLElement` type. De er pt mere velunderstøttede[^caniuse_customelements] end de tilpassede. De tilpassede custom elmenter udvider i stedet funktionaliteten af standard elementerne, så man fx kan lave et brugerdefineret element, der udvider funktionaliteten af `video` tagget fra HTML5, ved at lave et nedarvet objekt fra HTMLVideoElement typen.
 
-CustomElementRegistry interfacet / `customElements` tillader at registrere et hvert objekt, som nedarver fra HTMLElement, som et nyt brugerdefineret element. Når objektet er registreret, kan den bruges som markup direkte i HTML dokumentet. 
 
-Man arbejder med interfacet via `define` metoden på `customElements` property'en på `window` objektet. Hvis man laver en ny klasse, der ligesom alle andre DOM elementer nedarver fra klassen `HTMLElement`, kan den defineres i CustomElementRegistry objektet.
+[^caniuse_customelements]: https://caniuse.com/#feat=custom-elementsv1
 
-```{js, fig.cap="test"}
-class MyWebComponent extends HTMLElement {}
 
-window.customElements.define("custom-element", MyWebComponent);
+Man knytter sit selvstændige eller tilpassede custom element til et HTML tagnavn med `define` metoden på førnævnte `customElements` objekt. Hvis man laver et objekt, der (ligesom alle de standard HTML elementer) nedarver fra klassen `HTMLElement`, kan man give det objekt med som argument til `customElements.define` for at registrere sammenkoblingen.
+
+```{js, fig.cap="testsetest"}
+class MyCustomElement extends HTMLElement {}
+
+window.customElements.define("my-custom-element", MyCustomElement);
 ```
 
-Dette vil tillade at bruge `custom-element` tagget i sin HTML markup. For at give `CustomElement` noget funktionalitet, er det nødvendigt at kende til dens *component lifecycle*. Component lifecycle er en række metoder, som Custom Element API der kaldes på forskellige tidspunkter, fx. når elementet tilføjes til DOM eller skal opdateres.
 
-Den første af disse component lifecycle metoder er `connectedCallback`, som tilbydes af det Custom Element API og fyres, når komponenten føjes til DOM.
+Dette vil tillade at bruge `custom-element` tagget i sin HTML markup ligesom de standard HTML elementer. Indefra klassen har man så adgang til alle de properties, som udgør elementet. Man kan sætte `this.innerHtml` for at give den et template. Dette vil man typisk gøre i klassens constructor. 
+
+```{js, fig.cap="testsetest"}
+class MyCustomElement extends HTMLElement {}
+
+window.customElements.define("my-custom-element", MyCustomElement);
+```
+
+For at give `CustomElement` noget mere funktionalitet, er det nødvendigt at kende til dens *component lifecycle*. Component lifecycle er en række metoder på det brugerdefinerede element, som kaldes på forskellige tidspunkter, fx. når elementet tilføjes til DOM eller skal opdateres.
+
+Den første af disse component lifecycle metoder er `connectedCallback`, som bliver kaldt, når komponenten føjes til DOM.
 
 https://developers.google.com/web/fundamentals/web-components/customelements#reactions
+
+[^bfarrell]
+[^bfarell]: @bfarrell
 
 
 ### Shadow DOM
@@ -646,6 +662,10 @@ https://www.webcomponents.org/polyfills
 
 ## Module Federaton
 https://github.com/webpack/webpack/issues/10352 
+Module Federation er en ny (**dato**) funktion i Webpack (**link**), som spiller en vigtig rolle i microfrontend arkitekturen. Det er indtil videre kun i beta version. Det tillader at bundle hver eneste individuelle microfrontend med alle sine afhængigheder. Dermed kan man have en individuel proces/pipeline for at bygge og udgive hver enkelt microfrontend.
+
+Module Federation giver mulighed for, at man angiver *shared dependencies*. Hvis man f.eks. har angivet `react` som afhængighed for to forskellige microfrontends, og indlæser begge microfrontends, kan 
+
 ## Single-SPA
 
 # Litteratur
