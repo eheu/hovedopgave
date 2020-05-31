@@ -176,15 +176,19 @@ University College Lillebælt\\
 \pagenumbering{arabic}
 \hypersetup{linkcolor = blue}
 
-\hypertarget{indledning}{%
-\section{Indledning}\label{indledning}}
-
 \emph{``Learning JavaScript used to mean you weren't a serious software
 developer. Today, not learning Javascript means the same thing.''} ---
-Tim O'Reilly, opfinder af begrebet Web 2.0\footnote{\url{https://denstoredanske.lex.dk/Web_2.0}}
+Tim O'Reilly
+
+\newpage
+
+\hypertarget{basale-teknologier}{%
+\section{Basale teknologier}\label{basale-teknologier}}
+
+Dette afsnit handler om det basale teknolgoier
 
 \hypertarget{internettet}{%
-\section{Internettet}\label{internettet}}
+\subsection{Internettet}\label{internettet}}
 
 Internettet er et computernetværk bestående af computernetværk som er
 forbundet gennem routere. For at sende beskeder på internettet, bruger
@@ -203,14 +207,21 @@ laget svarer til netværkslaget, som router netværkstrafikken fra
 computerenhed til computerenhed. TCP/IP transport laget svarer til OSI
 transport laget, som etablerer forbindelsen mellem computerenhederne.
 Endelig svarer TCP/IP applikations laget til applikations-,
-præsentations- og sessionslagene i OSI-modellen, og på dette lag
-eksisterer den protokol, som har skabt internettet, som vi kender det i
-dag.
+præsentations- og sessionslagene i OSI-modellen. På dette lag ekisterer
+adskillige services som e-mail og \emph{world wide web}.
 
-HTTP protokollen blev
+World wide web blev udviklet i 1989 af Tim Berners Lee. Han
+specificerede HTML formatet til at strukturere tekst, Unique Resource
+Identifier (URI) specifikationen til at addressere ressourcer og HTTP
+protokollen til at kommunikere mellem klienter og servere.
+
+Efterhånden som websider gik fra at være blot at være statiske og
+præsentere dokumenter, til at være dynamiske og leve af brugerindhold,
+begyndte man at italesætte dette som \emph{web 2.0}. Begrebet blev
+opfundet af Tim O'Reilly{[}\^{}web20{]}.
 
 \hypertarget{javascript}{%
-\section{JavaScript}\label{javascript}}
+\subsection{JavaScript}\label{javascript}}
 
 JavaScript er det programmeringssprog, som flest udviklere
 benytter.{[}\^{}so{]} Det er også det programmeringssprog, som har flest
@@ -220,28 +231,63 @@ avancerede webapplikationer, som kan køre i browseren eller på næsten
 hvilken som helst anden platform, herunder webservere eller sågar
 mikrokontrollere.
 
+\hypertarget{engine-og-runtime-environment}{%
+\subsubsection{Engine og Runtime
+Environment}\label{engine-og-runtime-environment}}
+
 JavaScript tilhører kategorien af \emph{interpreted} programmeringssprog
-i modsætning til \emph{compiled} programmeringssprog som C\#. På et
+- i modsætning til \emph{compiled} programmeringssprog som C\#. På et
 compiled programmeringssprog oversætter udviklermaskinen programmets
 kildekode til maskinkode med en compiler. I et interpreted
 programmeringssprog oversættes kildekoden ikke direkte til maskinkode. I
 stedet læser oversætter et andet program kildekoden linje for linje til
 maskinkode instruktioner.
 
-JavaScript kildekode oversættes af et JavaScript \emph{engine}.
-Javacripts engine
+JavaScript kildekode oversættes af et JavaScript \emph{engine}. Et
+Javacript engine består af en \emph{call stack} og en \emph{memory
+heap}. Call stacken er en datastruktur, som holder styr på programmets
+\emph{stack frames}, hvilket svarer til de enkeltvise instruktioner i
+kildekoden. Fordi JavaScript kun har en enkelt call stack, er JavaScript
+\emph{single-threaded}. Det vil sige, at der ikke behandles flere
+instruktioner samtidigt. Memory heapen indeholder den allokerede
+hukommelse til programmets referenceværdier, hvilket i JavaScript vil
+sige objekter.
 
 JavaScript består mere generelt også af det \emph{runtime environment},
 som platformen udvider det pågældende engines muligheder med.
 Forskellige platforme har forskellige engines og tilbyder forskellige
-runtime environments. Af særlig interesse er browserplatformens runtime
-environment, der giver dens JavaScript engine adgang til Document Object
-Model (DOM) træet, som repræsenterer websidens aktuelle HTML og CSS,
-hvormed begge dele kan manipuleres med JavaScript kode.
+runtime environments. Det fleste runtime environments har et \emph{event
+loop} og en \emph{message queue}, som giver JavaScript mulighed for
+\emph{asynkron} single-threaded afvikling af kildekoden.
 
-DOM træet er
+Asynkrone instrukser i kildekoden er f.eks. dem, som arbejder med
+netværkskald og derfor koster tid. For at de ikke skal blokere
+applikationens eneste tråd, bliver disse instrukser lagt i en kø
+datastruktur. Event loopet holder øje med, om der er flere frames at
+køre i call stacken. Hvis ikke, så henter event loopet de asynkrone
+instruktioner ud fra message queue og ind i call stack, så de bliver
+kørt. På denne måde tillades asynkron JavaScript kode på trods af, at
+JavaScript er single-threaded. Browserplatformens runtime environment
+har også nogle \emph{web APIer}, som er af særlig interesse for
+webudviklere.
 
-single-threaded execution model ofthe language
+Browseren implementerer internt diverse funktioner med et lavere niveau
+programmeringssprog som C++. Web APIerne giver adgang til disse
+browserfunktioner, til f.eks. netværkskald, lyd eller 3D grafik.
+Document APIen er det mest vigtige for webudviklere, da denne giver
+adgang til Document Object Model (DOM) træet.
+
+DOM træet er en intern datastruktur i browseren. Datastrukturen er et
+hiearkisk træ, som repræsenterer siden aktuelle HTML struktur. Hver
+eneste knude i DOM træet repræsenterer et enkelt HTML element med alle
+dets attributter. Hvert undertræ består altså af et HTML element og alle
+dets børn. DOM træet er til hver tid en afspejling af HTML strukturen på
+den aktuelle webside. Med Document APIen er det muligt at manipulere DOM
+træet og alle dets knuder, f.eks. ved at oprette nye HTML elementer
+eller ved at oprette event listeners på eksisterende HTML elementer.
+
+\hypertarget{versioner}{%
+\subsubsection{Versioner}\label{versioner}}
 
 Det oprindelige JavaScript blev skabt i 1995 af Brendan Eich, som var
 ansat hos Netscape, for at understøtte scripting i deres browser,
@@ -273,11 +319,11 @@ indsendt til ECMA International, som håndterer webstandarder. De udgav i
 1997 en åben specifikation af sproget i form af ECMAScript
 standarden\footnote{\url{https://www.ecma-international.org/ecma-262/}}.
 Dermed kunne konkurrende JavaScript engines overholde en fælles
-standard, så alle JavaScript engines kunne mindske afvigelser i hvordan
-JavaScript kode håndteres. Der findes i dag mange forskellige JavaScript
-engines til forskellige miljøer, fx forskellige browsere, som alle
+standard, så alle JavaScript engines kunne mindske jævnbyrdes afvigelser
+i håndteringen af JavaScript kildekode. Der findes i dag mange
+forskellige JavaScript engines til forskellige platforme, som alle
 afvikler JavaScript kode efter denne samme standard. ECMAScript
-Standarden hedder formelt ECMA-262, og implementeringerne af standarden
+standarden hedder formelt ECMA-262, og implementeringerne af standarden
 i form af programmeringssprog og engines hedder formelt ECMAScript i
 stedet for JavaScript pga. varemærkebeskyttelsen.
 
@@ -309,7 +355,7 @@ udgaver navngives typisk efter deres udgivelsesår: den syvende udgave
 hedder ES2016, den ottende ES2017, osv.
 
 \hypertarget{vuxe6rdier-og-variable}{%
-\subsection{Værdier og variable}\label{vuxe6rdier-og-variable}}
+\subsubsection{Værdier og variable}\label{vuxe6rdier-og-variable}}
 
 JavaScript har overordnet to forskellige datatyper af værdier. Det er
 \emph{primitiver}, som opbevares på stack, og \emph{objekter}, som
@@ -341,7 +387,7 @@ DOM træet. Den giver metoder til at manipulere det hierarki af objekter,
 som hver især repræsenterer de HTML tags, som udgør den aktuelle DOM.
 
 \hypertarget{objekt-orienteret-programmering}{%
-\subsection{Objekt-orienteret
+\subsubsection{Objekt-orienteret
 programmering}\label{objekt-orienteret-programmering}}
 
 JavaScript er et objektorienteret sprog, men det har (i modsætning til
@@ -385,10 +431,13 @@ felter og metoder. Det forklarer bl.a. hvorfor, at klasser i JavaScript
 endnu ikke officielt understøtter private feltvariable.
 
 \hypertarget{funktionel-programmering}{%
-\subsection{Funktionel programmering}\label{funktionel-programmering}}
+\subsubsection{Funktionel
+programmering}\label{funktionel-programmering}}
+
+Jeg havde da skrevet en masse fedt, hvor blev det af\ldots{}
 
 \hypertarget{moderne-syntaks}{%
-\subsection{Moderne syntaks}\label{moderne-syntaks}}
+\subsubsection{Moderne syntaks}\label{moderne-syntaks}}
 
 JavaScript er navngivet efter Java, fordi det blev skabt med ideen om at
 være et supplement til Java. Derfor er syntaksen også inspireret af
@@ -398,56 +447,219 @@ sig. Efterhånden som JavaScript blev mere udbredt, opstod behovet for at
 udvikle sproget og syntaksen. Især ES6 introducerede nogle vigtige nye
 sprogfunktioner og syntaks.
 
+\hypertarget{lambda-udtryk}{%
+\paragraph{Lambda udtryk}\label{lambda-udtryk}}
+
 \hypertarget{moduler}{%
-\subsection{Moduler}\label{moduler}}
+\paragraph{Moduler}\label{moduler}}
 
 I JavaScript er det muligt at importere \emph{moduler}. Et modul er en
-kodefil, som kan importeres af andre kodefiler. Moduler tillader at
-eksportere \emph{named exports}, så man f.eks. kun eksporterer én
-funktion fra en fil. Der er også mulighed for **default exports*, som
-kan importeres nemmere, og generelt bruges, hvis moduler har en primær
-funktionalitet, som skal fremhæves. Default exports behøver ikke
-navngives, da de navngives ved importeringen. Endelig Før i tiden var
-der ingen understøttelse af moduler, så problemet blev løst med
-kodebiblioteker som CommonJS og RequireJS (hvorfor bruges requirejs
+kodefil, som kan importeres af andre kodefiler. Det nuværende
+modulsystem i JavaScript blev udgivet med ES6.
+
+Moduler tillader at eksportere \emph{named exports}, så man f.eks. kun
+eksporterer én funktion fra en fil. Der er også mulighed for **default
+exports*, som kan importeres nemmere, og generelt bruges, hvis moduler
+har en primær funktionalitet, som skal fremhæves. Default exports
+behøver ikke navngives, da de navngives ved importeringen. Endelig Før i
+tiden var der ingen understøttelse af moduler, så problemet blev løst
+med kodebiblioteker som CommonJS og RequireJS (hvorfor bruges requirejs
 stadig i Node?)
 
-\hypertarget{biblioteker}{%
-\subsection{Biblioteker}\label{biblioteker}}
+ES6 moduler
 
-Som webudviklere er det vores opgave at vælge de rigtige værktøjer til
-ethvert givet projekt. Dette kan blive kompliceret, fordi det ikke kun
-er projektets umiddelbare behov, der betyder noget. Man er del af et
-team og et større økosystem i en virksomhed, som har behov for at kunne
-vedligeholde systemet uden store omkostninger ved omskoling af sin
-medarbejderstab.
+\hypertarget{udbredte-teknologier}{%
+\section{Udbredte teknologier}\label{udbredte-teknologier}}
+
+\hypertarget{vuxe6rktuxf8jer-og-udviklingsmiljuxf8er}{%
+\subsection{Værktøjer og
+udviklingsmiljøer}\label{vuxe6rktuxf8jer-og-udviklingsmiljuxf8er}}
+
+For meget nutidig JavaScript udvikling gælder det, at man ikke bare er
+nødt til at kende til web platformen og dens teknologier, men der
+eksisterer også mange værktøjer til at løse flere problemer, end
+JavaScript umiddelbart er designet til.
+
+\hypertarget{node}{%
+\subsubsection{Node}\label{node}}
+
+Node er et runtime environment til at køre JavaScript på serveren i
+stedet for klienten. Node bruger samme JavaScript engine som Chrome
+browseren, men giver adgang til andre APIer i stedet for browserens web
+APier. Med Nodes APIer har man fx adgang til computerens filsystem. Man
+kan afvikle JavaScript kildekode på alle styresystemer med Node
+installeret, hvilket gør det velegnet til cross-platform udvikling af
+f.eks. webservere.
+
+Node bruger modulsystemet CommonJS, fordi Node udkom før ES modulerne
+blev introduceret i ES6. De indbyggede APIer i Node er moduler, som man
+indlæser med CommonJS. For eksempel kan man få adgang til filsystemet
+med modulet \texttt{fs}, som indlæses med den indbyggede
+\texttt{require} funktion.
+
+Node installeres sammen med \emph{NPM}, som er et program til at styre
+et projekts afhængigheder. NPM samarbejder med et online register af
+JavaScript biblioteker. Ved brug af NPM kan man nemt installere
+biblioteker fra registeret til sit projekt og styre afhængihederne med
+semantisk versionsstyring. Node installeres også sammen med NPX, som kan
+køre biblioteker, der er installeret som afhængighed, eller hente
+biblioteket fra registeret for at køre det, og herefter fjerne det igen.
+
+\hypertarget{webpack}{%
+\subsubsection{Webpack}\label{webpack}}
+
+Webpack er det, man kalder en \emph{module bundler}. Det vil sige, at
+Webpacks primære formål er på buildtime at samle koden til én samlet
+JavaScript \emph{bundle}, som indeholder alle applikationens moduler og
+deres indbyrdes afhængigheder. I konfigurationsfilen for Webpack
+definerer man et \emph{entry point}, som Webpack skal starte i. Webpack
+starter i den fil, man har defineret som entry point, og gennemløber
+derfra kildekodens import/export udtryk, som den undervejs bruger til at
+bygge en \emph{dependency graph}, som repræsenterer alle
+webapplikationens ES6 moduler og deres indbyrdes afhængigheder.
+
+Med udgangspunkt i denne dependency graph, samler Webpack alle ES6
+modulerne til en samlet JavaScript kildekode, som er klar til at blive
+downloadet og præsenteret af browseren. Dette giver i sig selv en
+gevinst, for brugeren kan få hele webapplikationen i ét request. Det kan
+gøre indlæsningen af alle modulerne betydeligt hurtigere på en
+traditionel HTTP/1.1 forbindelse med høj forsinkelse, da HTTP/1.1
+håndterer hvert request synkront og dermed blokerer renderingen indtil
+hver static asset er downloaded og eksekveret.
+
+Webpack kører også forskellige optimeringer på kildekoden, når bundler,
+for eksempel for at mindske filstørrelsen af den endelige bundle. Alt
+dette gør webpack ud af boksen med sin standard konfiguration, men langt
+de fleste bruger deres egen webpack konfiguration skræddersyet til deres
+projekt. Med webpacks konfigurationsfil er det muligt at ændre alle
+
+For at komme i gang med at bruge webpack, er Node en forudsætning. Man
+kan bruge NPM til lave et nyt tomt projekt og installere Webpack:
+
+Hvis overstående konfigurationsfil er til stede i rodmappen, vil Webpack
+automatisk samle den op, når man kører kommandoen \texttt{webpack} fra
+projektets rodmappe som arbejdsmappe. Hvis der findes en
+\texttt{main.js}, vil Webpack køre og resultere i en bundle i
+\texttt{./dist/bundle.js}.
+
+For at ændre output filnavnet til fx. \texttt{output.js}, tilføjer man
+en \texttt{output} property til \texttt{config} objektet, med en
+\texttt{filename} property. For at placere output placeringen til fx.
+\texttt{./build/}, tilføjer man yderligere en \texttt{path} property til
+\texttt{output} objektet.
+
+Webpack giver mulighed for, at man kan indlæse trejdeparts
+\emph{loaders} til at håndtere andre filtyper end JavaScript. Man
+konfigurerer webpack til at håndtere forskellige filtyper med
+forskellige loaders. Hver loader er en preprocessor, som Webpack
+anvender, når den støder på en angiven filtype. Loaders kan bl.a. sørge
+for, at Webpack også kan bundle stylesheets og andre assets. En hyppig
+anvendelse af loaders er også at få Webpack til at samarbejde med andre
+værktøjer som Babel og TypeScript.
+
+\hypertarget{babel}{%
+\subsubsection{Babel}\label{babel}}
+
+Babel Overstående HTML-lignende syntaks er den syntaksudvidelse, som
+kaldes JSX. Det transpileres (af Webpack) med en loader (Babel) til
+standard JavaScript. Webpack er en modul bundler, som samler projektets
+ES 6 moduler (ved import/export statements) til én samlet kildekode, og
+med Babel oversætter speciel syntaks som f.eks. JSX til standard
+JavaScript. Overstående kode bliver oversat af Babel til noget lignende:
+
+\hypertarget{typescript}{%
+\subsubsection{TypeScript}\label{typescript}}
+
+TypeScript er en udvidelse af JavaScript, som udvider JavaScript med
+type annotationer. TypeScript introducerer syntaks, man kender fra
+typestærke sprog som f.eks. interfaces, enums og generics. TypeScript
+introducerer også syntaks, man ikke traditionelt kender fra typestærke
+objekt-orienterede sprog, men til gengæld fra typestærke funktionelle
+sprog, som f.eks. \emph{mapped types} og \emph{algebraiske data typer}.
+
+Mapped types er en syntaks, der kan transformere en type definition til
+en anderledes tilstand. F.eks. mapper
+\texttt{Partial\textless{}T\textgreater{}} typen alle properties på den
+generiske type til at være optional.
+
+Algebraiske data typer er en syntaks, som tillader at kombinere typer
+for at skabe nye typer.
+
+Fordelene ved TypeScript er mange, men vigtigst er naturligvis den
+typesikkerhed, som man kan opnå med TypeScript på compile-time.
+Typesikkerhed er uvurderligt, når man skal refaktorere gammel kode, da
+det giver mulighed for at ændre koden med en vis grad af tillid til, at
+der hvert fald ikke er introduceret nye fejl pga. inkompatible typer.
+
+En anden fordel TypeScript har er, at det typestærkheden forbedrer
+dokumentation for koden. Hvis man importerer JavaScript moduler som har
+en korrekt type definition, kan man med sin IDE f.eks. udforske modulets
+eksporterede objekter, metoder, interfaces, etc. uden at man behøver
+nærlæse eller afvikle kildekoden. Med DefinitelyTyped registret, er det
+muligt at finde korrekte type definitioner til de fleste JavaScript
+kodebiblioteker, som endnu ikke har en officiel type definition (.d.ts
+fil).
+
+En af fordelene ved TypeScript er også, at det ligesom Babel er en
+transpiler, der oversætter syntaks, og man ser ofte nye syntaks
+funktioner i de nyeste versioner af TypeScript, før de kommer til
+ECMAScript.
+
+TypeScripts type system kaldes \emph{structural typing}, hvilket
+adskiller sig fra f.eks. C\#'s nominal typing ved at være mindre streng,
+når TypeScript skal bestemme hvorvidt et objekt overholder en type
+definition. Det bestemmes udelukkende ved, om et objekt har properties,
+som er tilsvarende alle de properties, som type definitionen indeholder,
+om den har yderligere properties, en anden type annotation men de samme
+properties, eller måske slet ingen type annotation. Det er kun de
+properties, som udgør måltypens interface, der bliver taget i
+betragtning.
+
+\hypertarget{biblioteker-og-frameworks}{%
+\subsection{Biblioteker og frameworks}\label{biblioteker-og-frameworks}}
+
+Som udviklere er det vores opgave at vælge de rigtige biblioteker og
+frameworks til ethvert givet projekt. Dette kan blive kompliceret, fordi
+det ikke kun er projektets umiddelbare behov, der betyder noget. Man er
+del af et team og et større socialt system i en virksomhed, som har
+behov for at kunne vedligeholde systemet uden store omkostninger ved
+omskoling af sin medarbejderstab.
 
 Mulighederne for at vælge JavaScript værktøjer er mange. Det er enormt
 mange JavaScript biblioteker tilgængelige. Man kan dele de tilgængelige
 biblioteker op i grupper af \emph{generelle} biblioteker,
-\emph{specialiserede} biblioteker og \emph{SPA framework} biblioteker.
+\emph{specialiserede} biblioteker og \emph{frontend framework}
+biblioteker.
 
 Der er generelle biblioteker, som giver mange hjælpemetoder til at gøre
 diverse opgavere lettere eller mindre repetetive. Et eksempel på det
-kunne være JQuery (\textasciitilde{}90kb), som i lang tid var populær
-for at gøre udvikleren i stand til at udtrykke mere med færre linjer
-JavaScript.
+kunne være JQuery (\textasciitilde{}90kb), som i lang tid var et
+populært bibliotek til at gøre udvikleren i stand til at udtrykke mere
+med færre linjer JavaScript.
 
 Der er specialiserede biblioteker, som indeholder relativt få linjer
 kode og løser et meget specifikt problem. Et eksempel kunne være Redux
 (\textasciitilde{}2kb), som kun har ansvar for at håndtere
 applikationstilstand.
 
-Endelig er der biblioteker, der fungerer som SPA frameworks. Det vil for
-denne hovedopgave betragtes som værende biblioteker, der varierer i
-størrelse, og evt. bruges sammen med andre biblioteker, med det formål
-at bygge og vedligeholde \emph{single page applications}. Et eksempel
-kunne være Angular (\textasciitilde{}500kb) , som er en ``alt-i-en''
-løsning til at bygge single page applications, der kan håndtere
-applikationstilstand med den indbyggede data-binding i biblioteket. Et
-andet eksempel kunne være Vue(\textasciitilde{}80kb), som ofte bruges
-sammen med Vuex(\textasciitilde{}10kb) biblioteket til at håndtere
-applikationstilstand.
+Endelig er der biblioteker, der fungerer som frontend frameworks. Selvom
+det er muligt at opbygge en simpel frontend kun med HTML, CSS og
+JavaScript, giver forskellige frontend frameworks mulighed for bl.a. at
+strukturere kildekoden, så den ikke bliver for kompleks og
+uvedligeholdbar. Der er også behov for en struktureret måde at håndtere
+komponenter, styling og applikationstilstand. Frontend frameworks
+opstiller på forskellig vis et stillads til at løse disse problemer på
+en mere eller mindre fleksibel måde.
+
+Frontend frameworks vil for denne opgave betragtes som værende
+biblioteker, der varierer i størrelse, og evt. bruges sammen med andre
+biblioteker, med det formål at bygge og vedligeholde \emph{single page
+applications}. Et eksempel kunne være Angular (\textasciitilde{}500kb) ,
+som er en ``alt-i-en'' løsning til at bygge single page applications,
+der kan håndtere applikationstilstand med den indbyggede data-binding i
+biblioteket. Et andet eksempel kunne være Vue(\textasciitilde{}80kb),
+som ofte bruges sammen med Vuex(\textasciitilde{}10kb) biblioteket til
+at håndtere applikationstilstand.
 
 Single page applications er en tilgang til webapplikationer, som samler
 hele hjemmesidens indhold på en webside, i stedet for at sprede det ud
@@ -472,75 +684,35 @@ identificeres fra dens URL-adresse. Man manipulerer ressourcerne med
 HTTP beskedens operationsverbum: GET, PUT, POST eller DELETE som bruges
 til henholdvis at læse, opdatere, oprette eller slette ressourcer.
 
+\hypertarget{popularitet}{%
+\subsubsection{Popularitet}\label{popularitet}}
+
+Eftersom det, for de fleste webudviklere, ikke er overkommeligt at lære
+alle tilgængelige populære frontend frameworks, bør man gøre nogle
+overvejelser, før man vælger hvilket frontend framework at lære. For
+denne opgave vil jeg se på de mest populære frontend frameworks blandt
+udviklere og arbejdsgivere.
+
 Når man dykker ned i de seneste års udvikling indenfor SPA frameworks,
-opstår der et mønster. De tre SPA frameworks, som flest udviklere bruger
-jævnligt, er React, Vue og Angular.\footnote{\url{https://www.jetbrains.com/lp/devecosystem-2019/javascript/}}
+opstår der et mønster. Blandt udviklere er de mest populære frontend
+frameworks React, Vue og Angular.\footnote{\url{https://www.jetbrains.com/lp/devecosystem-2019/javascript/}}
+Det er umuligt at forudse, hvilke af disse frontend frameworks, der
+overlever længst, eller hvornår de bliver erstattet af noget nyt. Men
+der tegner sig et billede af, at flere udviklere benytter og udtrykker
+tilfredshed med Vue og React end Angular. React ligger i 2019 placeret
+på andenpladsen af mest anvendte biblioteker (med jQuery fortsat på
+førstepladsen). I kategorien ``mest elskede'' frontend frameworks, er
+React den mest populære, med Vue lige i hælene, mens Angular halter
+bagefter på en niendeplads. Vue har flere stjerner på dets GitHub
+repository end React og Angular.
 
-Det er umuligt at forudse hvilke af disse teknologier der overlever
-længst, eller hvornår de bliver erstattet af noget nyt. Men der tegner
-sig et billede af, at flere udviklere benytter og udtrykker tilfredshed
-med Vue og React end Angular. React ligger i 2019 placeret \#2 på Stack
-Overflows undersøgelse af mest anvendte web frameworks (med jQuery
-fortsat på førstepladsen). I kategorien ''Most Loved Web Frameworks'' er
-React nummer ét med Vue lige i hælene, mens Angular halter bagefter på
-en niendeplads. Når man ser på deres indbyrdes popularitet, har Vue
-flest stjerner på dets GitHub repository og er nu det mest populære af
-de tre.
-
-Hvis man måler på hvor meget de respektive web frameworks downloades af
-udviklere, ligger React i toppen med op imod seks millioner downloads om
-ugen, sammenlignet med to millioner for Angular og en million for Vue4.
-Fælles for alle de nævnte web frameworks er, at de er open source. Store
-virksomheder som Google, Facebook og Microsoft har taget open source
-forretningsmodellen til sig og er med til puste til ilden af konstant
-innovation. React er udviklet og drevet af Facebooks senior
-softwareingeniøre. Google står bag Angular, mens Microsoft står bag dets
-anvendte open source programmeringssprog TypeScript. Vues styrke ligger
-bl.a. i, at det ikke har en stor virksomhed i ryggen som driver
-udviklingen, men er finansieret af crowdfunding og kombinerer det bedste
-fra Angular og React.
-
-\hypertarget{funktionel-programmering-1}{%
-\subsection{Funktionel programmering}\label{funktionel-programmering-1}}
-
-Begrebet funktionel programmering er svært at definere, men det lægger
-vægt på arbejde med funktioner i stedet for variable. Tankerne fra
-funktionel programmering har inspireret arkitekturen omkring React.
-JavaScript har faktisk også inspiration i funktionel programmering, da
-Brendan Eich oprindeligt havde den vision om JavaScript, at det skulle
-være ligesom programmeringssproget Scheme. Scheme er et
-programmeringssprog, der tilhører Lisp familien af programmeringssprog,
-som alle har fokus på funktionel programmering. Denne inspiration
-betyder, at JavaScript har god understøttelse af funktionel
-programmering, bl.a. fordi JavaScript har first-class functions og
-anonyme functions.
-
-Funktionelle programmeringssprog kommer fra det matematiske felt lambda
-calculus, som blev opfundet i 1936 af Alonzo Church, der er kendt i
-datalogiske kredse fra Church-Turing-afhandlingen, som formelt definerer
-konceptet beregnelighed. Funktionel programmering har derfor også størst
-tilslutning inden for den akademiske verden. Til gengæld har nogle
-principper fra funktionel programmering vundet indpas hos det brede
-udviklersamfund, og især har det inspireret frontend frameworks som
-React.
-
-inspireret software design patterns, som det brede udviklersamfund har
-taget til sig.
-
-Det mest centrale ved funktionel programmering er princippet om
-\emph{pure functions}. Det er funktioner, som for det første giver den
-samme returværdi for et givent argument. For det andet må de ikke have
-\emph{side effects}, dvs. ikke mutere variabler uden for funktionens
-scope. Disse begrænsninger kommer fra det teoretiske behov for at
-repræsentere matematiske funktioner, men det viser sig også at være en
-fordel, når man som almindelig udvikler vil skrive testbar kode.
-
-Et andet vigtigt princip i funktionel programmering er
-\emph{higher-order functions}. Det er funktioner, som tager andre
-funktioner som argument og/eller returnerer en funktion som returværdi.
+Hvis man ser på, hvor meget de respektive frontend frameworks downloades
+af udviklere, ligger React væsentligt højere end de andre med op imod
+seks millioner downloads om ugen, sammenlignet med to millioner for
+Angular og en million for Vue.
 
 \hypertarget{react}{%
-\subsection{React}\label{react}}
+\subsubsection{React}\label{react}}
 
 React er et JavaScript kodebibliotek til at bygge brugergrænseflader
 baseret på komposition af komponenter. Alting i React er en komponent,
@@ -573,7 +745,7 @@ på brugergrænsefladen (imperativt), så beskrives hvordan man ønsker
 tilstand.
 
 \hypertarget{komponenter-og-props}{%
-\subsubsection{Komponenter og props}\label{komponenter-og-props}}
+\paragraph{Komponenter og props}\label{komponenter-og-props}}
 
 En React komponent er ikke andet end en funktion, som returnerer noget,
 der i bund og grund bare er HTML. Strukturen og indholdet kan evt.
@@ -589,8 +761,8 @@ man undgår side effekter i sine komponenter. Med andre ord, vil de samme
 props som input altid generere det samme HTML som output. Man siger, at
 komponenten er en pure function med hensyn til sine props. Reacts eneste
 regel er, at alle komponenter skal være pure functions mht. sine props.
-For at en funktion kan være en pure function, må den: a) ikke have
-sideeffekter b) ikke kalde non-pure functions (som Date.now) og c)
+For at en funktion kan være en pure function, må den for det a) ikke
+have sideeffekter b) ikke kalde non-pure functions (som Date.now) og c)
 behandle sine argumenter som immutable (readonly). Der findes JavaScript
 kodebiblioteker som ImmutableJS til at håndhæve dette, eller code
 linting værktøjer som ESLint.
@@ -614,11 +786,11 @@ for hvert enkelt mellemled mellem A og B. Dette anti-pattern kaldes
 \emph{prop-drilling}.
 
 \hypertarget{redux}{%
-\subsubsection{Redux}\label{redux}}
+\paragraph{Redux}\label{redux}}
 
 En måde at omgå denne ``prop-drilling'' er ved at benytte Reacts
 indbyggede Context API. Den tillader komponenter at dele props indenfor
-en kontekst uden at mappe props mellem komponenter. {[}contextbillede{]}
+en kontekst uden at mappe props mellem komponenter.
 
 En anden mere avanceret måde, er at gøre som Facebook og bruge software
 design mønstret Flux. Flux applikationer har tre hovedbestanddele:
@@ -636,13 +808,213 @@ funktion kaldet combineReducers. Det er altså en funktion, der tager
 flere reducers som parameter, og returnerer en ny kombineret reducer.
 Typisk har man en reducer slice for hver feature / domæne i projektet,
 som kombineres til en enkelt root reducer med combineReducers. Root
-reduceren bruges af Redux til at lave store objektet. {[}reduxbillede{]}
+reduceren bruges af Redux til at lave store objektet.
 
 For at forbinde sine React komponenter til sin Redux store anbefales det
 at bruge Redux API'ens connect funktion. Connect tager to funktioner som
 input og returnerer en funktion, som er en higher order component, der
 tager en React komponent som input og returnerer en ''forbedret'' udgave
 af komponenten med adgang til store og action creators via props.
-{[}providerbillede{]}
+
+\hypertarget{client-side-og-server-side-rendering}{%
+\paragraph{Client-side og server-side
+rendering}\label{client-side-og-server-side-rendering}}
+
+Alt React kode som har direkte med browserens DOM at gøre, er splittet
+op i sit eget ReactDOM bibliotek. Man kan også udvikle med React mod en
+anden målplatform end browseren, ved at erstatte ReactDOM med et
+kodebibliotek til f.eks. cross-platform mobilapps (React Native) og
+konfiguration.
+
+ReactDOM fungerer ved, at der fra webapplikationens index side kører en
+JavaScript fil i browseren, som holder browserens DOM synkroniseret med
+applikationens komposition af React komponenter og state. Alt logikken
+til at generere HTML dynamisk er således flyttet over i
+klienten/browseren. Denne client-side-rendering gør det muligt at have
+en interaktiv hjemmeside uden brug af en webserver.
+
+Selvom man har en SPA uden en webserver, kan man stadig have
+pseudorouting med JavaScripts History API eller React udgaven, React
+Router. Men det er altid index siden, der indlæser hele
+webapplikationen, som præsenterer indholdet ud fra URL routen. Det
+medfører en bedre brugeroplevelse, da klienten aldrig indlæser en ny
+side efter index siden, og dermed slipper for nogensinde at genindlæse
+siden.
+
+React opdaterer kun de DOM elementer i browserens hukommelse, som det er
+nødvendigt for at matche det tilsvarende React elements state. Denne
+optimisering fremkommer af Reacts VDOM. Det er en virtuel kopi af
+DOM'en, som eksisterer med den nyeste opdaterede state i hukommelsen.
+Før React opdaterer DOM, hvilket er en meget dyr operation, sammenligner
+meget hurtige algoritmer VDOM med DOM og finder de steder, hvor der er
+forskel i browserens DOM state fra Reacts interne VDOM state, så kun de
+absolut nødvendige DOM elementer behøver at blive opdateret
+
+React understøtter også server-side-rendering, hvor serveren foretager
+den første indlæsning af webapplikationen og sender et snapshot af det
+fuldt formede HTML dokument til klienten. På denne måde understøtter man
+bedre søgemaskine crawlerne og opnår dermed en bedre rank i
+søgemaskinen. Man mindsker også tiden før first meaningful paint (når
+man kan se sidens primære indhold).
+
+\hypertarget{innovative-teknologier}{%
+\section{Innovative teknologier}\label{innovative-teknologier}}
+
+\hypertarget{innovation}{%
+\subsection{Innovation}\label{innovation}}
+
+Everett Rogers har beskrevet udbredelsen af innovative teknologier i et
+socialt samfund. Hans \emph{technology adoption lifecycle} model
+beskriver fem faser i anvendelse af ny teknologi, med udgangspunkt i de,
+som tager teknologien til sig.
+
+Den første gruppe til at tage en ny teknologi i brug kaldes
+\emph{innovators} (innovatør). Når teknologien ikke længere er ukendt,
+kaldes den næste gruppe \emph{early adopters}. Når en teknologi begynder
+at blive meget udbredt, kaldes de som tager teknologien i brug
+\emph{early majority}. Når en teknologi er nær toppen af sin
+popularitet, kaldes denne gruppe \emph{late majority}. Den sidste gruppe
+er \emph{laggards}, der anvender en teknologi, som i de flestes øjne er
+forældet.
+
+Det er mest risikofyldt at være innovatør, fordi der på dette stadie
+kræver en dybdegående forståelse at vurdere, om den nye teknologi har
+potentiale. Der er også størst potentiel gevinst ved at være innovatør,
+da man kan bruge den innovative teknologi til at udkonkurrere sine
+konkurrenter. De fleste ledere af store virksomheder vurderer, at deres
+virksomhed ville blive udkonkurreret inden for syv år, hvis de ikke
+formår at følge med innovationen.\footnote{\url{https://devops.com/survey-sees-massive-adoption-of-microservices/}}.
+
+Ron Adner har beskrevet en iboende konflikt mellem innovatøren og
+\emph{forbrugeren}. Her forstås innovatøren som producenten af en ny
+innovation, som skal sælge sin innovation til forbrugeren som kunde. Man
+kan også forestille sig udvikleren som innovatør, der vil overbevise
+ledelsen i en virksomhed som forbruger. Man kan også forestille sig den
+nyansatte juniorudvikler på et team som innovatøren, der vil overbevise
+seniorudviklerne som forbrugeren. Konflikten består af en forskel i
+opfattelse af \emph{cost} (omkostninger) og \emph{benefit} (fordele) ved
+at tage en innovation til sig.
+
+Innovatøren tænker på omkostninger med hensyn til den umiddelbare
+omkostning, der er ved at tage teknologien i brug. Forbrugeren tænker på
+omkostninger i forhold til den umiddelbare omkostning plus alle de andre
+ændringer, som er nødvendige for at bruge innovationen.
+
+Innovatøren tænker på fordelene med hensyn til den absolutte fordel, som
+forbrugeren modtager. Forbrugeren tænker over benefit i forhold til den
+relative fordel, som innovationen giver sammenlignet med de tilgængelige
+alternativer.
+
+Innovatøren har altså en tendens til at sammenligne den absolutte fordel
+med den umiddelbare omkostning, mens forbrugeren sammenligner den
+relative fordel med den samlede omkostning.
+
+Denne forskel kan optræde i scenariet med udvikleren i virksomheden, der
+ikke ser virksomhedens samlede omkostninger (omskoling af
+medarbejderstab, indkøb af licenser, etc.) ved at tage en innovation til
+sig. På samme måde kan den nyansatte juniorudvikler have nemmere ved at
+tage en innovativt teknologi i brug, fordi hans omkostningsperspektiv er
+mindre end seniorudvikleren, der har samlet meget viden om tidligere
+teknologier.
+
+\hypertarget{micro-frontends}{%
+\subsection{Micro Frontends}\label{micro-frontends}}
+
+Software arkitektur har længe bevæget sig mod at splitte monolitiske
+systemer op i mindre moduler. I stedet for at alle udviklere i en
+virksomhed arbejder på samme, komplekse system, har mange virksomheder
+set gevinster i microservice arkitekturen. Her består det samlede system
+af en lang række undersystemer, som kan udvikles og udgives uafhængigt
+af hinanden.
+
+Microservice arkitekturen er blevet meget udbredt, og størstedelen af
+store virksomheder er enten ved at tage microservices til sig, eller
+bruger allerede udelukkende microservices\footnote{\url{https://www.leanix.net/en/blog/beyond-agile-time-to-adopt-microservices}}.
+Brugergrænsefladen bliver for mange alligevel stadig udviklet som et
+monolitisk system. Microfrontend arkitekturen er at overføre ideen om
+microservices til brugergrænsefladen.
+
+Microfrontends kommer med mange af de samme fordele som microservices.
+Den centrale fordel er muligheden for en fastlægge en individuel kode-,
+test- og driftproces for hver microfrontend.
+
+Dermed kan mindre teams være ansvarlige for egne microfrontends, og
+hurtigere komme med inkrementelle opdateringer uden at vente på
+hinanden. Det understøtter en agil procesmodel, hvor hvert team autonomt
+kan komme med en ny version af deres microfrontend efter et sprint.
+
+man kan opdele microfrontends i ``vertikale'' hensyn til
+forretningsdomænet, i stedet for ``horisontale'' hensyn til tekniske
+ansvarsområder. Dermed får hvert team en bedre helhedsforståelse af det
+domæne, som de er ansvarlige for med deres microfrontend.
+
+Med microfrontends er kildekoden for hver microfrontend afkoblet fra
+hinanden. Fordi undersystemet er mindre end hele systemet, vil
+kildekoden for hver microfrontend også være mindre og nemmere at
+vedligeholde. Hvert team har også bedre fleksibilitet i deres valg af
+biblioteker og frameworks, som passer til lige præcis deres
+microfrontend.
+
+\hypertarget{module-federation}{%
+\subsection{Module Federation}\label{module-federation}}
+
+I beta version 5 af Webpack er der en ny funktion, som spiller en vigtig
+rolle i at understøtte en microfrontend arkitekturen. Det er indtil
+videre kun i beta version, og bliver officielt udgivet sammen med
+Webpack 5. Module federation tillader at bundle hver eneste individuelle
+microfrontend med alle sine afhængigheder. Dermed kan man have en
+individuel proces/pipeline for at udvikle, teste og udgive hver enkelt
+microfrontend uafhængigt af hinanden, men alligevel indlæse dem dynamisk
+med JavaScript i runtime og bruge dem som en samlet helhed.
+
+Men module federation giver også mulighed for, at man angiver
+\emph{shared dependencies}. Hvis man f.eks. har angivet \texttt{react}
+som \texttt{shared} for to forskellige microfrontends, og indlæser begge
+microfrontends, vil kun den ene af de to tilsvarende afhængigheder blive
+indlæst i runtime, men til gengæld vil dén ene afhængighed blive delt af
+begge microfrontends. Dermed opnår man \emph{decoupling} af de enkelte
+microfrontends på en ressourceffektiv måde.
+
+Module federation bruger betegnelsen \emph{hosts} for applikationer, der
+indlæser en \emph{remote} applikation. En applikation kan fungere som
+både host og remote på samme tid.
+
+Man angiver hosts og remotes i sin \texttt{webpack.config.js}
+konfigurationsfil. Module federation er inkluderet i Webpack som et
+plugin, der først skal indlæses med RequireJS:
+
+ModuleFederationPlugin initialisers i \texttt{config} objektets
+\texttt{plugins} array med et konfigurationsobjekt som parameter. Her
+angiver man den nuværende applikations navn, hvis den skal indlæses som
+remote. Her angiver man også hvilke remotes, som Webpack skal forvente
+at indlæse i denne host, og hvilke interne moduler, som skal udstilles
+som remote.
+
+Hermed vil Webpack håndtere det korrekt, i stedet for at melde fejl,
+hvis den støder på et \texttt{import} udtryk, som skal findes på en
+anden webadresse i stedet for det lokale filsystem.
+
+Hvis man ønsker at eksponere dele af applikationen som remote, er det
+for øjeblikket nødvendigt at angive applikationens offentlige
+webadresse, som den udgives på, i \texttt{output} property på
+\texttt{config} objektet til Webpack. Der arbejdes på en løsning, hvor
+dette kan angives fra konsummenten (hosten) eller udledes automatisk fra
+importeringen af remote.
+
+Når man herefter kører Webpack, vil den som buildprodukt også lave en
+lille fil ved navn \texttt{remoteEntry.js}. Denne fil er
+host-applikationens indgangspunkt til remote-applikationen. Den
+indeholder ikke selve de udstillede moduler, men eksisterer for at
+indlæse. Denne fil skal refereres til i host'en, fx ved at indsætte et
+\texttt{\textless{}script\textgreater{}} tag i
+\texttt{\textless{}head\textgreater{}} tagget af websidens
+\texttt{index.html}:
+
+Hermed er det muligt at importere alle de moduler, som
+remote-applikationen udstiller, så længe applikationen er i drift på den
+angivne webadresse. Man bruger en dynamisk import, hvor det navn, som
+man angiver for sin remote-applikation i host-applikationens
+\texttt{ModuleFederationPlugin}, fungerer som et namespace, som om
+remote-applikationen ligger på det lokale filsystem.
 
 \end{document}
