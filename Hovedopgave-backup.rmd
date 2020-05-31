@@ -1,12 +1,12 @@
 ---
 bibliography: citations/referenceliste.bib
 csl: citations/university-college-lillebaelt-harvard.csl
-output: 
+output:
   pdf_document:
     includes:
-      in_header: import.sty
       before_body: title.sty
-toc-title: IndholdsfortegnelseK
+      in_header: import.sty
+toc-title: Indholdsfortegnelse
 ---
 
 ```{r echo=FALSE}
@@ -129,6 +129,10 @@ I 1996 blev JavaScript indsendt til ECMA International som håndterer webstandar
 https://stackoverflow.com/questions/29027845/what-is-the-difference-between-javascript-engine-and-javascript-runtime-environm
 https://medium.com/@andrewrymaruk/v8-a-few-words-about-javascript-engines-882dc2cf6799
 
+Hvad er et runtime environment
+
+
+
 ### Datatyper
 
 JavaScript har overordnet to forskellige datatyper af værdier, som kan opbevares i variable. Det er *primitiver* (værdityper), som opbevares på stack, og *objekter* (referencetyper), som opbevares på heap.  Primitiver er simple værdier, som JavaScript har syv forskellige typer af: `Number`, `Boolean`, `String`, `Null`, `Undefined`, `Symbol` (introduceret i ES6) og `BigInt` (introduceret i ES7). Objekter består af *properties*, som er navngivne primitiver eller objekter. Properties kan også indeholde *functions*, som i Javascript er specielle objekter af typen `Function`, og *arrays* af primitiver og/eller objekter, som i JavaScript også er specielle objekter, der har typen `Array`. Functions og arrays er altså som næsten alt andet i JavaScript objeker, selvom syntaksen for at bruge disse specielle objekter er lidt anderledes. Man opretter generelt brugerdefinerede objekter ved at bruge *object literal* syntaksen:
@@ -211,7 +215,11 @@ Still, there are important differences.
 web components in action appendix
 
 ### Moduler
-I JavaScript er det muligt at importere *moduler*. Et modul er en kodefil, som kan importeres af andre kodefiler. Moduler tillader at eksportere *named exports*, så man f.eks. kun eksporterer én funktion fra en fil. Der er også mulighed for **default exports*, som kan importeres nemmere, og generelt bruges, hvis moduler har en primær funktionalitet, som skal fremhæves. Default exports behøver ikke navngives, da de navngives ved importeringen. Endelig  Før i tiden var der ingen understøttelse af moduler, så problemet blev løst med kodebiblioteker som CommonJS og RequireJS
+I JavaScript er det muligt at importere *moduler*. Et modul er en kodefil, som kan importeres af andre kodefiler. Moduler tillader at eksportere *named exports*, så man f.eks. kun eksporterer én funktion fra en fil. Der er også mulighed for **default exports*, som kan importeres nemmere, og generelt bruges, hvis moduler har en primær funktionalitet, som skal fremhæves. Default exports behøver ikke navngives, da de navngives ved importeringen. Endelig  Før i tiden var der ingen understøttelse af moduler, så problemet blev løst med kodebiblioteker som CommonJS og RequireJS (hvorfor bruges requirejs stadig i Node?)
+
+Med `require` kan fra et JavaScript modul importere andre JavaScript moduler.
+
+Dynamic imports
 
 # Moderne webudvikling med JavaScript Frameworks
 
@@ -362,6 +370,9 @@ indeholder bl.a. compilere, som udvider JavaScripts syntaks med JSX, og tillader
 starte en lokal live udviklingswebserver baseret på Node, med hot-reloading af CSS-
 filer og JavaScript-moduler, eller til at builde en produktionsklar statisk hjemmeside. 
 
+CRA bruger en automatisk opsat Webpack konfiguration til at transpilere applikationens kildekode, (hvilket tillader brug af `require` statements)
+
+
 ### Indbyggede variabler
 __dirname etc.
 
@@ -380,9 +391,9 @@ path etc.
 ### Tree shaking 
 https://insights.untapt.com/webpack-import-require-and-you-3fd7f5ea93c0
 
-CRA bruger en automatisk opsat Webpack konfiguration til at transpilere applikationens kildekode, hvilket tillader brug af `require` statements. Med `require` kan fra et JavaScript modul importere andre JavaScript moduler. Webpack er det, man kalder en *module bundler*. Det vil sige, at Webpacks primære formål er på buildtime at samle koden til én samlet JavaScript *bundle*, som indeholder alle applikationens moduler og deres indbyrdes afhængigheder. I konfigurationsfilen for Webpack definerer man et *entry point*, som Webpack skal starte i. Ud fra entry point kompilerer Webpack programmet og bygger undervejs en *dependency graph*, som repræsenterer alle webapplikationens moduler og afhængigheder. 
+Webpack er det, man kalder en *module bundler*. Det vil sige, at Webpacks primære formål er på buildtime at samle koden til én samlet JavaScript *bundle*, som indeholder alle applikationens moduler og deres indbyrdes afhængigheder. I konfigurationsfilen for Webpack definerer man et *entry point*, som Webpack skal starte i. Ud fra entry point kompilerer Webpack programmet og bygger undervejs en *dependency graph*, som repræsenterer alle webapplikationens moduler og afhængigheder. 
 
-Med udgangspunkt i denne dependency graph, bundler webpack modulerne og afhængighederne sammen i én samlet JavaScript bundle, som er klar til at blive downloadet og præsenteret af browseren. Dette giver i sig selv en gevinst, for brugeren kan få hele webapplikationen i ét request. Det kan gøre indlæsningen af alle modulerne betydeligt hurtigere på en HTTP/1.1 forbindelse med høj latency, da HTTP/1.1 håndterer hvert request synkront og dermed blokerer renderingen indtil hver static asset er downloaded og eksekveret.
+Med udgangspunkt i denne dependency graph, bundler webpack modulerne og afhængighederne sammen i én samlet JavaScript bundle, som er klar til at blive downloadet og præsenteret af browseren. Dette giver i sig selv en gevinst, for brugeren kan få hele webapplikationen i ét request. Det kan gøre indlæsningen af alle modulerne betydeligt hurtigere på en traditionel HTTP/1.1 forbindelse med høj forsinkelse, da HTTP/1.1 håndterer hvert request synkront og dermed blokerer renderingen indtil hver static asset er downloaded og eksekveret.
 
 
 ```{r echo=FALSE, fig.cap="Synkron asset download og eksekvering", fig.height=4, fig.width=4}
@@ -393,7 +404,7 @@ grid.raster(img)
 ```
 
 
-HTTP/2 protokollen tillader asynkron download af static assets, så her gør antallet af requests ikke den store forskel. Udover bundling af JavaScript moduler, kan man med Webpack også håndtere bl.a. importering af stylesheets, billedfiler og JSON, anvendelse af nonstandard syntaks, og meget mere[^webpack].
+HTTP/2 protokollen tillader asynkron parallel download af static assets, så her gør antallet af requests ikke den store forskel. Udover bundling af JavaScript moduler, kan man med Webpack også håndtere bl.a. importering af stylesheets, billedfiler og JSON, anvendelse af nonstandard syntaks, og meget mere[^webpack].
 
 ### Konfiguraton af Webpack
 Webpack tillader at konfigurere...
@@ -457,7 +468,9 @@ https://www.youtube.com/watch?v=WQue1AN93YU
 
 ## Babel
 
-`const element = <div className=”hello”>Hello, UCL!</div>` 
+```js
+const element = <div className=”hello”>Hello, UCL!</div>
+``` 
 
 Overstående HTML-lignende syntaks er den syntaksudvidelse, som kaldes JSX. Det 
 transpileres (af Webpack) med en loader (Babel) til standard JavaScript. Webpack er en modul bundler, som samler projektets 
@@ -465,7 +478,7 @@ ES 6 moduler (ved import/export statements) til én samlet kildekode, og med Bab
 oversætter speciel syntaks som f.eks. JSX til standard JavaScript. Overstående kode 
 bliver oversat af Babel til noget lignende: 
 
-```
+```js
 const element = React.createElement( 
   “div”, 
   { className: “hello” }, 
@@ -484,7 +497,7 @@ tillader at afbryde afviklingen af et udtryk uden fejl, hvis man prøvet at tilg
 property på et objekt med værdien null eller undefined, eller nullish coalescing `??` 
 operatoren, som i tilfælde af ’null’ eller ’undefined’ falder tilbage på en anden værdi: 
 
-```
+```js
 let x = foo?.bar.baz(); // => 'undefined’ hvis ’foo’ er ’null’ eller ’undefined’ 
 
 let y = foo ?? ”default”; // => “default” hvis foo er  null eller undefined 
@@ -493,8 +506,9 @@ let y = foo ?? ”default”; // => “default” hvis foo er  null eller undefi
 En meget anvendt syntaks inden for React er arrow functions og logical && operator: 
 const app = () => loggedIn && <Content /> 
 
- ```
 Hvilket oversættes til følgende mindre kompakte syntaks i almindelig Javascript: 
+
+ ```js
 function app() { 
   if (loggedIn) { 
     return React.createElement(Content, null); 
@@ -594,6 +608,7 @@ koden, hvis kommentarerne er skrevet efter JSDoc specifikationen.
 ## Vue
 
 # Micro Frontends
+https://dev.to/florianrappl/state-of-microfrontends-1j3p
 
 ## Web Components
 https://medium.com/rangle-io/everything-you-need-to-know-about-web-components-part-1-ced95964fbe6
@@ -622,7 +637,7 @@ I stedet for at være afhængig af et specifikt JavaScript framework, anvender w
 ### Custom Elements
 Custom Element API tillader udvikleren at skabe nye *custom elements* (brugerdefinerede), som kan bruges ligesom andre HTML elementer. Man tilgår API'en med den nye `customElements` property på det globale `window` objekt. `customElements` er et objekt af typen `CustomElementRegistry`, som tillader at registrere et hvert objekt, som nedarver fra HTMLElement, med et HTML tagnavn, hvormed man knytter dem sammen, så browseren forstår sammenhængen. Når objektet er registreret, kan den bruges som markup direkte i HTML dokumentet. Selvom det i forvejen er tilladt at navngive sine egne HTML tags uden videre, har man altså brug for Custom Element API for at skabe sammenkoblingen mellem tagnavn og det brugerdefinerede DOM element.
 
- på *autonomous custom elements* (selvstændige) og *customized built-in elements* (tilpassede). De selvstændige custom elementer er helt uafhængige af standard HTML elementer. Man skaber dem ganske enkelt ved at lave et nedarvet objekt fra den generiske `HTMLElement` type. De er pt mere velunderstøttede[^caniuse_customelements] end de tilpassede. De tilpassede custom elmenter udvider i stedet funktionaliteten af standard elementerne, så man fx kan lave et brugerdefineret element, der udvider funktionaliteten af `video` tagget fra HTML5, ved at lave et nedarvet objekt fra HTMLVideoElement typen.
+Der er forskel på *autonomous custom elements* (autonome) og *customized built-in elements* (tilpassede). De selvstændige custom elements er helt uafhængige af standard HTML elementer. Man skaber dem ganske enkelt ved at lave et nedarvet objekt fra den generiske `HTMLElement` type. Autonome custom elementer er mere velunderstøttede[^caniuse_customelements] end tilpassede custom elementer. De udvider i stedet funktionaliteten af standard elementerne, så man fx kan lave et brugerdefineret element, der udvider funktionaliteten af `video` tagget fra HTML5, ved at lave et nedarvet objekt fra HTMLVideoElement typen. 
 
 
 [^caniuse_customelements]: https://caniuse.com/#feat=custom-elementsv1
@@ -636,12 +651,10 @@ class MyCustomElement extends HTMLElement {}
 window.customElements.define("my-custom-element", MyCustomElement);
 ```
 
-
 Dette vil tillade at bruge `custom-element` tagget i sin HTML markup ligesom de standard HTML elementer. Indefra klassen har man så adgang til alle de properties, som udgør elementet. Man kan sætte `this.innerHtml` for at give den et template. Dette vil man typisk gøre i klassens constructor. 
 
 ```{js, fig.cap="testsetest"}
 class MyCustomElement extends HTMLElement {}
-
 window.customElements.define("my-custom-element", MyCustomElement);
 ```
 
@@ -662,10 +675,79 @@ https://www.webcomponents.org/polyfills
 
 ## Module Federaton
 https://github.com/webpack/webpack/issues/10352 
-Module Federation er en ny (**dato**) funktion i Webpack (**link**), som spiller en vigtig rolle i microfrontend arkitekturen. Det er indtil videre kun i beta version. Det tillader at bundle hver eneste individuelle microfrontend med alle sine afhængigheder. Dermed kan man have en individuel proces/pipeline for at bygge og udgive hver enkelt microfrontend.
+Module Federation er en ny (**dato**) mulighed i Webpack (**link**), som spiller en vigtig rolle i microfrontend arkitekturen. Det er indtil videre kun i beta version, og bliver officielt udgivet sammen med Webpack 5. Module federation tillader at bundle hver eneste individuelle microfrontend med alle sine afhængigheder. Dermed kan man have en individuel proces/pipeline for at udvikle, teste og udgive hver enkelt microfrontend uafhængigt af hinanden, men alligevel indlæse dem dynamisk med JavaScript i runtime og bruge dem som en samlet helhed. 
 
-Module Federation giver mulighed for, at man angiver *shared dependencies*. Hvis man f.eks. har angivet `react` som afhængighed for to forskellige microfrontends, og indlæser begge microfrontends, kan 
+Men module federation giver også mulighed for, at man angiver *shared dependencies*. Hvis man f.eks. har angivet `react` som `shared` for to forskellige microfrontends, og indlæser begge microfrontends, vil kun den ene af de to tilsvarende afhængigheder blive indlæst i runtime, men til gengæld vil dén ene afhængighed blive delt af begge microfrontends. Dermed opnår man *decoupling* af de enkelte microfrontends på en ressourceffektiv måde.
+
+Module federation bruger betegnelsen *hosts* for applikationer, der indlæser en *remote*, som er et specielt buildprodukt af Webpack fra det eksterne JavaScript modul. En applikation kan fungere som både host og remote på samme tid. 
+
+Man angiver hosts og remotes i sin `webpack.config.js` konfigurationsfil. Module federation er inkluderet i Webpack som et plugin, der først skal indlæses med RequireJS: 
+
+```{js}
+const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin")
+```
+
+ModuleFederationPlugin initialisers i `config` objektets `plugins` array med et konfigurationsobjekt som parameter. Her angiver man den nuværende applikations navn, hvis den skal indlæses som remote. Her angiver man også hvilke remotes, som Webpack skal forvente at indlæse i denne host, og hvilke interne moduler, som skal udstilles som remote.
+
+```js
+    // ...
+    plugins: [
+      new ModuleFederationPlugin({
+        name: "app_one", // Applikationens navn
+        remotes: { // Navn på remotes som skal indlæses
+          "app_two": "app_two"
+        },
+        exposes: { // Interne moduler som skal udstilles som remote
+          RemoteNavn: "./sti/til/remote"
+        }
+      }),
+    ],
+    // ...
+```
+
+Hermed vil Webpack håndtere det korrekt, i stedet for at melde fejl, hvis den støder på et `import` udtryk, som skal findes på en anden webadresse i stedet for det lokale filsystem.
+
+Hvis man ønsker at eksponere dele af applikationen som remote, er det for øjeblikket nødvendigt at angive applikationens offentlige webadresse, som den udgives på, i `output` property på `config` objektet til Webpack. Der arbejdes på en løsning[^mf-url-fix], hvor dette kan angives fra konsummenten (hosten) eller udledes automatisk fra importeringen af remote.
+
+
+```js
+    // ...
+    output: {
+      // ...
+      publicPath: "http://localhost:3001/",
+    },
+    // ...
+```
+
+Når man herefter kører Webpack, vil den som buildprodukt også lave en lille fil ved navn `remoteEntry.js`. Denne fil er host'ens indgangspunkt til remote'en. Den indeholder ikke selve de udstillede moduler, men eksisterer (**HVORFOR?**). Denne fil skal refereres til i host'en, fx ved at indsætte et `<script>` tag i `<head>` tagget af websidens `index.html`:
+
+```html
+<head>
+  <!-- ... -->
+  <script src="http://localhost:3001/remoteEntry.js"></script>
+</head>
+<body>
+  <!-- ... -->
+</body>
+```
+
+Hermed er det muligt at importere alle de moduler, som den remote udstiller, så længe dens webadresse er oppe. Man bruger en dynamisk import, hvor det navn, som man angiver for sin remotes i hostens `ModuleFederationPlugin`, fungerer som et namespace, som om den lå lokalt.
+
+```js
+import("app_two/sti/til/modul") // app_two svarer til navnet angivet under remotes
+```
+
+```{r echo=FALSE, fig.cap="Deling af afhængigheder mellem microfrontends",dpi=300 ,fig.height=4, fig.width=4 }
+library(png)
+library(grid)
+img <- readPNG("federated-modules-depshare.png")
+grid.raster(img)
+```
+
+[^mf-url-fix]: https://github.com/webpack/webpack/pull/10703
+
+
 
 ## Single-SPA
-
+\newpage
 # Litteratur

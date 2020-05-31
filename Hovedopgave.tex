@@ -1,0 +1,648 @@
+\PassOptionsToPackage{unicode=true}{hyperref} % options for packages loaded elsewhere
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provides euro and other symbols
+\else % if luatex or xelatex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage[]{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\usepackage{hyperref}
+\hypersetup{
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+% set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+
+\usepackage{setspace}
+
+% this is a lorem ipsum generator for adding dummy texts
+\usepackage{lipsum}
+\usepackage{tocloft}
+
+% to make the first rows bold in tables
+\usepackage{longtable}
+\usepackage{tabu}
+\usepackage{booktabs}
+
+% this makes list of figures appear in table of contents
+\usepackage[nottoc]{tocbibind}
+
+% for passing temporary notes
+\usepackage{todonotes}
+
+\usepackage{morefloats}
+\usepackage{float}
+
+% highlighting
+\usepackage{soul}
+
+% referencing mutliple things with a single command - \cref
+\usepackage{cleveref} 
+
+% this makes dots in table of contents
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+
+% to change the title of contents
+\renewcommand{\contentsname}{Indhold}
+
+% other translations
+\renewcommand{\listtablename}{Tabeloversigt}
+\renewcommand\tablename{Tabel}
+\renewcommand{\listfigurename}{Figuroversigt}
+\renewcommand\figurename{Figur}
+
+
+% line numbers for review purposes
+% this package might not be available in default latex installation 
+% get it by 'sudo tlmgr install lineno'
+%\usepackage{lineno}
+%\linenumbers
+
+% this allows checkmarks in the file
+\usepackage{amssymb}
+\DeclareUnicodeCharacter{2714}{\checkmark}
+
+% to be able to include latex comments
+\newenvironment{dummy}{}{}
+
+% https://gist.github.com/burchill/8873d2ade156b27e92a238a774ce2758
+% \usepackage{placeins}
+
+\usepackage{caption}
+
+% Package floatrow Error: Do not use float package with floatrow.
+%\usepackage{floatrow}
+
+% Code chunk captions
+% 
+%\DeclareNewFloatType{chunk}{placement=H, fileext=chk, name=}
+%\captionsetup{options=chunk}
+%\renewcommand{\thechunk}{Chunk~\thesection.\arabic{chunk}}
+%\makeatletter
+%\@addtoreset{chunk}{section}
+%\makeatother
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+
+\onehalfspacing
+\pagenumbering{gobble}
+
+%\begin{titlepage}
+\begin{center}
+\vspace*{8\baselineskip}
+\LARGE{\textbf{Webudvikling med JavaScript Frameworks}}\\
+\vspace*{1\baselineskip}
+\Large{Emil Martin Vork Heunecke}\\
+\vspace*{3\baselineskip}
+\Large{\textbf{Vejleder}}\\
+Per Bøgeskov\\
+\vspace*{2\baselineskip}
+Hovedopgave Datamatikeruddannelsen AK\\
+University College Lillebælt\\
+\end{center}
+% \end{titlepage}
+
+\doublespacing
+
+\hypersetup{linkcolor = black}
+\newpage
+\pagenumbering{roman}
+\tableofcontents
+\addcontentsline{toc}{section}{\contentsname}
+
+\newpage
+
+% list of figures have to be added manually to table of contents
+\listoffigures 
+
+\newpage
+\listoftables
+
+\doublespacing
+
+\newpage
+\pagenumbering{arabic}
+\hypersetup{linkcolor = blue}
+
+\hypertarget{indledning}{%
+\section{Indledning}\label{indledning}}
+
+\emph{``Learning JavaScript used to mean you weren't a serious software
+developer. Today, not learning Javascript means the same thing.''} ---
+Tim O'Reilly, opfinder af begrebet Web 2.0\footnote{\url{https://denstoredanske.lex.dk/Web_2.0}}
+
+\hypertarget{internettet}{%
+\section{Internettet}\label{internettet}}
+
+Internettet er et computernetværk bestående af computernetværk som er
+forbundet gennem routere. For at sende beskeder på internettet, bruger
+computerenhederne TCP/IP protokolstakken. Det er en gruppe af
+protokoller udarbejdet af det amerikanske Department of Defense, som
+tillader computerenheder at kommunikere. Protokolstakken kan inddeles i
+lag for protokollernes forskellige ansvarsområder. TCP/IP modellen
+beskriver de fire lag, som protokolstakken består af. Disse lag hedder
+\emph{network interface}, \emph{internet}, \emph{transport} og
+\emph{application}. Disse kan sammenlignes med lagene i OSI-modellen,
+som i sin abstrakte model deler netværkstrafik op i syv lag.
+
+TCP/IP network interface laget svarer til OSI data link laget, som
+forbinder internettets netværkstrafik til det lokale netværk. Internet
+laget svarer til netværkslaget, som router netværkstrafikken fra
+computerenhed til computerenhed. TCP/IP transport laget svarer til OSI
+transport laget, som etablerer forbindelsen mellem computerenhederne.
+Endelig svarer TCP/IP applikations laget til applikations-,
+præsentations- og sessionslagene i OSI-modellen, og på dette lag
+eksisterer den protokol, som har skabt internettet, som vi kender det i
+dag.
+
+HTTP protokollen blev
+
+\hypertarget{javascript}{%
+\section{JavaScript}\label{javascript}}
+
+JavaScript er det programmeringssprog, som flest udviklere
+benytter.{[}\^{}so{]} Det er også det programmeringssprog, som har flest
+aktive repositories på GitHub.\footnote{\url{https://githut.info/}}
+JavaScript anvendes i dag til alt fra simple scripts på websider, til
+avancerede webapplikationer, som kan køre i browseren eller på næsten
+hvilken som helst anden platform, herunder webservere eller sågar
+mikrokontrollere.
+
+JavaScript tilhører kategorien af \emph{interpreted} programmeringssprog
+i modsætning til \emph{compiled} programmeringssprog som C\#. På et
+compiled programmeringssprog oversætter udviklermaskinen programmets
+kildekode til maskinkode med en compiler. I et interpreted
+programmeringssprog oversættes kildekoden ikke direkte til maskinkode. I
+stedet læser oversætter et andet program kildekoden linje for linje til
+maskinkode instruktioner.
+
+JavaScript kildekode oversættes af et JavaScript \emph{engine}.
+Javacripts engine
+
+JavaScript består mere generelt også af det \emph{runtime environment},
+som platformen udvider det pågældende engines muligheder med.
+Forskellige platforme har forskellige engines og tilbyder forskellige
+runtime environments. Af særlig interesse er browserplatformens runtime
+environment, der giver dens JavaScript engine adgang til Document Object
+Model (DOM) træet, som repræsenterer websidens aktuelle HTML og CSS,
+hvormed begge dele kan manipuleres med JavaScript kode.
+
+DOM træet er
+
+single-threaded execution model ofthe language
+
+Det oprindelige JavaScript blev skabt i 1995 af Brendan Eich, som var
+ansat hos Netscape, for at understøtte scripting i deres browser,
+Netscape Navigator 2.0. Det blev udgivet med en pressemeddelse\footnote{\url{https://web.archive.org/web/20070916144913/http://wp.netscape.com/newsref/pr/newsrelease67.html}}
+hvori intentionen med sproget blev lagt frem. JavaScript blev
+præsenteret som et nemanvendeligt \emph{object scripting} sprog til
+webdokumenter, som supplement til HTML og Java. Sproget blev også
+præsenteret som en implementation af en \emph{åben standard} under en
+kommercielt venlig licens, for at tillade det brede udviklersamfund at
+bidrage til sprogets udvikling.
+
+JavaScript betegnes som sagt et objekt scripting sprog, og man kalder
+også JavaScript \emph{objekt baseret}. JavaScript understøtter det
+objekt-orienterede programmeringsparadigme, men sproget adskiller sig
+fra konventionelt objekt-orienterede sprog som Java og C\# bl.a. ved
+ikke at have statiske typer eller sondring mellem instanser og klasser.
+
+Den fornævnte åbne standard udmøntede sig i JavaScript Reference
+Implementation (JSRef), som var et open source JavaScript engine, der
+udviklede sig til . Men eftersom JSRef ikke blev udgivet i tide, havde
+Microsoft i mellemtiden analyseret JavaScript som det var implementeret
+i Netscape Navigator, og på den baggrund udviklet deres egen engine, som
+de kaldte Chakra. Fordi navnet JavaScript var
+varemærkeregistreret\footnote{\url{http://tsdr.uspto.gov/\#caseNumber=75026640\&caseSearchType=US_APPLICATION\&caseType=DEFAULT\&searchType=statusSearch}},
+blev Microsofts udgave af det samme sprog kaldt JScript.
+
+For at harmonisere de forskellige JavaScript engines, blev JavaScript
+indsendt til ECMA International, som håndterer webstandarder. De udgav i
+1997 en åben specifikation af sproget i form af ECMAScript
+standarden\footnote{\url{https://www.ecma-international.org/ecma-262/}}.
+Dermed kunne konkurrende JavaScript engines overholde en fælles
+standard, så alle JavaScript engines kunne mindske afvigelser i hvordan
+JavaScript kode håndteres. Der findes i dag mange forskellige JavaScript
+engines til forskellige miljøer, fx forskellige browsere, som alle
+afvikler JavaScript kode efter denne samme standard. ECMAScript
+Standarden hedder formelt ECMA-262, og implementeringerne af standarden
+i form af programmeringssprog og engines hedder formelt ECMAScript i
+stedet for JavaScript pga. varemærkebeskyttelsen.
+
+I daglig tale og i denne hovedopgave er ECMAScript synonymt med
+JavaScript, selvom det faktisk stadig er et registreret varemærke, der i
+dag er eget af Oracle, som endda i sjældne tilfælde\footnote{\url{https://adtmag.com/articles/2018/04/18/javascript-trademark.aspx}}
+stadig beskytter deres ophavsret på navnet. Der var på et tidspunkt tale
+om, at Oracle skulle donere varemærket til ECMA International\footnote{\url{https://twitter.com/BrendanEich/status/986605049987002368}}
+i erkendelse af, at navnet JavaScript de facto var blevet et offentligt
+domæne, men dette blev aldrig til noget.
+
+\begin{quote}
+``ECMAScript was always an unwanted trade name that sounds like a skin
+disease'' --- Brendan Eich
+\end{quote}
+
+ECMAScript standarden dikterer altså udviklingen af JavaScript sproget.
+Det betyder, at ældre browsere ikke understøtter alle moderne JavaScript
+funktioner, fordi de bruger et JavaScript engine, som implementerer en
+ældre udgave af ECMA-262. Der har været flere store udgivelser af
+ECMA-262, hvoraf de første tre udkom hurtigt efter hinanden: ES1 i 1997,
+ES2 i 1998 og ES3 i 1999. ES4 var under udvikling længe, men blev af
+forskellige årsager droppet. Først ti år efter udgivelsen af ES3, kom
+efterfølgeren ES5 i 2009, hvilket blev en milepæl for JavaScript, og det
+er den seneste udgave af sproget, som er understøttet af alle mainstream
+browsere inkl. Internet Explorer. Seks år senere kom ES6 i 2015, og
+herefter begyndte ECMA at udgive en ny version hver juni, så disse
+udgaver navngives typisk efter deres udgivelsesår: den syvende udgave
+hedder ES2016, den ottende ES2017, osv.
+
+\hypertarget{vuxe6rdier-og-variable}{%
+\subsection{Værdier og variable}\label{vuxe6rdier-og-variable}}
+
+JavaScript har overordnet to forskellige datatyper af værdier. Det er
+\emph{primitiver}, som opbevares på stack, og \emph{objekter}, som
+opbevares på heap.
+
+Primitiver er simple værdier, som JavaScript har syv forskellige typer
+af: \texttt{Number}, \texttt{Boolean}, \texttt{String}, \texttt{Null},
+\texttt{Undefined}, \texttt{Symbol} (introduceret i ES6) og
+\texttt{BigInt} (introduceret i ES7).
+
+Objekter består af \emph{properties}, som er navngivne primitiver eller
+objekter. Properties kan også indeholde \emph{functions}, som i
+Javascript er specielle objekter af typen \texttt{Function}, og
+\emph{arrays} af primitiver og/eller objekter, som i JavaScript også er
+specielle objekter, der har typen \texttt{Array}. Functions og arrays er
+altså som næsten alt andet i JavaScript objeker.
+
+JavaScript har som forventeligt variable til at indeholde værdier. I
+JavaScript kan ikke bare værdien af variabel ændre sig, når programmet
+kører, men også variablens type. Man kan lave variable med nøgleordene
+\emph{var}, \emph{let} eller \emph{const}. Det er muligt at lave flere
+variable kun med brug af et enkelt nøgleord. Variabler oprettet med
+\emph{var} kan ligesom
+
+JavaScript kører som sagt i et runtime environment, som gør nogle
+specifikke objekter tilgængelige for udvikleren. Alle browsere giver fx
+adgang til \texttt{document} objektet, som er udviklerens indgang til
+DOM træet. Den giver metoder til at manipulere det hierarki af objekter,
+som hver især repræsenterer de HTML tags, som udgør den aktuelle DOM.
+
+\hypertarget{objekt-orienteret-programmering}{%
+\subsection{Objekt-orienteret
+programmering}\label{objekt-orienteret-programmering}}
+
+JavaScript er et objektorienteret sprog, men det har (i modsætning til
+fx. C\#) ikke klasser og instanser, bare objekter. For at kunne lave
+objekter af en bestemt type, bruger man, i stedet for klasser og
+instanser, en \emph{constructor funktion}. Denne specielle metode
+navngives konventionelt med stort begyndelsesbogstav. På constructor
+funktionen er der en property \texttt{prototype}, som indeholder et
+objekt. Ved at sætte properties på prototype objektet, angiver man
+hvilke felter, som skal være på objekter skabt med constructor
+funktionen. Når man laver objekter ved at kalde constructor funktionen
+med nøgleordet \texttt{new}, vil man kunne tilgå de properties og
+metoder, man har angivet i prototypen.
+
+Når constructor funktionen kaldes med \texttt{new}, får Prototype
+objektet som standard en \texttt{constructor} property, som peger
+tilbage på den constructor funktion, som prototypen tilhører. For
+eksempel peger \texttt{Animal.prototype.constructor} tilbage på
+\texttt{Animal}. og \texttt{\_\_proto\_\_} property, som angiver hhv.
+typens constructor funktion, og constructor funktionen for den nedarvede
+type (i sidste ende \texttt{Object}).
+
+Hvis man vil specialisere sin constructor function, fx. lave en
+\texttt{Mammal} som specialisering af \texttt{Animal}, laver man en ny
+constructor function, og sætter prototypen til en instans af overtypen.
+
+Når man tilgår en property, fx. (???) vil JavaScripts engine søge efter
+en property med det navn: først blandt objektets properties, dernæst i
+dens prototypes properties, så prototypens \textbf{proto}'s properties,
+osv. indtil roden af nedarvingshiearkiet, som er constructor funktionen
+\texttt{Object}.
+
+I ES6 blev en ny syntaks indført for at gøre det lettere at arbejde med
+prototypiske nedarvningskæder. Man kan nu bruge \texttt{class}
+nøgleordet til at definere sine \emph{klasser}. Syntaksen for klasser i
+JavaScript minder meget om klasser i andre objektorienterede sprog, fx.
+C\#, men resultaten af klasse definitionen minder mest om prototypisk
+nedarvning, så man kan næsten betragte sprogkonstruktionen som
+syntaktisk sukker for at definere en constructor med dens prototype
+felter og metoder. Det forklarer bl.a. hvorfor, at klasser i JavaScript
+endnu ikke officielt understøtter private feltvariable.
+
+\hypertarget{funktionel-programmering}{%
+\subsection{Funktionel programmering}\label{funktionel-programmering}}
+
+\hypertarget{moderne-syntaks}{%
+\subsection{Moderne syntaks}\label{moderne-syntaks}}
+
+JavaScript er navngivet efter Java, fordi det blev skabt med ideen om at
+være et supplement til Java. Derfor er syntaksen også inspireret af
+Java, og nogle vil sige mere generelt af C. Hovedformålet var dog, at
+det skulle være nemt for nybegyndere at tage sproget og syntaksen til
+sig. Efterhånden som JavaScript blev mere udbredt, opstod behovet for at
+udvikle sproget og syntaksen. Især ES6 introducerede nogle vigtige nye
+sprogfunktioner og syntaks.
+
+\hypertarget{moduler}{%
+\subsection{Moduler}\label{moduler}}
+
+I JavaScript er det muligt at importere \emph{moduler}. Et modul er en
+kodefil, som kan importeres af andre kodefiler. Moduler tillader at
+eksportere \emph{named exports}, så man f.eks. kun eksporterer én
+funktion fra en fil. Der er også mulighed for **default exports*, som
+kan importeres nemmere, og generelt bruges, hvis moduler har en primær
+funktionalitet, som skal fremhæves. Default exports behøver ikke
+navngives, da de navngives ved importeringen. Endelig Før i tiden var
+der ingen understøttelse af moduler, så problemet blev løst med
+kodebiblioteker som CommonJS og RequireJS (hvorfor bruges requirejs
+stadig i Node?)
+
+\hypertarget{biblioteker}{%
+\subsection{Biblioteker}\label{biblioteker}}
+
+Som webudviklere er det vores opgave at vælge de rigtige værktøjer til
+ethvert givet projekt. Dette kan blive kompliceret, fordi det ikke kun
+er projektets umiddelbare behov, der betyder noget. Man er del af et
+team og et større økosystem i en virksomhed, som har behov for at kunne
+vedligeholde systemet uden store omkostninger ved omskoling af sin
+medarbejderstab.
+
+Mulighederne for at vælge JavaScript værktøjer er mange. Det er enormt
+mange JavaScript biblioteker tilgængelige. Man kan dele de tilgængelige
+biblioteker op i grupper af \emph{generelle} biblioteker,
+\emph{specialiserede} biblioteker og \emph{SPA framework} biblioteker.
+
+Der er generelle biblioteker, som giver mange hjælpemetoder til at gøre
+diverse opgavere lettere eller mindre repetetive. Et eksempel på det
+kunne være JQuery (\textasciitilde{}90kb), som i lang tid var populær
+for at gøre udvikleren i stand til at udtrykke mere med færre linjer
+JavaScript.
+
+Der er specialiserede biblioteker, som indeholder relativt få linjer
+kode og løser et meget specifikt problem. Et eksempel kunne være Redux
+(\textasciitilde{}2kb), som kun har ansvar for at håndtere
+applikationstilstand.
+
+Endelig er der biblioteker, der fungerer som SPA frameworks. Det vil for
+denne hovedopgave betragtes som værende biblioteker, der varierer i
+størrelse, og evt. bruges sammen med andre biblioteker, med det formål
+at bygge og vedligeholde \emph{single page applications}. Et eksempel
+kunne være Angular (\textasciitilde{}500kb) , som er en ``alt-i-en''
+løsning til at bygge single page applications, der kan håndtere
+applikationstilstand med den indbyggede data-binding i biblioteket. Et
+andet eksempel kunne være Vue(\textasciitilde{}80kb), som ofte bruges
+sammen med Vuex(\textasciitilde{}10kb) biblioteket til at håndtere
+applikationstilstand.
+
+Single page applications er en tilgang til webapplikationer, som samler
+hele hjemmesidens indhold på en webside, i stedet for at sprede det ud
+på flere hyperlinkede websider. Når brugeren af webapplikationen
+navigerer rundt på siden, bliver det efterspurgte indhold hentet
+dynamisk ned fra webserveren og vist på websiden uden genindlæsning.
+Tilgangen er i kraftig vækst{[}\^{}spa-growth{]} og bliver brugt af
+store virksomheder som Facebook, Twitter og Google. En meget udbredt
+arkitektur for single page applications, er en JavaScript SPA, der
+kommunikerer vha. HTTP og \emph{JSON} med en \emph{RESTful} webservice.
+
+JSON er en data formatterings standard til at beskrive strukturen af
+JavaScript objekter. Selvom JSON er navngivet efter JavaScript, er det
+et selvstændigt data format, som kan bruges af alle programmeringssprog.
+Syntaksen for JSON tilsvarer JavaScript object og array literal
+syntaksen. Man kan repræsentere både primitiver, objekter og arrays med
+JSON.
+
+RESTful webservices er karakteriseret ved, at de giver webadgang til
+ressourcer, som fx kan ligge i en database. Hver resource kan
+identificeres fra dens URL-adresse. Man manipulerer ressourcerne med
+HTTP beskedens operationsverbum: GET, PUT, POST eller DELETE som bruges
+til henholdvis at læse, opdatere, oprette eller slette ressourcer.
+
+Når man dykker ned i de seneste års udvikling indenfor SPA frameworks,
+opstår der et mønster. De tre SPA frameworks, som flest udviklere bruger
+jævnligt, er React, Vue og Angular.\footnote{\url{https://www.jetbrains.com/lp/devecosystem-2019/javascript/}}
+
+Det er umuligt at forudse hvilke af disse teknologier der overlever
+længst, eller hvornår de bliver erstattet af noget nyt. Men der tegner
+sig et billede af, at flere udviklere benytter og udtrykker tilfredshed
+med Vue og React end Angular. React ligger i 2019 placeret \#2 på Stack
+Overflows undersøgelse af mest anvendte web frameworks (med jQuery
+fortsat på førstepladsen). I kategorien ''Most Loved Web Frameworks'' er
+React nummer ét med Vue lige i hælene, mens Angular halter bagefter på
+en niendeplads. Når man ser på deres indbyrdes popularitet, har Vue
+flest stjerner på dets GitHub repository og er nu det mest populære af
+de tre.
+
+Hvis man måler på hvor meget de respektive web frameworks downloades af
+udviklere, ligger React i toppen med op imod seks millioner downloads om
+ugen, sammenlignet med to millioner for Angular og en million for Vue4.
+Fælles for alle de nævnte web frameworks er, at de er open source. Store
+virksomheder som Google, Facebook og Microsoft har taget open source
+forretningsmodellen til sig og er med til puste til ilden af konstant
+innovation. React er udviklet og drevet af Facebooks senior
+softwareingeniøre. Google står bag Angular, mens Microsoft står bag dets
+anvendte open source programmeringssprog TypeScript. Vues styrke ligger
+bl.a. i, at det ikke har en stor virksomhed i ryggen som driver
+udviklingen, men er finansieret af crowdfunding og kombinerer det bedste
+fra Angular og React.
+
+\hypertarget{funktionel-programmering-1}{%
+\subsection{Funktionel programmering}\label{funktionel-programmering-1}}
+
+Begrebet funktionel programmering er svært at definere, men det lægger
+vægt på arbejde med funktioner i stedet for variable. Tankerne fra
+funktionel programmering har inspireret arkitekturen omkring React.
+JavaScript har faktisk også inspiration i funktionel programmering, da
+Brendan Eich oprindeligt havde den vision om JavaScript, at det skulle
+være ligesom programmeringssproget Scheme. Scheme er et
+programmeringssprog, der tilhører Lisp familien af programmeringssprog,
+som alle har fokus på funktionel programmering. Denne inspiration
+betyder, at JavaScript har god understøttelse af funktionel
+programmering, bl.a. fordi JavaScript har first-class functions og
+anonyme functions.
+
+Funktionelle programmeringssprog kommer fra det matematiske felt lambda
+calculus, som blev opfundet i 1936 af Alonzo Church, der er kendt i
+datalogiske kredse fra Church-Turing-afhandlingen, som formelt definerer
+konceptet beregnelighed. Funktionel programmering har derfor også størst
+tilslutning inden for den akademiske verden. Til gengæld har nogle
+principper fra funktionel programmering vundet indpas hos det brede
+udviklersamfund, og især har det inspireret frontend frameworks som
+React.
+
+inspireret software design patterns, som det brede udviklersamfund har
+taget til sig.
+
+Det mest centrale ved funktionel programmering er princippet om
+\emph{pure functions}. Det er funktioner, som for det første giver den
+samme returværdi for et givent argument. For det andet må de ikke have
+\emph{side effects}, dvs. ikke mutere variabler uden for funktionens
+scope. Disse begrænsninger kommer fra det teoretiske behov for at
+repræsentere matematiske funktioner, men det viser sig også at være en
+fordel, når man som almindelig udvikler vil skrive testbar kode.
+
+Et andet vigtigt princip i funktionel programmering er
+\emph{higher-order functions}. Det er funktioner, som tager andre
+funktioner som argument og/eller returnerer en funktion som returværdi.
+
+\hypertarget{react}{%
+\subsection{React}\label{react}}
+
+React er et JavaScript kodebibliotek til at bygge brugergrænseflader
+baseret på komposition af komponenter. Alting i React er en komponent,
+og selv hele applikationen er en komponent, som er sammensat af de
+øvrige komponenter. Komponent strukturen gør det muligt at genbruge og
+indkapsle alt lige fra en simpel checkbox til en hel applikation. Det
+gør det også nemt at ændre komponenterne og f.eks. tilføje yderligere
+state, uden at det skaber en dominoeffekt af side effekter i resten af
+applikationen. Komponent modellen passer ikke så godt med objekt
+modellen, og principper vi kender som søjler i objekt orienteret
+programmering, er ikke anvendelige eller har bedre løsninger i React.
+Facebook promoverer stærkt ''Composition over Inheritance'', og udtaler
+at de aldrig har brugt nedarvning i deres tusindevis af komponenter.
+{[}komponenter-billede{]}
+
+React koncentrerer sig kun om brugergrænsefladen, og det er både en
+fordel og en ulempe. Langt de fleste React projekter vil have behov for
+at hente yderligere tredjeparts pakker ned for at håndtere problemer,
+som f.eks. Angular har indbyggede løsninger på. React omtales ofte
+heller ikke som et framework men et kodebibliotek, og man sammenligner
+det ofte med View-laget i MVC. Det gode ved Reacts minimalistiske
+tilgang er, at der er stor fleksibilitet i hvordan man løser et givent
+problem, og der er mange højt specialiserede værktøjer til at håndtere
+nicher som f.eks. routing eller global state.
+
+React har hvad man kalder en deklarativ API. I stedet for at beskrive
+hvert trin og i hvilken rækkefølge, man opdaterer de enkelte elementer
+på brugergrænsefladen (imperativt), så beskrives hvordan man ønsker
+(deklarerer), at brugegrænsefladen skal se ud afhængigt af dens
+tilstand.
+
+\hypertarget{komponenter-og-props}{%
+\subsubsection{Komponenter og props}\label{komponenter-og-props}}
+
+En React komponent er ikke andet end en funktion, som returnerer noget,
+der i bund og grund bare er HTML. Strukturen og indholdet kan evt.
+afhænge af nogle funktionsparametre -- eller hvad man i React termer
+ville kalde props. Disse props følger et princip om unidirectional data
+flow, eller en-vejs databinding. Props kan kun sendes fra
+forældre-komponent til barn-komponent.
+
+Det hænger sammen med en anden egenskab ved props, som er, at de skal
+være immutable. En komponent kan læse sine props, men ikke overskrive
+dem. Eftersom en komponent modtager sine props som input, betyder det at
+man undgår side effekter i sine komponenter. Med andre ord, vil de samme
+props som input altid generere det samme HTML som output. Man siger, at
+komponenten er en pure function med hensyn til sine props. Reacts eneste
+regel er, at alle komponenter skal være pure functions mht. sine props.
+For at en funktion kan være en pure function, må den: a) ikke have
+sideeffekter b) ikke kalde non-pure functions (som Date.now) og c)
+behandle sine argumenter som immutable (readonly). Der findes JavaScript
+kodebiblioteker som ImmutableJS til at håndhæve dette, eller code
+linting værktøjer som ESLint.
+
+Props kan indeholde callbacks, så en forældre-komponent kan sende en
+funktion ned til barn-komponenten, som barn-komponenten kan kalde med en
+eller flere parametre for at sende data til forældre-komponenten. Det er
+den eneste umiddelbare måde komponenter kan sende data på, til andre end
+sine børn. Selvom det er med til at gøre programmet nemt at debugge og
+forstå, virker det umiddelbart som en begrænsning. For eksempel når når
+to komponenter A og B langt fra hinanden i træhiearkiet skal bruge data
+fra hinandens props. Det kræver at en fælles forældre-komponent til
+komponent A og komponent B sender dataen ned i sine props gennem flere
+mellemled. Dette pattern kaldes \emph{lifting-state-up}.
+
+Når man har en stor applikation med mange komponenter, som deler mange
+props, kan det blive uoverskueligt at vedligeholde med at løfte
+tilstanden, da det overholder ikke DRY princippet, eftersom den manuelle
+proces med at sende dataen igennem komponenten via props skal gentages
+for hvert enkelt mellemled mellem A og B. Dette anti-pattern kaldes
+\emph{prop-drilling}.
+
+\hypertarget{redux}{%
+\subsubsection{Redux}\label{redux}}
+
+En måde at omgå denne ``prop-drilling'' er ved at benytte Reacts
+indbyggede Context API. Den tillader komponenter at dele props indenfor
+en kontekst uden at mappe props mellem komponenter. {[}contextbillede{]}
+
+En anden mere avanceret måde, er at gøre som Facebook og bruge software
+design mønstret Flux. Flux applikationer har tre hovedbestanddele:
+dispatcher, stores og views. Ideen med Flux er, at den delte state
+ligger i en single source of truth dvs. i stores. State i stores kan kun
+opdateres ved at trigge en action. Actions fortæller sine stateændringer
+(payload) til dispatcher. Stores lytter på ændringer fra dispatcher, og
+opdaterer deres egen state i overeensstemmelse hermed.
+
+Redux har også mulighed for middleware, som kan manipulere actions på
+vej ind og ud af reduceren. Dette giver mulighed for f. eks. asynkrone
+actions til API kald med redux-thunk middlewaren. Redux API'en giver
+også mulighed for at kombinere reducers med en higher order reducer
+funktion kaldet combineReducers. Det er altså en funktion, der tager
+flere reducers som parameter, og returnerer en ny kombineret reducer.
+Typisk har man en reducer slice for hver feature / domæne i projektet,
+som kombineres til en enkelt root reducer med combineReducers. Root
+reduceren bruges af Redux til at lave store objektet. {[}reduxbillede{]}
+
+For at forbinde sine React komponenter til sin Redux store anbefales det
+at bruge Redux API'ens connect funktion. Connect tager to funktioner som
+input og returnerer en funktion, som er en higher order component, der
+tager en React komponent som input og returnerer en ''forbedret'' udgave
+af komponenten med adgang til store og action creators via props.
+{[}providerbillede{]}
+
+\end{document}
