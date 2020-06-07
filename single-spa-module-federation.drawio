@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-06-07T13:07:31.719Z" agent="5.0 (Windows)" etag="sKgQTptSWsAgYZZkj3bY" version="13.1.14" type="github">
+<mxfile host="app.diagrams.net" modified="2020-06-07T13:08:05.970Z" agent="5.0 (Windows)" etag="Fj88E5rQSA0_2OEBbtj9" version="13.1.14" type="github">
   <diagram id="39HmSSPPJytQBJ3p-pZv" name="Page-1">
     <mxGraphModel dx="756" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -40,7 +40,7 @@
         <mxCell id="28w-H09hTlqUuu_r2elM-20" value="&lt;div&gt;react-components&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontStyle=1" parent="1" vertex="1">
           <mxGeometry x="65" y="160" width="120" height="20" as="geometry" />
         </mxCell>
-        <mxCell id="AXeKaIb-T4G1wdaBcbMU-1" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;" parent="1" vertex="1">
+        <mxCell id="AXeKaIb-T4G1wdaBcbMU-1" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;dashed=1;" parent="1" vertex="1">
           <mxGeometry x="70" y="360" width="330" height="80" as="geometry" />
         </mxCell>
         <mxCell id="AXeKaIb-T4G1wdaBcbMU-4" value="Webpack Module Federation: Shared Dependencies" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontStyle=1" parent="1" vertex="1">
@@ -49,7 +49,7 @@
         <mxCell id="yu_PpRfWeJClu4RsIgDd-9" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="420" y="180" width="110" height="160" as="geometry" />
         </mxCell>
-        <mxCell id="yu_PpRfWeJClu4RsIgDd-10" value="React Counter" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="yu_PpRfWeJClu4RsIgDd-10" value="Web Counter" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="440" y="200" width="70" height="50" as="geometry" />
         </mxCell>
         <mxCell id="yu_PpRfWeJClu4RsIgDd-12" value="&lt;div&gt;web-components&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontStyle=1" vertex="1" parent="1">
