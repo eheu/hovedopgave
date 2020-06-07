@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2020-06-07T12:52:22.415Z" agent="5.0 (Windows)" etag="iaWrxPIRvgPlj0-OnAIB" version="13.1.14" type="github">
+<mxfile host="app.diagrams.net" modified="2020-06-07T12:53:02.973Z" agent="5.0 (Windows)" etag="Ah5wCVJrFt3NmwxP9h9f" version="13.1.14" type="github">
   <diagram id="39HmSSPPJytQBJ3p-pZv" name="Page-1">
     <mxGraphModel dx="756" dy="496" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
@@ -37,11 +37,11 @@
         <mxCell id="28w-H09hTlqUuu_r2elM-17" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;fillColor=none;" vertex="1" parent="1">
           <mxGeometry x="20" y="160" width="160" height="280" as="geometry" />
         </mxCell>
-        <mxCell id="28w-H09hTlqUuu_r2elM-18" value="&lt;div&gt;Web &lt;br&gt;&lt;/div&gt;&lt;div&gt;Counter&lt;/div&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="28w-H09hTlqUuu_r2elM-18" value="React Counter" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="40" y="200" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="28w-H09hTlqUuu_r2elM-19" value="Webpack &lt;br&gt;Module Federation" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#000000;" vertex="1" parent="1">
-          <mxGeometry x="40" y="270" width="120" height="60" as="geometry" />
+          <mxGeometry x="40" y="360" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="28w-H09hTlqUuu_r2elM-20" value="&lt;div&gt;hovedopgave-react-components&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontStyle=1" vertex="1" parent="1">
           <mxGeometry y="140" width="200" height="20" as="geometry" />
