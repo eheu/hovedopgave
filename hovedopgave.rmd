@@ -6,26 +6,86 @@ output:
     includes:
       before_body: title.sty
       in_header: import.sty
+  word_document: default
 ---
 
-# Basale teknologier
-Dette afsnit handler om det basale teknolgoier
+```{r, echo=FALSE,}
+library(png)
+library(grid)
+library(ggplot2) 
+```
 
-## Internettet
+# Problemformulering
+
+Innovativ webudvikling er at bruge de nyeste og bedste værktøjer til formålet, som web platformen har at byde på, men mange virksomheder har svært ved at følge med innovationen inden for webudvikling. Hvorfor er det svært for virksomhederne at følge med innovationen? På serversiden har mange virksomheder løst problemet ved at bruge Microservice arkiktekturen, men hvordan kan Microfrontend arkitekturen løse samme problem på klientsiden? Hvordan kan man implementere en optimeret Microfrontend arkitektur med Module Federation og Web Components, og hvordan kan man integrere forskellige frontend frameworks på samme microfrontend arkitektur med Single-SPA?
+
+JavaScript økosystemet består af et hav af innovative værktøjer, biblioteker og frameworks til at bygge moderne webapplikationer. Hvad er de mest udbredte værktøjer, og hvordan virker de? Af alle biblioteker og frameworks er frontend frameworks de mest synlige i JavaScript. Hvordan bruges frontend frameworks til at bygge single page applications, og hvordan virker det mest populære frontend framework React?
+
+Web platformen er i sig selv innovativ. Der er sket en drastisk udvikling af nye sprogfunktioner til JavaScript og funktionalitet indbygget i webplatformen. Programmeringssproget til web platformen JavaScript er fra sin ydmyge begyndelse blevet verdens mest populære programmeringssprog. Derfor hvilke teknologier bygger web platformen på, og hvordan er udviklingen med JavaScript sket?  
+
+# Web Platformen
+
+## TCP/IP
 Internettet er et computernetværk bestående af computernetværk som er forbundet gennem routere. For at sende beskeder på internettet, bruger computerenhederne TCP/IP protokolstakken. Det er en gruppe af protokoller udarbejdet af det amerikanske Department of Defense, som tillader computerenheder at kommunikere. Protokolstakken kan inddeles i lag for protokollernes forskellige ansvarsområder. TCP/IP modellen beskriver de fire lag, som protokolstakken består af. Disse lag hedder *network interface*, *internet*, *transport* og *application*. Disse kan sammenlignes med lagene i OSI-modellen, som i sin abstrakte model deler netværkstrafik op i syv lag.
+
+```{r echo=FALSE, fig.cap="TCP/IP og OSI Model", fig.height=4, fig.width=4}
+img <- readPNG("tcp-ip-osi.png")
+grid.raster(img)
+```
 
 TCP/IP network interface laget svarer til OSI data link laget, som forbinder internettets netværkstrafik til det lokale netværk. Internet laget svarer til netværkslaget, som router netværkstrafikken fra computerenhed til computerenhed. TCP/IP transport laget svarer til OSI transport laget, som etablerer forbindelsen mellem computerenhederne. Endelig svarer TCP/IP applikations laget til applikations-, præsentations- og sessionslagene i OSI-modellen. På dette lag ekisterer adskillige services som e-mail og *world wide web*.
 
+## World Wide Web
 World wide web blev udviklet i 1989 af Tim Berners Lee. Han specificerede HTML formatet til at strukturere tekst, Unique Resource Identifier (URI) specifikationen til at addressere ressourcer og HTTP protokollen til at kommunikere mellem klienter og servere.
 
-Efterhånden som websider gik fra at være blot at være statiske og præsentere dokumenter, til at være dynamiske og leve af brugerindhold, begyndte man at italesætte dette som *web 2.0*. Begrebet blev opfundet af Tim O'Reilly[^web20].
+```{r echo=FALSE, fig.cap="World Wide Web", fig.height=4, fig.width=4}
+img <- readPNG("client-server-http.png")
+grid.raster(img)
+```
 
+Tim Berners Lee havde også lavet et program, WorldWideWeb Browser, som kunne præsentere HTML sider og navigere til andre URI'er på HTTP protokollen med TCP/IP netværket. Denne browser var også et redigeringsprogram, hvor brugerne kunne redigere indholdet af websider. Allerede fra begyndelsen var det altså meningen, at websider skulle være interaktive[^wwwbrowser]. Denne interaktivitet blev ikke implementeret i de efterfølgende browsere, men med udbredelsen af JavaScript blev websider igen interaktive. Efterhånden som websider gik fra at være statiske til at være interaktive og i højere grad bestå af brugerindhold, blev betegnelsen *web 2.0* udbredt af Tim O'Reilly[^web20] i 1999  for at beskrive dette. Med web 2.0 gik internettet fra et obskurt værktøj til at revolutionere alle forretningsmarkeder, og det medførte en eksplosivt stigning i antallet af brugere af internettet.
+
+```{r echo = FALSE, fig.cap = "Brugere af internettet i Danmark", fig.width=4, fig.height=4}
+library('WDI')
+raw <- WDIsearch("individuals using the internet")
+individuals_using_internet <- as.data.frame(raw)
+indicator <- toString(individuals_using_internet["indicator", 1])
+individuals_using_internet_denmark <- WDI(country = "DK", indicator = indicator, start = 1990, end = 2020)
+to_plot <- individuals_using_internet_denmark[c("year", indicator)]
+plot(to_plot, type="l", main="", xlab = "Årstal", ylab="% af population")
+```
+
+I 2015 kom HTTP/2.... Forskellle fra HTTP/1.
+
+[^wwwbrowser]: http://info.cern.ch/NextBrowser.html
 
 ## JavaScript
-JavaScript er det programmeringssprog, som flest udviklere benytter.[^so] Det er også det programmeringssprog, som har flest aktive repositories på GitHub.[^githut] JavaScript anvendes i dag til alt fra simple scripts på websider, til avancerede webapplikationer, som kan køre i browseren eller på næsten hvilken som helst anden platform, herunder webservere eller sågar mikrokontrollere.
+JavaScript er det programmeringssprog, som flest udviklere benytter[^so-survey]. 
+
+```{R echo = FALSE, fig.cap = "Popularitet af programmeringssprog", fig.width=4, fig.height=4}
+language_by_popularity <- data <- data.frame(
+  name=c("JavaScript","SQL","Java","C#"),  
+  value=c(67.8,54.4,41.1,31)
+)
+# Basic barplot
+# reorder https://stackoverflow.com/a/16968999
+p<-ggplot(data=language_by_popularity, aes(x=reorder(name, -value), y=value)) +
+  geom_bar(stat="identity")
+p + xlab("") + ylab("% af adspurgte udviklere, som bruger sproget")
+```
+
+JavaScript anvendes i dag til alt fra simple scripts på websider, til avancerede webapplikationer, som kan køre i browseren eller på næsten hvilken som helst anden platform, herunder webservere eller sågar mikrokontrollere[^engine-list].
+
+[^so-survey]: @SO, Most Popular Technologies, Programming Scripting and Markup Languages
+[^engine-list]: https://en.wikipedia.org/wiki/List_of_ECMAScript_engines
 
 ### Engine og Runtime Environment
 JavaScript tilhører kategorien af *interpreted* programmeringssprog - i modsætning til *compiled* programmeringssprog som C#. På et compiled programmeringssprog oversætter udviklermaskinen programmets kildekode til maskinkode med en compiler. I et interpreted programmeringssprog oversættes kildekoden ikke direkte til maskinkode. I stedet læser oversætter et andet program kildekoden linje for linje til maskinkode instruktioner.
+
+```{r echo=FALSE, fig.cap="Compiled / Interpreted Programmeringssprog", fig.height=4, fig.width=4}
+img <- readPNG("compiled-interpreted.png")
+grid.raster(img)
+```
 
 JavaScript kildekode oversættes af et JavaScript *engine*. Et Javacript engine består af en *call stack* og en *memory heap*. Call stacken er en datastruktur, som holder styr på programmets *stack frames*, hvilket svarer til de enkeltvise instruktioner i kildekoden. Fordi JavaScript kun har en enkelt call stack, er JavaScript *single-threaded*. Det vil sige, at der ikke behandles flere instruktioner samtidigt. Memory heapen indeholder den allokerede hukommelse til programmets referenceværdier, hvilket i JavaScript vil sige objekter.
 
@@ -37,7 +97,7 @@ Browseren implementerer internt diverse funktioner med et lavere niveau programm
 
 DOM træet er en intern datastruktur i browseren. Datastrukturen er et hiearkisk træ, som repræsenterer siden aktuelle HTML struktur. Hver eneste knude i DOM træet repræsenterer et enkelt HTML element med alle dets attributter. Hvert undertræ består altså af et HTML element og alle dets børn. DOM træet er til hver tid en afspejling af HTML strukturen på den aktuelle webside. Med Document APIen er det muligt at manipulere DOM træet og alle dets knuder, f.eks. ved at oprette nye HTML elementer eller ved at oprette event listeners på eksisterende HTML elementer.
 
-### Versioner
+### ECMAScript Versioner
 Det oprindelige JavaScript blev skabt i 1995 af Brendan Eich, som var ansat hos Netscape, for at understøtte scripting i deres browser, Netscape Navigator 2.0. Det blev udgivet med en pressemeddelse[^pressemeddelse] hvori intentionen med sproget blev lagt frem. JavaScript blev præsenteret som et nemanvendeligt *object scripting* sprog til webdokumenter, som supplement til HTML og Java. Sproget blev også præsenteret som en implementation af en *åben standard* under en kommercielt venlig licens, for at tillade det brede udviklersamfund at bidrage til sprogets udvikling.
 
 JavaScript betegnes som sagt et objekt scripting sprog, og man kalder også JavaScript *objekt baseret*. JavaScript understøtter det objekt-orienterede programmeringsparadigme, men sproget adskiller sig fra konventionelt objekt-orienterede sprog som Java og C# bl.a. ved ikke at have statiske typer eller sondring mellem instanser og klasser.
@@ -53,38 +113,81 @@ I daglig tale og i denne hovedopgave er ECMAScript synonymt med JavaScript, selv
 
 ECMAScript standarden dikterer altså udviklingen af JavaScript sproget. Det betyder, at ældre browsere ikke understøtter alle moderne JavaScript funktioner, fordi de bruger et JavaScript engine, som implementerer en ældre udgave af ECMA-262. Der har været flere store udgivelser af ECMA-262, hvoraf de første tre udkom hurtigt efter hinanden: ES1 i 1997, ES2 i 1998 og ES3 i 1999. ES4 var under udvikling længe, men blev af forskellige årsager droppet. Først ti år efter udgivelsen af ES3, kom efterfølgeren ES5 i 2009, hvilket blev en milepæl for JavaScript, og det er den seneste udgave af sproget, som er understøttet af alle mainstream browsere inkl. Internet Explorer. Seks år senere kom ES6 i 2015, og herefter begyndte ECMA at udgive en ny version hver juni, så disse udgaver navngives typisk efter deres udgivelsesår: den syvende udgave hedder ES2016, den ottende ES2017, osv.
 
-### Værdier og variable
-JavaScript har overordnet to forskellige datatyper af værdier. Det er *primitiver*, som opbevares på stack, og *objekter*, som opbevares på heap.
+### Værdier og Variable
+JavaScript har overordnet to forskellige typer af værdier. Det er *primitiver*, som opbevares på stack, og *objekter*, som opbevares på heap.
 
 Primitiver er simple værdier, som JavaScript har syv forskellige typer af: `Number`, `Boolean`, `String`, `Null`, `Undefined`, `Symbol` (introduceret i ES6) og `BigInt` (introduceret i ES7). 
 
-Objekter består af *properties*, som er navngivne primitiver eller objekter. Properties kan også indeholde *functions*, som i Javascript er specielle objekter af typen `Function`, og *arrays* af primitiver og/eller objekter, som i JavaScript også er specielle objekter, der har typen `Array`. Functions og arrays er altså som næsten alt andet i JavaScript objeker.
+Objekter består af *properties*, som er et navn og en primitiver eller objekter. Properties kan også indeholde *functions*, som i Javascript er specielle objekter af typen `Function`, og *arrays* af primitiver og/eller objekter, som i JavaScript også er specielle objekter, der har typen `Array`. Functions og arrays er altså som næsten alt andet i JavaScript objeker.
+
+```js
+// objekt
+const animal = {
+  // properties
+  alive: false, // primitiv værdi
+  position: { // objekt værdi
+    x: 0,
+    y: 0,
+  },
+  walk: function (x, y) { // metode
+    this.position.x = x;
+    this.position.y = y;
+  },
+};
+```
 
 JavaScript har som forventeligt variable til at indeholde værdier. I JavaScript kan ikke bare værdien af variabel ændre sig, når programmet kører, men også variablens type. Man kan lave variable med nøgleordene *var*, *let* eller *const*. Det er muligt at lave flere variable kun med brug af et enkelt nøgleord.  Variabler oprettet med *var* kan ligesom 
 
 JavaScript kører som sagt i et runtime environment, som gør nogle specifikke objekter tilgængelige for udvikleren. Alle browsere giver fx adgang til `document` objektet, som er udviklerens indgang til DOM træet. Den giver metoder til at manipulere det hierarki af objekter, som hver især repræsenterer de HTML tags, som udgør den aktuelle DOM. 
 
-### Objekt-orienteret programmering
+### Prototypisk nedarvning
 JavaScript er et objektorienteret sprog, men det har (i modsætning til fx. C#) ikke klasser og instanser, bare objekter. For at kunne lave objekter af en bestemt type, bruger man, i stedet for klasser og instanser, en *constructor funktion*. Denne specielle metode navngives konventionelt med stort begyndelsesbogstav. På constructor funktionen er der en property `prototype`, som indeholder et objekt. Ved at sætte properties på prototype objektet, angiver man hvilke felter, som skal være på objekter skabt med constructor funktionen. Når man laver objekter ved at kalde constructor funktionen med nøgleordet `new`, vil man kunne tilgå de properties og metoder, man har angivet i prototypen. 
+
+```js
+// constructor funktion
+function Animal() {
+}
+
+// prototype pattern
+Animal.prototype.alive = false;
+Animal.prototype.position = { x: 0, y: 0 };
+Animal.prototype.move = function (x, y) {
+  this.position.x = x;
+  this.position.y = y;
+};
+```
 
 Når constructor funktionen kaldes med `new`, får Prototype objektet som standard en `constructor` property, som peger tilbage på den constructor funktion, som prototypen tilhører. For eksempel peger `Animal.prototype.constructor` tilbage på `Animal`.  og `__proto__` property, som angiver hhv. typens constructor funktion, og constructor funktionen for den nedarvede type (i sidste ende `Object`). 
 
-Hvis man vil specialisere sin constructor function, fx. lave en `Mammal` som specialisering af `Animal`, laver man en ny constructor function, og sætter prototypen til en instans af overtypen. 
+Hvis man vil specialisere sin constructor function, fx. lave en `Mammal` som specialisering af `Animal`, laver man en ny constructor function, og sætter prototypen til en instans af den nedarvede type.
 
-Når man tilgår en property, fx. (???) vil JavaScripts engine søge efter en property med det navn: først blandt objektets properties, dernæst i dens prototypes properties, så prototypens __proto__'s properties, osv. indtil roden af nedarvingshiearkiet, som er constructor funktionen `Object`. 
+```{js}
+function Mammal(){
+}
 
-I ES6 blev en ny syntaks indført for at gøre det lettere at arbejde med prototypiske nedarvningskæder. Man kan nu bruge `class` nøgleordet til at definere sine *klasser*. Syntaksen for klasser i JavaScript minder meget om klasser i andre objektorienterede sprog, fx. C#, men resultaten af klasse definitionen minder mest om prototypisk nedarvning, så man kan næsten betragte sprogkonstruktionen som syntaktisk sukker for at definere en constructor med dens prototype felter og metoder. Det forklarer bl.a. hvorfor, at klasser i JavaScript endnu ikke officielt understøtter private feltvariable. 
+Mammal.prototype = new Animal();
+Mammal.prototype.isPregnant = false;
+```
 
-### Funktionel programmering
+Når man tilgår en property, fx. isPregnant, vil JavaScripts engine søge efter en property med det navn: først blandt objektets properties, dernæst i dens prototypes properties, så prototypens __proto__'s properties, osv. indtil roden af nedarvingshiearkiet, som er constructor funktionen `Object`. 
 
-Jeg havde da skrevet en masse fedt, hvor blev det af...
+```{r echo=FALSE, fig.cap="Prototypisk nedarvningskæde", fig.height=4, fig.width=4}
+img <- readPNG("prototypical-inheritance.png")
+grid.raster(img)
+```
 
-### Moderne syntaks
+
+### Moderne Syntaks
 JavaScript er navngivet efter Java, fordi det blev skabt med ideen om at være et supplement til Java. Derfor er syntaksen også inspireret af Java, og nogle vil sige mere generelt af C. Hovedformålet var dog, at det skulle være nemt for nybegyndere at tage sproget og syntaksen til sig. Efterhånden som JavaScript blev mere udbredt, opstod behovet for at udvikle sproget og syntaksen. Især ES6 introducerede nogle vigtige nye sprogfunktioner og syntaks.
 
-#### Lambda udtryk
+# Klasser
+I ES6 blev en ny syntaks indført for at gøre det lettere at arbejde med prototypiske nedarvningskæder. Man kan nu bruge `class` nøgleordet til at definere sine *klasser*. Syntaksen for klasser i JavaScript minder meget om klasser i andre objektorienterede sprog, fx. C#, men resultaten af klasse definitionen minder mest om prototypisk nedarvning, så man kan næsten betragte sprogkonstruktionen som syntaktisk sukker for at definere en constructor med dens prototype felter og metoder. Det forklarer bl.a. hvorfor, at klasser i JavaScript endnu ikke officielt understøtter private feltvariable. 
+
+#### Lambda Udtryk
 
 #### Moduler
+
+JavaScript har som mange andre sprog moduler, som er genbruglige og selvstændige biblioteker af JavaScript kode. Med moduler har man kontrol over bibliotekernes afhængigheder
 
 I JavaScript er det muligt at importere *moduler*. Et modul er en kodefil, som kan importeres af andre kodefiler. Det nuværende modulsystem i JavaScript blev udgivet med ES6. 
 
@@ -92,10 +195,12 @@ Moduler tillader at eksportere *named exports*, så man f.eks. kun eksporterer �
 
 ES6 moduler
 
-# Udbredte teknologier
+# JavaScript Økosystemet
 
-## Værktøjer og udviklingsmiljøer
-For meget nutidig JavaScript udvikling gælder det, at man ikke bare er nødt til at kende til web platformen og dens teknologier, men der eksisterer også mange værktøjer til at løse flere problemer, end JavaScript umiddelbart er designet til.
+For meget nutidig JavaScript udvikling gælder det, at man ikke bare er nødt til at kende til web platformen og dens teknologier. Det er opstået et stort udviklingsmiljø omkring JavaScript, og der er mange værktøjer, biblioteker og frameworks løse flere problemer, end JavaScript umiddelbart var beregnet til.
+
+## Værktøjer
+Værktøjer som Node, Webpack, Babel og TypeScript kører ikke i browseren, men gør det muligt at have et 
 
 ### Node
 Node er et runtime environment til at køre JavaScript på serveren i stedet for klienten. Node bruger samme JavaScript engine som Chrome browseren, men giver adgang til andre APIer i stedet for browserens web APier. Med Nodes APIer har man fx adgang til computerens filsystem. Man kan afvikle JavaScript kildekode på alle styresystemer med Node installeret, hvilket gør det velegnet til cross-platform udvikling af f.eks. webservere. 
@@ -107,20 +212,56 @@ Node installeres sammen med *NPM*, som er et program til at styre et projekts af
 ### Webpack
 Webpack er det, man kalder en *module bundler*. Det vil sige, at Webpacks primære formål er på buildtime at samle koden til én samlet JavaScript *bundle*, som indeholder alle applikationens moduler og deres indbyrdes afhængigheder. I konfigurationsfilen for Webpack definerer man et *entry point*, som Webpack skal starte i. Webpack starter i den fil, man har defineret som entry point, og gennemløber derfra kildekodens import/export udtryk, som den undervejs bruger til at bygge en *dependency graph*, som repræsenterer alle webapplikationens ES6 moduler og deres indbyrdes afhængigheder.
 
-Med udgangspunkt i denne dependency graph, samler Webpack alle ES6 modulerne til en samlet JavaScript kildekode, som er klar til at blive downloadet og præsenteret af browseren. Dette giver i sig selv en gevinst, for brugeren kan få hele webapplikationen i ét request. Det kan gøre indlæsningen af alle modulerne betydeligt hurtigere på en traditionel HTTP/1.1 forbindelse med høj forsinkelse, da HTTP/1.1 håndterer hvert request synkront og dermed blokerer renderingen indtil hver static asset er downloaded og eksekveret.
+```{r echo=FALSE, fig.cap="Webpack dependency graph transpilering til bundle", fig.height=4, fig.width=4}
+library(png)
+library(grid)
+img <- readPNG("modules-dependencies-webpack.png")
+grid.raster(img)
+```
+
+Med udgangspunkt i denne dependency graph, samler Webpack alle ES6 modulerne til en samlet JavaScript kildekode, som er klar til at blive downloadet og præsenteret af browseren. Dette giver i sig selv en gevinst, for brugeren kan få hele webapplikationen i ét request. Det kan gøre indlæsningen af alle modulerne betydeligt hurtigere på en traditionel HTTP/1.1 forbindelse med høj forsinkelse, da HTTP/1.1 håndterer hvert request synkront og dermed blokerer renderingen indtil hver static asset er downloaded og eksekveret. HTTP/2 protokollen tillader asynkron håndtering af requests, så her gør antallet af requests ikke den store forskel.
+
+```{r echo=FALSE, fig.cap="Synkron asset download og eksekvering", fig.height=4, fig.width=4}
+img <- readPNG("sync-assets-http1.png")
+grid.raster(img)
+```
 
 Webpack kører også forskellige optimeringer på kildekoden, når bundler, for eksempel for at mindske filstørrelsen af den endelige bundle. Alt dette gør webpack ud af boksen med sin standard konfiguration, men langt de fleste bruger deres egen webpack konfiguration skræddersyet til deres projekt. Med webpacks konfigurationsfil er det muligt at ændre alle
 
 For at komme i gang med at bruge webpack, er Node en forudsætning. Man kan bruge NPM til lave et nyt tomt projekt og installere Webpack:
 
+```
+npm init -y
+npm i -D webpack
+```
+Som standard er Webpack konfigureret til at søge efter et entry point i `./src/index.js`. Hvis man prøver at køre webpack på sit tomme projekt, vil man få en fejlmeddelse, når man kører webpack med `npx webpack`. Hvis man vil ændre sit entry point, skal man oprette konfiguratonsfilen `webpack.config.js` i projektets rodmappe. En minimal konfigurationsfil, der ændrer entry point til en `main.js` fil i rodmappen, ser sådan ud:
+
+```js
+const config = {
+  entry: './main.js',
+};
+
+module.exports = config;
+```
 Hvis overstående konfigurationsfil er til stede i rodmappen, vil Webpack automatisk samle den op, når man kører kommandoen `webpack` fra projektets rodmappe som arbejdsmappe. Hvis der findes en `main.js`, vil Webpack køre og resultere i en bundle i `./dist/bundle.js`.
 
-For at ændre output filnavnet til fx. `output.js`, tilføjer man en `output` property til `config` objektet, med en `filename` property. For at placere output placeringen til fx. `./build/`, tilføjer man yderligere en `path` property til `output` objektet. 
+For at ændre filnavnet af den bundle, tilføjer man en `output` property til `config` objektet, med en `filename` property. For at placere output placeringen til fx. `./build/`, tilføjer man yderligere en `path` property til `output` objektet. 
+
+```{js}
+const config = {
+  entry: './src/index.js',
+  output: {
+    path: __dirname + "/build/",
+    filename: 'output.js'
+  }
+};
+
+module.exports = config;
+```
 
 Webpack giver mulighed for, at man kan indlæse trejdeparts *loaders* til at håndtere andre filtyper end JavaScript. Man konfigurerer webpack til at håndtere forskellige filtyper med forskellige loaders. Hver loader er en preprocessor, som Webpack anvender, når den støder på en angiven filtype. Loaders kan bl.a. sørge for, at Webpack også kan bundle stylesheets og andre assets. En hyppig anvendelse af loaders er også at få Webpack til at samarbejde med andre værktøjer som Babel og TypeScript.
 
 ### Babel
-Babel 
 Overstående HTML-lignende syntaks er den syntaksudvidelse, som kaldes JSX. Det transpileres (af Webpack) med en loader (Babel) til standard JavaScript. Webpack er en modul bundler, som samler projektets ES 6 moduler (ved import/export statements) til én samlet kildekode, og med Babel oversætter speciel syntaks som f.eks. JSX til standard JavaScript. Overstående kode bliver oversat af Babel til noget lignende: 
 
 
@@ -141,7 +282,7 @@ En af fordelene ved TypeScript er også, at det ligesom Babel er en transpiler, 
 TypeScripts type system kaldes *structural typing*, hvilket adskiller sig fra f.eks. C#’s nominal typing ved at være mindre streng, når TypeScript skal bestemme hvorvidt et objekt overholder en type definition. Det bestemmes 
 udelukkende ved, om et objekt har properties, som er tilsvarende alle de properties, som type definitionen indeholder, om den har yderligere properties, en anden type annotation men de samme properties, eller måske slet ingen type annotation. Det er kun de properties, som udgør måltypens interface, der bliver taget i betragtning. 
 
-## Biblioteker og frameworks
+## Biblioteker og Frameworks
 
 Som udviklere er det vores opgave at vælge de rigtige biblioteker og frameworks til ethvert givet projekt. Dette kan blive kompliceret, fordi det ikke kun er projektets umiddelbare behov, der betyder noget. Man er del af et team og et større socialt system i en virksomhed, som har behov for at kunne vedligeholde systemet uden store omkostninger ved omskoling af sin medarbejderstab.
 
@@ -155,6 +296,7 @@ Endelig er der biblioteker, der fungerer som frontend frameworks. Selvom det er 
 
 Frontend frameworks vil for denne opgave betragtes som værende biblioteker, der varierer i størrelse, og evt. bruges sammen med andre biblioteker, med det formål at bygge og vedligeholde *single page applications*. Et eksempel kunne være Angular (~500kb) , som er en "alt-i-en" løsning til at bygge single page applications, der kan håndtere applikationstilstand med den indbyggede data-binding i biblioteket. Et andet eksempel kunne være Vue(~80kb), som ofte bruges sammen med Vuex(~10kb) biblioteket til at håndtere applikationstilstand.
 
+### Single Page Applications
 Single page applications er en tilgang til webapplikationer, som samler hele hjemmesidens indhold på en webside, i stedet for at sprede det ud på flere hyperlinkede websider. Når brugeren af webapplikationen navigerer rundt på siden, bliver det efterspurgte indhold hentet dynamisk ned fra webserveren og vist på websiden uden genindlæsning. Tilgangen er i kraftig vækst[^spa-growth] og bliver brugt af store virksomheder som Facebook, Twitter og Google. En meget udbredt arkitektur for single page applications, er en JavaScript SPA, der kommunikerer vha. HTTP og *JSON* med en *RESTful* webservice.
 
 JSON er en data formatterings standard til at beskrive strukturen af JavaScript objekter. Selvom JSON er navngivet efter JavaScript, er det et selvstændigt data format, som kan bruges af alle programmeringssprog. Syntaksen for JSON tilsvarer JavaScript object og array literal syntaksen. Man kan repræsentere både primitiver, objekter og arrays med JSON.
@@ -162,7 +304,7 @@ JSON er en data formatterings standard til at beskrive strukturen af JavaScript 
 RESTful webservices er karakteriseret ved, at de giver webadgang til ressourcer, som fx kan ligge i en database. Hver resource kan identificeres fra dens URL-adresse. Man manipulerer ressourcerne med HTTP beskedens operationsverbum: GET, PUT, POST eller DELETE som bruges til henholdvis at læse, opdatere, oprette eller slette ressourcer.
 
 
-### Popularitet 
+### Popularitet af Frontend Frameworks
 Eftersom det, for de fleste webudviklere, ikke er overkommeligt at lære alle tilgængelige populære frontend frameworks, bør man gøre nogle overvejelser, før man vælger hvilket frontend framework at lære. For denne opgave vil jeg se på de mest populære frontend frameworks blandt udviklere og arbejdsgivere. 
 
 Når man dykker ned i de seneste års udvikling indenfor SPA frameworks, opstår der et mønster. Blandt udviklere er de mest populære frontend frameworks React, Vue og Angular.[^s1] Det er umuligt at forudse, hvilke af disse frontend frameworks, der overlever længst, eller hvornår de bliver erstattet af noget nyt. Men der tegner sig et billede af, at flere udviklere benytter og udtrykker tilfredshed med Vue og React end Angular. React ligger i 2019 placeret på andenpladsen af mest anvendte biblioteker (med jQuery fortsat på førstepladsen). I kategorien "mest elskede" frontend frameworks, er React den mest populære, med Vue lige i hælene, mens Angular halter bagefter på en niendeplads. Vue har flere stjerner på dets GitHub repository end React og Angular. 
@@ -178,7 +320,7 @@ React koncentrerer sig kun om brugergrænsefladen, og det er både en fordel og 
 React har hvad man kalder en deklarativ API. I stedet for at beskrive hvert trin og i hvilken rækkefølge, man opdaterer de enkelte elementer på brugergrænsefladen (imperativt), så beskrives hvordan man ønsker (deklarerer), at brugegrænsefladen skal se ud afhængigt af dens tilstand. 
 
  
-#### Komponenter og props
+#### Komponenter og Props
 En React komponent er ikke andet end en funktion, som returnerer noget, der i bund og grund bare er HTML. Strukturen og indholdet kan evt. afhænge af nogle funktionsparametre – eller hvad man i React termer ville kalde props. Disse props følger et princip om unidirectional data flow, eller en-vejs databinding. Props kan kun sendes fra forældre-komponent til barn-komponent.   
 
 Det hænger sammen med en anden egenskab ved props, som er, at de skal være immutable. En komponent kan læse sine props, men ikke overskrive dem. Eftersom en komponent modtager sine props som input, betyder det at man undgår side effekter i sine komponenter. Med andre ord, vil de samme props som input altid generere det samme HTML som output. Man siger, at komponenten er en pure function med hensyn til sine props. Reacts eneste regel er, at alle komponenter skal være pure functions mht. sine props. For at en funktion kan være en pure function, må den for det a) ikke have sideeffekter b) ikke kalde non-pure functions (som Date.now) og c) behandle sine argumenter som immutable (readonly). Der findes JavaScript kodebiblioteker som ImmutableJS til at håndhæve dette, eller code linting værktøjer som ESLint. 
@@ -196,7 +338,7 @@ Redux har også mulighed for middleware, som kan manipulere actions på vej ind 
 
 For at forbinde sine React komponenter til sin Redux store anbefales det at bruge Redux API’ens connect funktion. Connect tager to funktioner som input og returnerer en funktion, som er en higher order component, der tager en React komponent som input og returnerer en ”forbedret” udgave af komponenten med adgang til store og action creators via props.
 
-#### Client-side og server-side rendering
+#### Client-Side og Server-Side Rendering
 Alt React kode som har direkte med browserens DOM at gøre, er splittet op i sit eget ReactDOM bibliotek. Man kan også udvikle med React mod en anden målplatform end browseren, ved at erstatte ReactDOM med et kodebibliotek til f.eks. cross-platform mobilapps (React Native) og konfiguration. 
 
 ReactDOM fungerer ved, at der fra webapplikationens index side kører en JavaScript fil i browseren, som holder browserens DOM synkroniseret med applikationens komposition af React komponenter og state. Alt logikken til at generere HTML dynamisk er således flyttet over i klienten/browseren. Denne client-side-rendering gør det muligt at have en interaktiv hjemmeside uden brug af en webserver. 
@@ -207,47 +349,57 @@ React opdaterer kun de DOM elementer i browserens hukommelse, som det er nødven
 
 React understøtter også server-side-rendering, hvor serveren foretager den første indlæsning af webapplikationen og sender et snapshot af det fuldt formede HTML dokument til klienten. På denne måde understøtter man bedre søgemaskine crawlerne og opnår dermed en bedre rank i søgemaskinen. Man mindsker også tiden før first meaningful paint (når man kan se sidens primære indhold).
 
-# Innovative teknologier
+# Innovativ Webudvikling 
+De fleste ledere af store virksomheder vurderer, at deres virksomhed ville blive udkonkurreret inden for syv år, hvis de ikke formår at følge med innovationen.[^devops-survey]. Alligevel er mange virksomheder udfordret i at følge med innovationen indenfor webudvikling. For at forstå udfordringen, er det det nødvendigt at beskrive hvordan innovative teknologier udbredes samt hvordan omkostningerne kontra fordelene ved innovation opleves.
+
 ## Innovation
 Everett Rogers har beskrevet udbredelsen af innovative teknologier i et socialt samfund. Hans *technology adoption lifecycle* model beskriver fem faser i anvendelse af ny teknologi, med udgangspunkt i de, som tager teknologien til sig. 
 
 Den første gruppe til at tage en ny teknologi i brug kaldes *innovators* (innovatør). Når teknologien ikke længere er ukendt, kaldes den næste gruppe *early adopters*. Når en teknologi begynder at blive meget udbredt, kaldes de som tager teknologien i brug *early majority*. Når en teknologi er nær toppen af sin popularitet, kaldes denne gruppe *late majority*. Den sidste gruppe er *laggards*, der anvender en teknologi, som i de flestes øjne er forældet. 
 
-Det er mest risikofyldt at være innovatør, fordi der på dette stadie kræver en dybdegående forståelse at vurdere, om den nye teknologi har potentiale. Der er også størst potentiel gevinst ved at være innovatør, da man kan bruge den innovative teknologi til at udkonkurrere sine konkurrenter. De fleste ledere af store virksomheder vurderer, at deres virksomhed ville blive udkonkurreret inden for syv år, hvis de ikke formår at følge med innovationen.[^devops-survey].
+Det er mest risikofyldt at være innovatør, fordi der på dette stadie kræver en dybdegående forståelse at vurdere, om den nye teknologi har potentiale. Der er også størst potentiel gevinst ved at være innovatør, da man kan bruge den innovative teknologi til at udkonkurrere sine konkurrenter.
 
-Ron Adner har beskrevet en iboende konflikt mellem innovatøren og *forbrugeren*. Her forstås innovatøren som producenten af en ny innovation, som skal sælge sin innovation til forbrugeren som kunde. Man kan også forestille sig udvikleren som innovatør, der vil overbevise ledelsen i en virksomhed som forbruger. Man kan også forestille sig den nyansatte juniorudvikler på et team som innovatøren, der vil overbevise seniorudviklerne som forbrugeren. Konflikten består af en forskel i opfattelse af *cost* (omkostninger) og *benefit* (fordele) ved at tage en innovation til sig.
+For at følge med innovationen, laver virksomhederne cost/benefit analyser af innovationen, hvor de altså ser på omkostninger kontra fordele ved at tage innovationen i brug. Ron Adner har beskrevet situationen, når en ny innovation skal tages i brug, som en konflikt mellem *innovatøren* og *forbrugeren*. Her forstås innovatøren generelt som budbringeren af den nye innovation, som skal overbevise forbrugeren om at tage innovationen til sig. Konflikten består af en forskel i innovatørens og forbrugerens opfattelse af omkostninger og fordele ved at tage innovationen til sig.
 
+Innovatøren tænker på omkostninger med hensyn til den umiddelbare omkostning, der er ved at tage teknologien i brug. Det kan f.eks. være omkostninger til køb af licenser for at bruge innovationen. Forbrugeren tænker på omkostninger i forhold til den samlede omkostning af innovationen og alle de øvrige ændringer, som er nødvendige for at bruge innovationen, f.eks. omskoling af medarbejderstab og andre indirekte omkostninger.
 
-Innovatøren tænker på omkostninger med hensyn til den umiddelbare omkostning, der er ved at tage teknologien i brug. Forbrugeren tænker på omkostninger i forhold til den umiddelbare omkostning plus alle de andre ændringer, som er nødvendige for at bruge innovationen. 
+Innovatøren tænker på fordelene med hensyn til den absolutte fordel, som forbrugeren modtager. Det kan være fordelene ved et nyt bibliotek eller framework, som gør arbejdet lettere for udvikleren. Forbrugeren tænker over benefit i forhold til den relative fordel, som innovationen giver sammenlignet med de tilgængelige alternativer. Det kan være i forhold til de fordele, som teamets eksisterende udvalg af biblioteker og frameworks tilbyder.
 
-Innovatøren tænker på fordelene med hensyn til den absolutte fordel, som forbrugeren modtager. Forbrugeren tænker over benefit i forhold til den relative fordel, som innovationen giver sammenlignet med de tilgængelige alternativer. 
+Innovatøren har altså en tendens til at sammenligne den absolutte fordel med den umiddelbare omkostning, mens forbrugeren sammenligner den relative fordel med den samlede omkostning. Den optimale situation ville være, at der ikke var nogen forskel mellem den innovatørens og forbrugerens perspektiv på fordele og omkostninger. 
 
-Innovatøren har altså en tendens til at sammenligne den absolutte fordel med den umiddelbare omkostning, mens forbrugeren sammenligner den relative fordel med den samlede omkostning.
+Man kan forestille sig et udviklingsteam som innovatøren, der vil overbevise teamlederne som forbrugeren, om at teamet skal anvende et nyt innovativt framework til deres næste projekt. Dette nye framework kan gøre udviklerne mere produktive, og fra teamets perspektiv er der få umiddelbare omkostninger, da teammedlemmerne allerede har lært frameworket i deres fritid. Fra teamledernes perspektiv, er den samlede omkostning for stor ved at bruge det nye framework, da det er nemmere at sikre arbejdskraft til at vedligeholde systemet med deres nuværende framework. Hvis de skulle vælge at bruge et nyt framework til systemet, er det næsten umuligt at fortryde, da man ville skulle skrive hele systemet om forfra.
 
-Denne forskel kan optræde i scenariet med udvikleren i virksomheden, der ikke ser virksomhedens samlede omkostninger (omskoling af medarbejderstab, indkøb af licenser, etc.) ved at tage en innovation til sig. På samme måde kan den nyansatte juniorudvikler have nemmere ved at tage en innovativt teknologi i brug, fordi hans omkostningsperspektiv er mindre end seniorudvikleren, der har samlet meget viden om tidligere teknologier.
+Denne forskel på teamets og teamledernes perspektiv på omkostninger og fordele ved at tage et nyt framework i brug, kan risikere at medføre lavere produktivitet, fordi teamet ikke får lov til at bruge de mest produktive værktøjer, hvilket ovenikøbet potentielt kan medvirke tab af motivation.
 
-## Micro Frontends
-Software arkitektur har længe bevæget sig mod at splitte monolitiske systemer op i mindre moduler. I stedet for at alle udviklere i en virksomhed arbejder på samme, komplekse system, har mange virksomheder set gevinster i microservice arkitekturen. Her består det samlede system af en lang række undersystemer, som kan udvikles og udgives uafhængigt af hinanden.
+Man kan gøre forskellen mindre, ved ikke at bygge hele det nye system med det nye framework, men lade et mindre team være ansvarlige for et uafhængigt undersystem, som bruger det nye framework. Dette har mange virksomheder set lyset i, og det kan man opnå ved at bruge en microservice og/eller microfrontend arkitektur.
 
-Microservice arkitekturen er blevet meget udbredt, og størstedelen af store virksomheder er enten ved at tage microservices til sig, eller bruger allerede udelukkende microservices[^leanix-survey]. Brugergrænsefladen bliver for mange alligevel stadig udviklet som et monolitisk system. Microfrontend arkitekturen er at overføre ideen om microservices til brugergrænsefladen. 
+## Micro Services og Micro Frontends
+Med microservice arkitekturen splittes de monolitiske systemer op i mindre uafhængige enkeltdele. Dermed behøver alle udviklere i virksomheden ikke at arbejde på den samme, komplekse kildekode. 
+
+Hvert team er ansvarlige for en service, som har sin egen bygge- og driftproces. Dermed har hvert team mulighed for at bruge de biblioteker og frameworks, som bedst egner sig til løse problemet.  
+
+Det udligner forskellem mellem teamets og teamledernes perspektiv på omkostninger og fordele, da de andre teams i virksomheden ikke påvirkes af andre enkelte teams valg af biblioteker og frameworks. 
+
+Microservice arkitekturen er blevet meget udbredt, og størstedelen af store virksomheder er enten ved at tage microservices til sig, eller bruger allerede udelukkende microservices[^leanix-survey]. Brugergrænsefladen bliver for mange alligevel stadig udviklet som et monolitisk system. Microfrontend arkitekturen går ud på at overføre ideen om microservices til brugergrænsefladen. 
 
 Microfrontends kommer med mange af de samme fordele som microservices. Den centrale fordel er muligheden for en fastlægge en individuel kode-, test- og driftproces for hver microfrontend. 
 
 Dermed kan mindre teams være ansvarlige for egne microfrontends, og hurtigere komme med inkrementelle opdateringer uden at vente på hinanden. Det understøtter en agil procesmodel, hvor hvert team autonomt kan komme med en ny version af deres microfrontend efter et sprint.
 
-man kan opdele microfrontends i "vertikale" hensyn til forretningsdomænet, i stedet for "horisontale" hensyn til tekniske ansvarsområder. Dermed får hvert team en bedre helhedsforståelse af det domæne, som de er ansvarlige for med deres microfrontend.
+Man kan opdele microfrontends i "vertikale" hensyn til forretningsdomænet, i stedet for "horisontale" hensyn til tekniske ansvarsområder. Dermed får hvert team en bedre helhedsforståelse af det domæne, som de med deres microfrontend er ansvarlige for.
 
 Med microfrontends er kildekoden for hver microfrontend afkoblet fra hinanden. Fordi undersystemet er mindre end hele systemet, vil kildekoden for hver microfrontend også være mindre og nemmere at vedligeholde. Hvert team har også bedre fleksibilitet i deres valg af biblioteker og frameworks, som passer til lige præcis deres microfrontend.
 
+Microfrontend arkitekturen tillader at bruge forskellige frontend frameworks på samme webside. Det medfører dog den en risiko for, at den samlede frontend kan ende med at fylde for meget, fordi hver microfrontend anvender sit eget tunge frontend framework. Der er også risiko for, at CSS eller JavaScript fra en microfrontend, kan have utilsigtede effekter i en anden microfrontend, da de eksisterer på den samme webside og ikke er indkapslede.
 
 ## Module Federation
-I beta version 5 af Webpack er der en ny funktion, som spiller en vigtig rolle i at understøtte en microfrontend arkitekturen. Det er indtil videre kun i beta version, og bliver officielt udgivet sammen med Webpack 5. Module federation tillader at bundle hver eneste individuelle microfrontend med alle sine afhængigheder. Dermed kan man have en individuel proces/pipeline for at udvikle, teste og udgive hver enkelt microfrontend uafhængigt af hinanden, men alligevel indlæse dem dynamisk med JavaScript i runtime og bruge dem som en samlet helhed. 
+For at implementere sin micro frontend, kan man bruge Webpacks nye *module federation* funktionalitet. Med den kan man implementere en optimeret microfrontend arkitektur ved at indlæse de enkelte microfrontends fra deres webadresse men samtidig tillade dem at dele afhængigheder.
 
-Men module federation giver også mulighed for, at man angiver *shared dependencies*. Hvis man f.eks. har angivet `react` som `shared` for to forskellige microfrontends, og indlæser begge microfrontends, vil kun den ene af de to tilsvarende afhængigheder blive indlæst i runtime, men til gengæld vil dén ene afhængighed blive delt af begge microfrontends. Dermed opnår man *decoupling* af de enkelte microfrontends på en ressourceffektiv måde.
+Module federation er indtil videre kun i beta version 5 af Webpack. Module federation tillader giver Webpack et indgangspunkt, som den kan bruge til at indlæse en driftsat microfrontend med alle sine afhængigheder. Dermed kan man have en individuel proces/pipeline for at udvikle, teste og udgive hver enkelt microfrontend uafhængigt af hinanden, men alligevel indlæse dem dynamisk med JavaScript i runtime og bruge dem som en samlet helhed. 
 
-Module federation bruger betegnelsen *hosts* for applikationer, der indlæser en *remote* applikation. En applikation kan fungere som både host og remote på samme tid. 
+Men module federation giver også mulighed for, at man deler modulernes afhængigheder. Hvis man f.eks. har angivet `react` som `shared` for to forskellige microfrontends, og indlæser begge microfrontends, vil kun den ene af de to tilsvarende afhængigheder blive indlæst i runtime og blive delt af begge microfrontends. Dermed opnår man afkobling af de enkelte microfrontends på en ressourceffektiv måde.
 
-Man angiver hosts og remotes i sin `webpack.config.js` konfigurationsfil. Module federation er inkluderet i Webpack som et plugin, der først skal indlæses med RequireJS: 
+Module federation bruger betegnelsen *hosts* for applikationer, der indlæser en *remote* applikation. En applikation kan fungere som både host og remote på samme tid. Man angiver hosts og remotes i sin `webpack.config.js` konfigurationsfil. Module federation er inkluderet i Webpack som et plugin, der først skal indlæses med RequireJS: 
 
 ModuleFederationPlugin initialisers i `config` objektets `plugins` array med et konfigurationsobjekt som parameter. Her angiver man den nuværende applikations navn, hvis den skal indlæses som remote. Her angiver man også hvilke remotes, som Webpack skal forvente at indlæse i denne host, og hvilke interne moduler, som skal udstilles som remote.
 
@@ -258,6 +410,97 @@ Hvis man ønsker at eksponere dele af applikationen som remote, er det for øjeb
 Når man herefter kører Webpack, vil den som buildprodukt også lave en lille fil ved navn `remoteEntry.js`. Denne fil er host-applikationens indgangspunkt til remote-applikationen. Den indeholder ikke selve de udstillede moduler, men eksisterer for at indlæse. Denne fil skal refereres til i host'en, fx ved at indsætte et `<script>` tag i `<head>` tagget af websidens `index.html`:
 
 Hermed er det muligt at importere alle de moduler, som remote-applikationen udstiller, så længe applikationen er i drift på den angivne webadresse. Man bruger en dynamisk import, hvor det navn, som man angiver for sin remote-applikation i host-applikationens `ModuleFederationPlugin`, fungerer som et namespace, som om remote-applikationen ligger på det lokale filsystem.
+
+## Web Components
+En anden måde at optimere sin micro frontend på, for at undgå problemer med for stor filstørrelse, er ved at bruge *web components*. Web components er en innovativ teknologi i webplatformen, hvis understøttelse er indbygget i alle moderne browsere. Det kommer med den fordel, at man fjerner behovet for frontend frameworks, hvilket gør størrelsen af ens kildekode mindre. Hvis man ønsker det, kan man også vælge at bruge web components i frontend frameworks.
+
+Man kan betragte indbyggede HTML tags, fx. `input` og `form`, som genbrugelige komponenter, der indeholder (HTML), en style (CSS) og en intern logik (JavaScript). På samme måde kan man med web components lave genbrugelige komponenter af ren HTML, CSS og JavaScript, som kan anvendes med brugerdefinerede HTML tagnavne og attributter ligesom de indbyggede HTML tags.
+
+```{r echo=FALSE, fig.cap="Et typisk DOM element", fig.height=4, fig.width=4 }
+img <- readPNG("typical-dom-element.png")
+grid.raster(img)
+```
+
+Web components er altså integrerede i webplatformen. Det betyder, at de bygger på en samling af nye web APIer, som udbydes af alle moderne browser runtimes. Det er især *Custom Element API* og *Shadow DOM API*, som man bruger til at bygge web components. 
+
+### Custom elements
+
+Custom Element API tillader udvikleren at skabe *custom elements*. Custom elements er brugerdefinerede HTML tags med indbygget funktionalitet, som kan bruges ligesom alle andre HTML tags. Man tilgår API'en med den nye `customElements` property på det globale `window` objekt. `customElements` er et objekt af typen `CustomElementRegistry`, som tillader at registrere et hvert objekt, som nedarver fra HTMLElement, med et HTML tagnavn. Når objektet er registreret, kan HTML tagget bruges som markup i HTML dokumentet. Selvom det i forvejen er tilladt at navngive sine egne HTML tags uden videre, har man altså brug for Custom Element API for at skabe sammenkoblingen mellem tagnavn og objektet af typen HTMLElement.
+
+Der er forskel på *autonomous custom elements* (selvstændige) og *customized built-in elements* (tilpassede). De selvstændige custom elements skaber man ved at nedarve fra HTMLElement. De har bedre browser understøttelse[^caniuse_customelements] end tilpassede custom elementer. Tilpassede custom elements udvider i stedet funktionaliteten af browserens indbyggede HTML elementer. 
+
+Man knytter sit selvstændige eller tilpassede custom element til et HTML tagnavn med `define` metoden på førnævnte `customElements` globale property. Hvis man laver et objekt, der (ligesom browserens indbyggede HTML elementer) nedarver fra klassen `HTMLElement`, kan man give det objekt med som argument til `customElements.define` for at registrere sammenkoblingen. Dette vil tillade at bruge `custom-element` tagget i sin HTML markup ligesom de standard HTML elementer. Indefra klassen har man så adgang til alle de properties, som udgør elementet.
+
+Custom elements har 
+
+
+For at give `CustomElement` noget mere funktionalitet, er det nødvendigt at kende til dens *component lifecycle*. Component lifecycle er en række metoder på det brugerdefinerede element, som kaldes på forskellige tidspunkter, fx. når elementet tilføjes til DOM eller skal opdateres.
+
+Den første af disse component lifecycle metoder er `connectedCallback`, som bliver kaldt, når komponenten føjes til DOM. Denne hører sammen med `disconnectedCallback` metoden, som kaldes, når komponenten fjernes fra DOM.
+
+
+### Shadow DOM
+Shadow DOM er i stand til at give hver web component sit eget indkapslede DOM træ. Det er indkapslet i den forstand, at dette undertræ ikke kan tilgås uden for komponenten. CSS regler i Shadow DOM træet påvirker heller ikke den øvrige DOM. Derfor kan man style sine komponenter uden at frygte, at utilsigtede dele af websiden bliver ramt af komponentens stylesheet. Omvendt er komponenten også beskyttet fra udefrakommende stylesheets.
+
+En lille gevinst ved Shadow DOM er også, at komponenten har adgang til sin Shadow DOM før den er føjet til websidens DOM. Derfor kan man undlade `connectedCallback` metoden og i stedet bare bruge klassens constructor.
+
+
+[^bfarell]: @bfarrell
+
+## Single-SPA
+Single-SPA giver mulighed for at bruge flere frontend frameworks på samme webside uden at skulle opdatere siden. Hvis man bruger Single-SPA, er det også muligt udskifte en applikations frontend framework inkrementelt.
+
+En Single-SPA applikation består af en router, som kan tilføje og fjerne hele microfrontends fra websidens DOM afhængigt af den nuværende route. De enkelte microfrontends med Single-SPA med metoden `registerApplication`. Denne metoder forventer tre argumenter. Det første argument, `appName`, er et navn til den enkelte microfrontend. Det næste argument er applikationens, `applicationOrLoadingFn`, giver Single-SPA adgang til applikationen bootstrap, mount og unmount lifecycle metoder. Det sidste argument, `activitityFn`, er den routing metode, som skal afgøre, om den enkelte microfrontend skal være tilføjet til DOM.
+
+```js
+import { registerApplication } from "single-spa";
+import { reactCounterLifecycles } from "./react-counter"
+
+registerApplication(
+);
+```
+
+Det navn man angiver i det første argument afgører, hvordan man kan henvise til sin microfrontend i sin Single-SPA applikations html film. Hvis man f.eks. giver den navnet `"test-app"`, vil man kunne referere til denne microfrontend ved at bruge det navn som ID attribut på en div:
+
+```html
+<div id="single-spa-application:test-app"></div>
+```
+
+I det andet argument angives lifecycle metoderne bootstrap, mount og unmount, som hjælper Single-SPA med hhv. den første indlæsning af den enkelte microfrontend, at tilføje og endelig at fjerne den enkelte microfrontend fra DOM. Disse skal implementeres selv, men der er udviklet hjælpe biblioteker til de fleste populære frontend frameworks, som gør det nemt. Hvis man f.eks. vil registrere en React microfrontend `Foo`, kan man bruge `single-spa-react` hjælperbiblioteket. Hjælperbiblioteket returnerer objekt, som indeholder alle de lifecycle metoder, man skal bruge som det andet argument i `registerApplication`. 
+
+
+```js
+import React from "react";
+import ReactDOM from "react-dom";
+import singleSpaReact from "single-spa-react";
+import { Foo } from "./foo";
+
+export const fooLifecycles = singleSpaReact({
+  React,
+  ReactDOM,
+  rootComponent: Foo
+});
+```
+
+Det tredje argument, routesti metoden, er en metode, som får websidens nuværende URL sti som argument, og single-SPA bruger metodens booleanske returtype til at afgøre, om den enkelte microfrontend skal være til stede på den nuværende URL sti. Hvis man f.eks. kun vil have `foo` til at være synlig på stien `/foo`, vil ens `registerApplication` for `Foo` microfrontenden se således ud:
+
+import { registerApplication } from "single-spa";
+import { fooLifecycles } from "./foo-lifecycles"
+
+registerApplication(
+  "react-counter",
+  reactCounterLifecycles,
+  (location) => location.pathname.startsWith("/foo")
+);
+
+## Projekt
+
+For at demonstrere en microfrontend arkitektur, der deler afhængigheder med Module Federation, anvender indbyggede Web Components og tillade routing af microfrontends med Single-SPA, har jeg oprettet tre projekter: `hovedopgave-web-components`, `hovedopgave-react-components` og `hovedopgave-single-spa`. Som navnet antyder indeholder de første to projekter en demokomponent, hhv. `WebCounter` og `ReactCounter`. For at komponenterne skal være afkoblede, bruger de ikke `single-spa`, men bliver i stedet registreret i `hovedopgave-single-spa`, som altså også har React som afhængighed for at kunne foretage registreringen. Med Module Federation bliver `react` afhængigheden delt mellem `hovedopgave-react-components` og `hovedopgave-single-spa`.
+
+```{r echo=FALSE, fig.cap="Projekt arkitektur", fig.height=4, fig.width=4}
+img <- readPNG("single-spa-module-federation.png")
+grid.raster(img)
+```
 
 [^s1]: https://www.jetbrains.com/lp/devecosystem-2019/javascript/
 
@@ -271,3 +514,6 @@ Hermed er det muligt at importere alle de moduler, som remote-applikationen udst
 
 [^devops-survey]: https://devops.com/survey-sees-massive-adoption-of-microservices/ 
 [^leanix-survey]: https://www.leanix.net/en/blog/beyond-agile-time-to-adopt-microservices
+
+\newpage
+# Referencer
